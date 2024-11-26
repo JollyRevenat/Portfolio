@@ -1,0 +1,103 @@
+<!DOCTYPE html><!--This website was created by: Charlie Blake-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bike Sold</title>
+    <script src="https://kit.fontawesome.com/c176b6755b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="images/mybikesold_logo.svg" alt="My Bike Sold Logo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact">
+        <h1>Provide Info on a Bike You Want to Sell</h1>
+
+        <p>Please provide your name, address, and bike details by filling out the following form. Note that the required fields are followed by an astrick*.</p>
+
+        <div class="contactform">
+                <h3 class="heading-text">Personal Details</h3>
+            <form>
+                <label for="fname">First Name*</label><br>
+                <input type="text" id="fname" name="fname" placeholder=" Your first name"><br>
+                <label for="lname">Last Name*</label><br>
+                <input type="text" id="lname" name="lname" placeholder="Your last name"><br>
+                <label for="phone">Phone*</label><br>
+                <input type="text" id="phone" name="phone" placeholder="Phone Number"><br>
+                <label for="email">Email*</label><br>
+                <input type="text" id="email" name="email" placeholder="Email Address"><br>
+                <label for="address">Street Address*</label><br>
+                <input type="text" id="address" name="address" placeholder=" Street Address"><br>
+                <label for="zip">Zip Code*</label><br>
+                <input type="text" id="zip" name="zip" placeholder="Zip Code"><br>
+                </form>
+        </div>
+
+        <div class="contactform">
+                <h3 class="heading-text">Motorcycles Details</h3>
+                <form>
+                    <label for="vinnum">VIN Number*</label><br>
+                    <input type="text" id="vinnum" name="vinnum" placeholder="VIN Number"><br>
+                    <label for="year">Year*</label><br>
+                    <input type="text" id="year" name="year" placeholder="Year"><br>
+                    <label for="make">Make*</label><br>
+                    <input type="text" id="make" name="make" placeholder="Make"><br>
+                    <label for="model">Model*</label><br>
+                    <input type="text" id="model" name="model" placeholder="Model"><br>
+                    <label for="miles">Miles*</label><br>
+                    <input type="text" id="miles" name="miles" placeholder="Miles"><br>
+                    Color<br>
+                    <input type="radio" id="silver" name="color" value="silver" style="height:1em;"><label for="silver">silver</label>
+                    <input type="radio" id="black" name="color" value="black" style="height:1em;"><label for="black">black</label>
+                    <input type="radio" id="red" name="color" value="red" style="height:1em;"><label for="red">red</label>
+                    <input type="radio" id="orange" name="color" value="orange" style="height:1em;"><label for="orange">orange</label>
+                    <input type="radio" id="blue" name="color" value="blue" style="height:1em;"><label for="blue">blue</label>
+                    <input type="radio" id="green" name="color" value="green" style="height:1em;"><label for="green">green</label>
+                    <input type="radio" id="other" name="color" value="other" style="height:1em;"><label for="other">other</label><br><br>
+                    Is the bike in your name?<br>
+                    <input type="radio" id="nameyes" name="yourname" value="yes" style="height:1em;"><label for="nameyes">Yes</label><br>
+                    <input type="radio" id="nameno" name="yourname" value="no" style="height:1em;"><label for="nameno">No</label><br><br>
+                    Do you have the title?<br>
+                    <input type="radio" id="titleyes" name="yourtitle" value="yes" style="height:1em;"><label for="titleyes">Yes</label><br>
+                    <input type="radio" id="titleno" name="yourtitle" value="no" style="height:1em;"><label for="titleno">No</label><br><br>
+                    Do you have any liens on the vehicle?<br>
+                    <input type="radio" id="liensyes" name="yourliens" value="yes" style="height:1em;"><label for="liensyes">Yes</label><br>
+                    <input type="radio" id="liensno" name="yourliens" value="no" style="height:1em;"><label for="liensno">No</label><br><br>
+                    <label for="payoff">What is your estimated payoff?</label>
+                    <input type="text" id="payoff" name="payoff"><br>
+                    <label for="scratch">List any dents or scratches and mechanical issues with your bike</label><br>
+                    <textarea id="scratch" name="scratch" rows="10"></textarea><br>
+                </form>
+        </div>
+
+        <div class="btn">Submit Form</div>
+
+    </section>
+
+
+
+    <footer>
+        <h2>Contact Us</h2>
+        <p>1-999-999-9999 | info@yourbikesold.com</p>
+        <p>160 North Road, Big City, CA 111111</p>
+            <ul class="icons">
+                <li><a href="#"><i class="fab fa-facebook-square"></i>&nbsp;&nbsp;&nbsp;</a></li> 
+                <li><a href="#"><i class="fab fa-twitter-square"></i>&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a href="#"><i class="fab fa-instagram-square"></i></a></li>
+            </ul>
+        <p>Copyright 2021. All rights reserved | <a href="#">Privacy Policy</a>&nbsp; <a href="#">Terms &amp; Condition</a></p>
+    </footer>
+
+</body>
+</html>

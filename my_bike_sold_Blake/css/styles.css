@@ -1,0 +1,432 @@
+/* global Style Rules */
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: 'PT Sans Narrow', Arial, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+section {
+    padding: 3em 6em;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+   /* flex-wrap: nowrap; */
+    justify-content: space-evenly;
+    /* align-items: center;  could change */
+}
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    font-family: 'PT Sans Narrow', Arial, Tahoma, sans-serif;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: left;
+}
+
+h2, h3 {
+    font-family: 'PT Sans Narrow', Arial, Tahoma, sans-serif;
+    font-size: 3em;
+    font-weight: bold;
+    margin: 2em; 
+    text-align: center;
+}
+
+a:hover {
+    color: #aaaaaa;
+}
+
+.btn {
+    background-color: red;
+    color: #ffffff;
+    border: 3px solid black;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em;
+    border-radius: 25px;
+}
+
+.btn:hover {
+    background-color: darkred;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #232323;
+    padding: .5em;
+}
+
+header img{
+    width: 350px;
+    color: #ffffff;
+}
+
+nav li{
+    display: inline;
+    text-align: right;
+    padding: .5em;
+}
+
+nav li a{
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.hero{
+    background-image: url(../images/bike_hero.jpg);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    padding: 3em;
+    height: 70vh; /* could change */
+}
+
+.hero h1{
+    color: #000000;
+}
+
+.flexhow{
+    flex-basis: 33%;
+}
+
+.how img{
+    display: block; 
+    margin: auto;
+    width: 80%;
+}
+
+.how p{
+    margin-right: 0.7em;
+    margin-left: 0.7em; 
+    font-size: 20px;
+}
+
+.how h1{
+    margin-top: 0em;
+    padding-top: 1em;
+}
+
+/* who are we */
+.who {
+    background-color: #adc5e4;
+    font-size: 20px;
+}
+
+.who .flex-container {
+    align-items: flex-start;
+}
+
+.flexwholeft {
+    flex-basis: 48%;
+}
+
+.flexwhoright {
+    flex-basis: 48%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    padding-left: 3em;
+}
+
+.who img{
+    border: 6px solid #dd0000;
+}
+
+.who li{
+    list-style-type: none;
+}
+
+.who i {
+    color: #dd0000;
+    font-size: 1em;
+    padding-right: 1em;
+}
+
+/* testimonials section */
+
+.test p {
+    font-size: 20px;
+}
+
+.test .flex-container {
+    align-items: stretch;
+}
+
+.flextest {
+    flex-basis: 48%;
+    margin: auto;
+}
+
+.flextest i {
+   color: #dd0000;
+   font-size: 4.5em;
+   float: left;
+   margin-right: 25px;
+}
+
+.ltbold {
+    font-weight: bold;
+    color: #282828;
+}
+
+/* ready to sell section */
+
+.ready{
+    background-color: #adc5e4;
+    text-align: center;
+    padding: 1em;
+}
+
+/* brand logos */
+
+.flex-container-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.brands .flex-container-logo img{
+    max-width: 10%;
+    margin: auto;
+}
+
+/* contact us style */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #282828;
+    color: white;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer li {
+    display: inline;
+    padding-left: .25em;
+    padding-left: .25em;
+}
+
+footer li a { 
+    color: red;
+   
+}
+
+footer li a i{ 
+    font-size: 2.3em;
+}
+
+.icons {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+
+footer a:hover{
+    color: darkred;
+}
+
+@media only screen and (max-width: 767px){
+
+    body{
+        font-size: 1em;
+    }
+
+    section{
+        padding: 1em;
+    }
+
+    .flex-container{
+        flex-direction: column;
+    }
+
+    header{
+        flex-direction: column;
+    }
+
+    header img{
+        margin: auto;
+    }
+
+    .brands{
+        display: none;
+    }
+
+    nav{
+        width: 100%
+    }
+
+    nav img{
+        margin: auto;
+    }
+
+    nav ul{
+        padding: 0;
+        margin: 0;
+    }
+
+    nav li{
+        display: block;
+        text-align: center;
+        border-bottom: solid white 1px;
+        padding: 1em;
+        font-size: 1.1em;
+    }
+
+    .hero{
+        background-image: url(../images/bike_hero_mobile.jpg);
+        text-align: center;
+        padding: 1em 6em;
+        height: 150vh;
+    }
+
+    .hero h1{
+        text-align: center;
+        font-size: 4em;
+    }
+
+
+    .hero a{
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .how p{
+        font-size: 2em;
+    }
+
+    .how img{
+        width: 50%;
+    }
+    
+    .who{
+        font-size: 1em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+    }
+
+    .test{
+        padding: 2em;
+    }
+
+    .flextest{
+        font-size: 1em;
+    }
+
+    .ready h3{
+        font-size: 2em; 
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+
+    footer p{
+        font-size: 1.5em;
+    }
+}
+
+/* styles for inventory */
+
+    .bike{
+        border-bottom: 4px dotted #dd0000;
+        padding: 1.5em 2em;
+    }
+
+    .bike table{
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    .bike td, th{
+        border: 1px solid black;
+    }
+
+    .bike table th{
+        text-align: left;
+    }
+
+    .bike img{
+        width: 100%;
+    }
+
+    /* Styles for Contact Page */
+
+    .contact{
+        width: 45%;
+        margin: auto;
+    }
+
+    .contactform {
+        margin-top: 3em;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #e9e9e9; 
+        border: 1px solid black;
+        padding-right: 2em;
+        padding-bottom: 2em;
+        position: relative;
+    }
+    .contactform h3 {
+        margin-bottom: 0px;
+        position: absolute;
+    }
+    
+    .heading-text {
+        font-size: clamp(1rem, 2.5vw, 2.5rem);
+        white-space: nowrap;
+        text-align: left;
+        margin-top: -0.6em;
+        margin-left: 1em;
+        color: #aa0000;
+        overflow: hidden;
+        display:inline-block;
+        background: linear-gradient(to bottom, #ffffff 50%, #e9e9e9 50%);  
+        padding-left: 3px;
+        padding-right: 3px;
+    } 
+    
+    form{
+        padding-top: 0;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-top: 2em;
+    }
+
+    form input{
+        height: 3em;
+        padding-right: 1em;
+        padding-left: 1em;
+        margin: .5em 0em;
+    }
+
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 1em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        }
+
+    .contact .btn{
+        margin-top: 3em;
+    }
