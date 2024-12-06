@@ -12,6 +12,7 @@ header img {
 
 body {
     background-color: #c7d3c0;
+    text-decoration: none;
 }
 
 /* Container for dropdown */
@@ -47,4 +48,19 @@ body {
 /* Show dropdown content on hover */
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+/* hero section */
+
+.hero {
+    background-image: ;
+}
+
+/* project section */
+
+.recent_projects {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
