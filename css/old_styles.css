@@ -1,128 +1,36 @@
-/* style for body background color*/
-body {
-    background-color: #c7d3c0;
-}
-
-/*style for container centers the page and sets the elements width*/
-#container {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-
-
-/* style space for header specifies top and bottom margins, background color, rounded border, shawdow and alignment */
 header {
-    background-color: #c7d3c0;
-}
-
-/* style for the nav specifies text properties, padding, margins, and borders*/
-nav {
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-align: center;
-}
-
-a {
-    color: #1c2427;
-    text-decoration: none;
-}
-
-/* style for main specifies  a block display, text properties, margins, padding, rounded, and shadow */
-main {
-    display: block;
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 1em;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 12px 12px 12px #404040;
-}
-
-/* style for footer specifies font size, text alignment, and top margins */
-footer {
-    font-size: .70em;
-    text-align: center;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 8em;
+    justify-content: space-between;
 }
 
 .equip {
-    height: 100px;
-    width: 100px;
-    order: 1;
+    height: 7em;
 }
-
-.nav-item {
-    order: 2;
-    flex-grow: .5;
-
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    align-items: center;
-}
-
-.nav-element-1 {
-    order: 1;
-
-}
-
-.nav-element-2 {
-    order: 2;
-
-}
-
-.nav-element-3 {
-    order: 3;
-
-}
-
-.nav-element-4 {
-    order: 4;
-
-}
-
-.header-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #c7d3c0;
+    background-color: #04AA6D;
+    color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
+    margin-top: 1.5em;
+    margin-right: 2em;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    background-color: white;
     position: relative;
     display: inline-block;
-    order: 3;
-}
-
-.dropdown i {
-    font-size: 5em;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #c7d3c0;
+    background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -148,5 +56,33 @@ footer {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #abb6a4;
+    background-color: #3e8e41;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url("/images/1226333.jpg");
+
+    /* Set a specific height */
+    min-height: 800px;
+    height: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.first_section {
+    height: 100em;
+    background-color: #c7d3c0;
+    min-height: 100%;
+}
+
+.heading h1 {
+    color: rgb(49, 37, 20);
+    text-align: center;
+    padding-top: 2em;
+    font-size: 5em;
 }

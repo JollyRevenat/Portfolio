@@ -2,53 +2,60 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Charles Blake</title>
-    <meta charset="UTF-8">
-    <script src="https://kit.fontawesome.com/4465c0ad20.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charles Blake | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Charles Blake</div>
 
-    <div id="container">
+      <!-- Hamburger icon for mobile -->
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
 
-        <header class="header-flex">
-            <a href="index.html"><img class="equip" src="images/IMG_0609.png" alt="Charles Blake's Logo"></a>
-
-            <nav class="nav-item nav-container">
-                <a class="nav-element-1" href="index.html">Home</a>
-                <a class="nav-element-2" href="portfolio.html">Portfolio</a>
-                <a class="nav-element-3" href="skill.html">Skills</a>
-                <a class="nav-element-4" href="contact.html">Contact</a>
-            </nav>
-
-            <div class="dropdown">
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div><!--end of dropdown content-->
-            </div><!--end of class-->
-        </header>
-
-        <main>
-            <a href="Fitness8/index.html">fitnes page</a><br>
-            <a href="my_bike_sold_Blake/index.html">My Bike Sold</a><br>
-            <a target="_blank" href="https://www.cookingwithcatalyst.org/">Catalyst Cooks</a><br>
-            <a target="_blank" href="http://www.the-naea.org/">new site</a><br>
-            <a target="_blank" href="https://dropoutprevention.org/">new site ref</a><br>
+      <!-- Navigation links -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="resume.html">Résumé</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
 
-        </main>
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Hey, I’m <span class="highlight">Charles Blake</span></h1>
+      <p>Front-End Web Developer • Cybersecurity Enthusiast • Mountain Lover</p>
+      <a href="about.html" class="btn">Learn More</a>
+    </div>
+  </section>
 
+  <footer>
+    © 2025 Charles Blake — Web Development & Cybersecurity Student | Ski Team @ Snowbasin Mountain
+  </footer>
 
-        <!-- <footer>
-            &copy; Copyright 2024. All Rights Reserved. <br>
-            <a href="mailto:charlesdavidblake@gmail.com">Contact Me</a>
-        </footer> -->
+  <script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
 
-
-    </div><!--end container-->
+    mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+  </script>
 
 </body>
 

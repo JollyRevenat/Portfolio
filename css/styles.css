@@ -53,7 +53,7 @@ body {
 /* hero section */
 
 .hero {
-    background-image: ;
+    background-image: c;
 }
 
 /* project section */
@@ -64,3 +64,4 @@ body {
     flex-direction: column;
     text-align: center;
 }
+
