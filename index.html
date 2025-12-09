@@ -10,13 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/logo-primary.png">
 </head>
 
 <body>
     <header class="site-header">
-        <a href="index.html" class="logo">
-            <span class="logo-mark">LOGO</span>
-            <span class="logo-text">Your Name</span>
+        <a href="index.html" class="logo" aria-label="Return to homepage">
+            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
+                height="52" loading="lazy" decoding="async">
+            <div class="logo-copy">
+                <span class="logo-eyebrow">Charles Blake</span>
+            </div>
         </a>
         <nav class="primary-nav">
             <a href="index.html" class="active">Home</a>
@@ -26,25 +30,16 @@
             <a href="resume.html">Resume</a>
             <a href="contact.html">Contact</a>
         </nav>
-
     </header>
 
     <main>
-        <section class="hero hero--classic">
-            <div class="hero__content">
-                <h1>Hi, I'm Charles Blake</h1>
-                <p class="lead">
-                    Based in Bountiful, UT, I split time between the Davis Catalyst Center, BHS classes, and the
-                    mountains. This is where I share the projects and experiments that keep me curious.
+        <section class="hero hero--overlay">
+            <div class="hero__text">
+                <p class="eyebrow hero__eyebrow">Hi, I'm Charles</p>
+                <h1>Bountiful High student building modern web work at Davis Catalyst Center.</h1>
+                <p class="hero__intro">
+                    I’m a web dev student-athlete creating clean UI and practical sites for class projects and future clients.
                 </p>
-                <div class="hero__actions">
-                    <a class="btn primary" href="projects.html">View portfolio</a>
-                    <a class="btn ghost" href="contact.html">Contact me</a>
-                </div>
-            </div>
-            <div class="hero__links">
-                <a href="resume.html">Resume</a>
-                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
             </div>
         </section>
 
@@ -52,41 +47,63 @@
             <div>
                 <p class="eyebrow">Explore</p>
                 <h2>Each part of my story lives on its own page now.</h2>
-                <p>Use the quick links below to dive into my background, toolbox, Catalyst experience, outdoor life, and
-                    plans whenever you're ready.</p>
+                <p>The snowflake mark ties it all together &mdash; design explorations, Catalyst labs, outdoor sessions,
+                    and the next experiments I'm lining up.</p>
             </div>
             <div class="home-links">
-                <a href="about.html" class="card">
-                    <h3>About me</h3>
-                    <p>My journey at Bountiful High, Catalyst projects, skills, experience, and roadmap all in one
-                        place.</p>
+                <a href="about.html" class="card card-link">
+                    <div>
+                        <h3>About me</h3>
+                        <p>My journey at Bountiful High, Catalyst projects, skills, experience, and roadmap all in one
+                            place.</p>
+                    </div>
+                    <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
-                <a href="outdoors.html" class="card">
-                    <h3>Outdoors</h3>
-                    <p>The skiing, biking, and hiking sessions fueling every project.</p>
+                <a href="outdoors.html" class="card card-link">
+                    <div>
+                        <h3>Outdoors</h3>
+                        <p>The skiing, biking, and hiking sessions fueling every project.</p>
+                    </div>
+                    <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
-                <a href="resume.html" class="card">
-                    <h3>Resume</h3>
-                    <p>Downloadable one-pager with highlights ready to share.</p>
+                <a href="resume.html" class="card card-link">
+                    <div>
+                        <h3>Resume</h3>
+                        <p>Downloadable one-pager with highlights ready to share.</p>
+                    </div>
+                    <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
-                <a href="projects.html" class="card">
-                    <h3>Projects</h3>
-                    <p>Spotlights and experiments &mdash; ready for future demos.</p>
+                <a href="projects.html" class="card card-link">
+                    <div>
+                        <h3>Projects</h3>
+                        <p>Spotlights and experiments &mdash; ready for future demos.</p>
+                    </div>
+                    <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
-                <a href="contact.html" class="card">
-                    <h3>Contact</h3>
-                    <p>Say hi or team up on something ambitious.</p>
+                <a href="contact.html" class="card card-link">
+                    <div>
+                        <h3>Contact</h3>
+                        <p>Say hi or team up on something ambitious.</p>
+                    </div>
+                    <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <p>&copy; <span id="year"></span> Charles &mdash; Placeholder logo &amp; palette</p>
+        <div class="footer-brand">
+            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
+                height="48" loading="lazy" decoding="async">
+            <div>
+                <p>&copy; <span id="year"></span> Charles Blake</p>
+                <p>Built in Bountiful, fueled by bluebird days.</p>
+            </div>
+        </div>
         <div class="footer-links">
             <a href="#">LinkedIn</a>
             <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="#">Email</a>
+            <a href="mailto:charles@example.com">Email</a>
         </div>
     </footer>
 
@@ -94,3 +111,5 @@
 </body>
 
 </html>
+
+
