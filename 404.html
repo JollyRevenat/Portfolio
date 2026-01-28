@@ -8,12 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/logo-primary.png">
 </head>
 <body>
     <header class="site-header">
-        <a href="index.html" class="logo">
-            <span class="logo-mark">LOGO</span>
-            <span class="logo-text">Your Name</span>
+        <a href="index.html" class="logo" aria-label="Return to homepage">
+            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52" height="52" loading="lazy" decoding="async">
+            <div class="logo-copy">
+                <span class="logo-eyebrow">Charles Blake</span>
+            </div>
         </a>
         <nav class="primary-nav">
             <a href="index.html">Home</a>
@@ -37,7 +40,7 @@
                 </div>
             </div>
             <div class="not-found__details">
-                <p class="eyebrow">Need a hint?</p>
+                <p class="eyebrow">Need a hint'</p>
                 <ul>
                     <li>Check the URL for typos.</li>
                     <li>Head back to the About page for my full story.</li>
@@ -48,14 +51,22 @@
     </main>
 
     <footer class="site-footer">
-        <p>&copy; <span id="year"></span> Charles &mdash; Placeholder logo &amp; palette</p>
+        <div class="footer-brand">
+            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48" height="48" loading="lazy" decoding="async">
+            <div>
+                <p>&copy; <span id="year"></span> Charles Blake</p>
+                <p>Built in Bountiful, fueled by bluebird days.</p>
+            </div>
+        </div>
         <div class="footer-links">
             <a href="#">LinkedIn</a>
             <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="#">Email</a>
+            <a href="mailto:charles@example.com">Email</a>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
+

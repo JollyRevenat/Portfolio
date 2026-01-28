@@ -3,23 +3,23 @@ const toggle = document.querySelector(".theme-toggle");
 const yearEl = document.getElementById("year");
 
 const lightTheme = {
-    "--bg": "#f5f6f7",
+    "--bg": "#f2fbff",
     "--surface": "#ffffff",
-    "--contrast": "#0c0f13",
-    "--muted": "rgba(12, 15, 19, 0.65)",
-    "--accent": "#265cff",
-    "--accent-2": "#ff7a18",
-    "--shadow": "0 20px 40px rgba(0, 0, 0, 0.15)"
+    "--contrast": "#041025",
+    "--muted": "rgba(4, 16, 37, 0.65)",
+    "--accent": "#7ddcff",
+    "--accent-2": "#0dd59b",
+    "--shadow": "0 15px 35px rgba(0, 0, 0, 0.15)"
 };
 
 const darkTheme = {
-    "--bg": "#050608",
-    "--surface": "#0c0f13",
-    "--contrast": "#f5f6f7",
-    "--muted": "rgba(245, 246, 247, 0.65)",
+    "--bg": "#01030a",
+    "--surface": "#07101f",
+    "--contrast": "#f2f8ff",
+    "--muted": "rgba(242, 248, 255, 0.65)",
     "--accent": "#7ddcff",
-    "--accent-2": "#ffb477",
-    "--shadow": "0 20px 40px rgba(0, 0, 0, 0.35)"
+    "--accent-2": "#64f5c3",
+    "--shadow": "0 25px 60px rgba(0, 0, 0, 0.45)"
 };
 
 let theme = "dark";
