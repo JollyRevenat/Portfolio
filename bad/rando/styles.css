@@ -1,0 +1,64 @@
+body {
+    background-image: url(images/images.jpg);
+
+}
+
+.title {
+    color: #FFED29;
+    font-family: 'Curlz MT', fantasy;
+    font-size: 5em;
+    text-align: center;
+    transform: rotate(2deg);
+}
+
+.box {
+    border: 10px dashed #FF00FF;
+    margin: 20px 400px 20pc 200px;
+    color: #ff0c85;
+    font-size: 6em;
+    background-image: url(images/chaotic-word-warped-distorted-repeated-and-arranged-into-seamless-pattern-background-2FN86MT.jpg);
+    transform: rotate(-1deg);
+}
+
+.box .images {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+    transform: rotate(1deg);
+    overflow: scroll;
+}
+
+.box h2 {
+    transform: rotate(2deg);
+    text-align: center;
+}
+
+.box .btn {
+    font-size: 1em;
+    text-align: right;
+}
+
+@font-face {
+    font-family: 'Curlz MT';
+    /* Name the font */
+    src: url('fonts/curlz.woff2') format('woff2'),
+        /* Path to your font files */
+        url('fonts/curlz.woff') format('woff'),
+        url('fonts/curlz.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #FF00FF;
+    font-family: 'Curlz MT', fantasy;
+}
+
+.btb {
+    font-size: 1em;
+    text-align: center;
+    color: red;
+}
