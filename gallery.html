@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9VES5CG06"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-R9VES5CG06');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charles | Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/logo-primary.png">
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo" aria-label="Return to homepage">
+            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
+                height="52" loading="lazy" decoding="async">
+            <div class="logo-copy">
+                <span class="logo-eyebrow">Charles Blake</span>
+            </div>
+        </a>
+        <nav class="primary-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="outdoors.html">Outdoors</a>
+            <a href="projects.html">Projects</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="resume.html">Resume</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero page-hero--image gallery-hero-image">
+            <p class="eyebrow">Gallery</p>
+            <h1>Scroll through every logo variation.</h1>
+            <p>Use the buttons to cycle through your full logo set from the assets folder.</p>
+        </section>
+
+        <section class="panel scroller-panel">
+            <p class="eyebrow">Image Scroller</p>
+            <h2>Inline JavaScript controls.</h2>
+            <div class="image-scroller">
+                <div class="scroller-frame scroller-frame--logos">
+                    <img id="scrollerImage" src="assets/logo-primary.png" alt="Charles logo primary version">
+                </div>
+                <p class="scroller-caption" id="scrollerCaption">Primary logo.</p>
+                <div class="scroller-controls">
+                    <button class="btn ghost" id="prevImageBtn" type="button">Previous</button>
+                    <button class="btn primary" id="nextImageBtn" type="button">Next</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
+                height="48" loading="lazy" decoding="async">
+            <div>
+                <p>&copy; <span id="year"></span> Charles Blake</p>
+                <p>Built in Bountiful, fueled by bluebird days.</p>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">LinkedIn</a>
+            <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="mailto:charles@example.com">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        const imageList = [
+            {
+                src: "assets/logo-primary.png",
+                alt: "Charles logo primary version",
+                caption: "Primary logo."
+            },
+            {
+                src: "assets/new%20logos/Black%20logo%20with%20background.png",
+                alt: "Black logo with background",
+                caption: "Black logo with background."
+            },
+            {
+                src: "assets/new%20logos/Blue%20snowflake%20with%20background.png",
+                alt: "Blue snowflake logo with background",
+                caption: "Blue snowflake with background."
+            },
+            {
+                src: "assets/new%20logos/Black%20reverse%20polo%20snowflake%20with%20background.png",
+                alt: "Black reverse polo snowflake with background",
+                caption: "Black reverse polo snowflake with background."
+            },
+            {
+                src: "assets/new%20logos/Blue%20reverse%20polo%20snowflake%20with%20background.png",
+                alt: "Blue reverse polo snowflake with background",
+                caption: "Blue reverse polo snowflake with background."
+            },
+            {
+                src: "assets/new%20logos/Blue%20border%20black%20infill%20snowflake%20with%20background.png",
+                alt: "Blue border black infill snowflake with background",
+                caption: "Blue border black infill snowflake with background."
+            },
+            {
+                src: "assets/new%20logos/Black%20border%20blue%20infill%20snowflake%20with%20background.png",
+                alt: "Black border blue infill snowflake with background",
+                caption: "Black border blue infill snowflake with background."
+            },
+            {
+                src: "assets/new%20logos/Charles%20black%20snowflake.png",
+                alt: "Charles black snowflake",
+                caption: "Charles black snowflake."
+            },
+            {
+                src: "assets/new%20logos/Charles%20black%20reverse%20polo%20snowflake.png",
+                alt: "Charles black reverse polo snowflake",
+                caption: "Charles black reverse polo snowflake."
+            },
+            {
+                src: "assets/new%20logos/transparent/Black%20logo%20(transparent).png",
+                alt: "Black logo transparent version",
+                caption: "Black logo transparent."
+            },
+            {
+                src: "assets/new%20logos/transparent/blue%20snowflake%20(transparent).png",
+                alt: "Blue snowflake transparent version",
+                caption: "Blue snowflake transparent."
+            },
+            {
+                src: "assets/new%20logos/transparent/black%20reverse%20polo%20snowflake%20(transparent).png",
+                alt: "Black reverse polo snowflake transparent version",
+                caption: "Black reverse polo transparent."
+            },
+            {
+                src: "assets/new%20logos/transparent/Blue%20reverse%20polo%20snowflake%20(transparent).png",
+                alt: "Blue reverse polo snowflake transparent version",
+                caption: "Blue reverse polo transparent."
+            },
+            {
+                src: "assets/new%20logos/transparent/blue%20border%20black%20infill%20snowflake%20(transparent).png",
+                alt: "Blue border black infill snowflake transparent version",
+                caption: "Blue border black infill transparent."
+            },
+            {
+                src: "assets/new%20logos/transparent/Black%20border%20blue%20infill%20snowflake%20(transparent).png",
+                alt: "Black border blue infill snowflake transparent version",
+                caption: "Black border blue infill transparent."
+            },
+            {
+                src: "assets/new%20logos/old%20logo/Charles%20blue%20snowflake.png",
+                alt: "Old logo Charles blue snowflake",
+                caption: "Old logo: Charles blue snowflake."
+            },
+            {
+                src: "assets/new%20logos/old%20logo/Charles%20blue%20reverse%20polo%20snowflake.png",
+                alt: "Old logo Charles blue reverse polo snowflake",
+                caption: "Old logo: Charles blue reverse polo."
+            },
+            {
+                src: "assets/new%20logos/old%20logo/Charles%20blue%20border%20black%20infill%20snowflake.png",
+                alt: "Old logo Charles blue border black infill snowflake",
+                caption: "Old logo: blue border black infill."
+            },
+            {
+                src: "assets/new%20logos/old%20logo/Charles%20black%20border%20blue%20infill%20snowflake.png",
+                alt: "Old logo Charles black border blue infill snowflake",
+                caption: "Old logo: black border blue infill."
+            }
+        ];
+
+        const scrollerImage = document.getElementById("scrollerImage");
+        const scrollerCaption = document.getElementById("scrollerCaption");
+        const prevImageBtn = document.getElementById("prevImageBtn");
+        const nextImageBtn = document.getElementById("nextImageBtn");
+        let currentImageIndex = 0;
+
+        function renderImage(index) {
+            const item = imageList[index];
+            scrollerImage.src = item.src;
+            scrollerImage.alt = item.alt;
+            scrollerCaption.textContent = item.caption;
+        }
+
+        prevImageBtn.addEventListener("click", () => {
+            currentImageIndex = (currentImageIndex - 1 + imageList.length) % imageList.length;
+            renderImage(currentImageIndex);
+        });
+
+        nextImageBtn.addEventListener("click", () => {
+            currentImageIndex = (currentImageIndex + 1) % imageList.length;
+            renderImage(currentImageIndex);
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
