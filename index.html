@@ -42,26 +42,39 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero hero--overlay">
-            <div class="hero__text">
+    <main class="home-main">
+        <section class="home-story" data-frame-count="169" data-frame-path="assets/frames/"
+            data-frame-prefix="frame_" data-frame-extension="png" data-frame-padding="6">
+            <div class="home-story__stage">
+                <canvas class="home-story__canvas" aria-hidden="true"></canvas>
+                <img class="home-story__fallback-image" src="assets/frames/frame_000000.png" alt="" aria-hidden="true"
+                    loading="eager" decoding="async">
+                <div class="home-story__shade" aria-hidden="true"></div>
+            </div>
+
+            <div class="home-story__chapters">
+                <section class="story-chapter story-chapter--intro" data-story-chapter>
+                    <div class="story-copy">
                 <p class="eyebrow hero__eyebrow">Hi, I'm Charles</p>
                 <h1>Bountiful High student building modern web work at Davis Catalyst Center.</h1>
                 <p class="hero__intro">
                     I’m a web dev student-athlete creating clean UI and practical sites for class projects and future
                     clients.
                 </p>
-            </div>
-        </section>
+                    </div>
+                </section>
 
-        <section class="panel home-overview">
-            <div>
+                <section class="story-chapter story-chapter--right" data-story-chapter>
+                    <div class="story-copy">
                 <p class="eyebrow">Explore</p>
                 <h2>Each part of my story lives on its own page now.</h2>
                 <p>The snowflake mark ties it all together &mdash; design explorations, Catalyst labs, outdoor sessions,
                     and the next experiments I'm lining up.</p>
-            </div>
-            <div class="home-links">
+                    </div>
+                </section>
+
+                <section class="story-chapter story-chapter--card" data-story-chapter>
+                    <div class="story-link-grid story-link-grid--single">
                 <a href="about.html" class="card card-link">
                     <div>
                         <h3>About me</h3>
@@ -70,6 +83,11 @@
                     </div>
                     <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
+                    </div>
+                </section>
+
+                <section class="story-chapter story-chapter--card story-chapter--right" data-story-chapter>
+                    <div class="story-link-grid story-link-grid--single">
                 <a href="outdoors.html" class="card card-link">
                     <div>
                         <h3>Outdoors</h3>
@@ -77,6 +95,11 @@
                     </div>
                     <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
+                    </div>
+                </section>
+
+                <section class="story-chapter story-chapter--card" data-story-chapter>
+                    <div class="story-link-grid story-link-grid--single">
                 <a href="resume.html" class="card card-link">
                     <div>
                         <h3>Resume</h3>
@@ -84,6 +107,11 @@
                     </div>
                     <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
+                    </div>
+                </section>
+
+                <section class="story-chapter story-chapter--card story-chapter--right" data-story-chapter>
+                    <div class="story-link-grid story-link-grid--single">
                 <a href="projects.html" class="card card-link">
                     <div>
                         <h3>Projects</h3>
@@ -91,6 +119,11 @@
                     </div>
                     <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
+                    </div>
+                </section>
+
+                <section class="story-chapter story-chapter--card" data-story-chapter>
+                    <div class="story-link-grid story-link-grid--single">
                 <a href="gallery.html" class="card card-link">
                     <div>
                         <h3>Gallery</h3>
@@ -98,6 +131,11 @@
                     </div>
                     <span class="card-arrow" aria-hidden="true">â†—</span>
                 </a>
+                    </div>
+                </section>
+
+                <section class="story-chapter story-chapter--card story-chapter--final" data-story-chapter>
+                    <div class="story-link-grid story-link-grid--single">
                 <a href="contact.html" class="card card-link">
                     <div>
                         <h3>Contact</h3>
@@ -105,6 +143,8 @@
                     </div>
                     <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
@@ -125,6 +165,8 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 
