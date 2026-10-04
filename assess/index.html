@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><!-- draft preview: remove at launch -->
+<title>{name} — quizzes and assessments for companies</title>
+<meta name="description" content="A quiz and assessment platform for companies: onboarding checks, training assessments and team surveys, with every result in one place. Now in early access.">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#f7f6f3">
+<link rel="stylesheet" href="styles.css">
+<script src="site.config.js"></script>
+<script>
+  // Motion gate: only animate when the visitor hasn't asked for reduced motion.
+  // If motion.js never arrives, drop the class so nothing stays hidden.
+  if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    document.documentElement.classList.add("motion");
+    setTimeout(function () { if (!window.__motion) document.documentElement.classList.remove("motion"); }, 2500);
+  }
+</script>
+<script src="motion.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page" id="top">
+  <header>
+    <div class="topline">
+      <span class="label">Early access edition · Vol. 1</span>
+      <a class="label link" data-mailto href="#contact">Contact</a>
+    </div>
+    <div class="masthead"><a class="wordmark" href="#top"><span data-name></span><span class="dot">.</span></a></div>
+    <div class="rules"></div>
+    <nav class="sections label" aria-label="Sections">
+      <a href="#uses">Who it's for</a><a href="#build">Build</a><a href="#how">How it works</a><a href="#results">Results</a><a href="#teams">Teams</a><a href="#integrations">Integrations</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="lead">
+      <div>
+        <span class="label accent">Quizzes &amp; assessments for companies <span class="nw"><span class="sep">· </span>Now in early access</span></span>
+        <h1>Know what your people <span class="scribble">know.<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8 C 40 2, 80 2, 120 6 S 180 10, 198 4"/></svg></span></h1>
+        <p class="deck"><span data-name></span> is a quiz and assessment platform for companies. Build onboarding checks, training assessments and team surveys, share them with a link, and see what your people know, and where they need help, all in one place.</p>
+        <div class="ctas"><a class="btn" data-mailto href="#contact">Get in touch</a><a class="btn-dashed" href="#uses">See who it's for</a></div>
+      </div>
+      <figure>
+        <div class="sheet m-quiz" aria-hidden="true">
+          <span class="label">Safety onboarding <span class="nw"><span class="sep">· </span>Question 3 of 8</span></span>
+          <p class="q">Where can you find your floor's fire assembly point?</p>
+          <ol>
+            <li><span class="bubble"></span>In the welcome email</li>
+            <li class="picked"><span class="bubble"></span>On the floor plan by each exit</li>
+            <li><span class="bubble"></span>Ask facilities</li>
+          </ol>
+          <div class="foot"><div class="m-progress"></div><span class="label">Next →</span></div>
+        </div>
+        <figcaption>Fig. 1 — An illustrative onboarding check, as a new starter sees it.</figcaption>
+      </figure>
+    </div>
+
+    <section class="section" id="uses" aria-labelledby="uses-h">
+      <span class="label kicker">Who it's for</span>
+      <h2 id="uses-h">For companies that need to know their people know it.</h2>
+      <div class="uses">
+        <div class="uses-main">
+          <h3>Training &amp;&nbsp;onboarding</h3>
+          <p>Your teams build the checks, your people take them, and you see who's ready and who needs help.</p>
+          <ul class="use-list">
+            <li><strong>Onboarding checks.</strong> Make sure new starters have taken in the essentials, from safety to systems.</li>
+            <li><strong>Compliance &amp; training assessments.</strong> Scored assessments with a clear record of who took what, and how they did.</li>
+            <li><strong>Team surveys &amp; polls.</strong> Ask how people feel, what's working and what isn't, and get an honest read.</li>
+          </ul>
+        </div>
+        <aside class="uses-also" aria-label="Also useful for">
+          <span class="label">Also useful for</span>
+          <h3>Engaging your audience</h3>
+          <p>Put outcome quizzes and polls on your website, embed them anywhere, and capture leads from the people who take them.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="build" aria-labelledby="build-h">
+      <span class="label kicker">What you can build</span>
+      <h2 id="build-h">Four formats, one editor.</h2>
+      <div class="cols cols-4">
+        <div><h3>Scored quizzes</h3><p>Right answers and a score at the end, for onboarding checks and training assessments.</p></div>
+        <div><h3>Surveys</h3><p>No wrong answers, for hearing how your teams really feel.</p></div>
+        <div><h3>Polls</h3><p>One quick question and an instant read on the room.</p></div>
+        <div><h3>Outcome quizzes</h3><p>"Which one are you?" quizzes with a single result or a ranked list, great on your website.</p></div>
+      </div>
+      <div class="types">
+        <p><strong>20 question types</strong>, plus display logic that shows or skips questions based on earlier answers.</p>
+        <ul class="chips" aria-label="Some of the question types"><li>Multiple choice</li><li>Matrix</li><li>Slider</li><li>Drag and drop</li><li>Hotspot</li><li>Image select</li><li>Word cloud</li><li class="more">+13 more</li></ul>
+      </div>
+    </section>
+
+    <section class="section" id="how" aria-labelledby="how-h">
+      <span class="label kicker">How it works</span>
+      <h2 id="how-h">From blank page to answers in three steps.</h2>
+      <div class="cols">
+        <div><div class="numeral" aria-hidden="true">I.</div><h3>Build</h3><p>Write your questions, choose from 20 question types and add display logic where you need it.</p></div>
+        <div><div class="numeral" aria-hidden="true">II.</div><h3>Share</h3><p>Send a link, or embed the quiz right on your own site.</p>
+          <div class="sheet m-link" aria-hidden="true"><span class="tab on">Link</span><span class="tab">Embed</span><span class="url" data-link="…/take/onboarding" data-embed="&lt;iframe src=&quot;…/embed/onboarding&quot;&gt;">…/take/onboarding</span></div></div>
+        <div><div class="numeral" aria-hidden="true">III.</div><h3>See results</h3><p>Respondents see their result the moment they finish. You get every response in Insights, ready to export.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="results" aria-labelledby="results-h">
+      <div class="split">
+        <div>
+          <span class="label kicker">Results &amp; insights</span>
+          <h2 id="results-h">Every answer, on the record.</h2>
+          <p>See who has taken each quiz, how they scored, and which questions trip people up, so you know where training needs work. Each live quiz has its own Insights home with results, share and embed options, and exports.</p>
+        </div>
+        <div class="stack">
+          <figure>
+            <div class="sheet m-bars" aria-hidden="true">
+              <span class="label">Q3 — fire assembly point</span>
+              <div class="row"><span>Welcome email</span><div class="bar" style="width:12%"></div><span class="num">12%</span></div>
+              <div class="row"><span>Floor plan ✓</span><div class="bar hi" style="width:79%"></div><span class="num">79%</span></div>
+              <div class="row"><span>Facilities</span><div class="bar" style="width:9%"></div><span class="num">9%</span></div>
+              <div class="foot"><span class="label">142 responses</span><span class="label accent">Export ↓</span></div>
+            </div>
+            </figure>
+          <figure>
+            <div class="sheet" aria-hidden="true">
+              <table class="m-table">
+                <thead><tr><th>Name</th><th>Score</th><th>Submitted</th></tr></thead>
+                <tbody><tr><td>J. Rivera</td><td>8 / 8</td><td>Today</td></tr><tr><td>M. Chen</td><td>6 / 8</td><td>Today</td></tr><tr><td>A. Patel</td><td>7 / 8</td><td>Yesterday</td></tr></tbody>
+              </table>
+            </div>
+            <figcaption>Fig. 2 — How one question went, and who has taken the quiz. Illustrative data.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="teams" aria-labelledby="teams-h">
+      <div class="split">
+        <div>
+          <span class="label kicker">Built for teams</span>
+          <h2 id="teams-h">Your company, your quizzes.</h2>
+          <p>Each company gets its own space. Authors build and manage their own team's work, and admins can see everything across the company. Quizzes carry your company's own brand colors.</p>
+        </div>
+        <div class="sheet m-roles" aria-hidden="true">
+          <div class="r"><span>Admin</span><span class="label">Sees every team</span></div>
+          <div class="r"><span>Author — Marketing</span><span class="label">Own team's quizzes</span></div>
+          <div class="r"><span>Author — Training</span><span class="label">Own team's quizzes</span></div>
+          <div class="r"><span>Brand colors</span><span class="label"><span class="swatch"></span>Your company's</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="integrations" aria-labelledby="int-h">
+      <div class="split">
+        <div>
+          <span class="label kicker">Integrations</span>
+          <h2 id="int-h">Results that <span class="scribble">travel<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8 C 40 2, 80 2, 120 6 S 180 10, 198 4"/></svg></span>.</h2>
+          <p>Webhooks send events to the tools you already use, such as your CRM, a spreadsheet or your own systems. Get notified when someone completes a quiz, or when a quiz is published or unpublished.</p>
+        </div>
+        <figure>
+<pre class="sheet m-code">POST /your-endpoint
+{
+  <span class="k">"event"</span>: "attempt.completed",
+  <span class="k">"data"</span>: {
+    <span class="k">"assessmentTitle"</span>: "Safety onboarding",
+    <span class="k">"score"</span>: 8,
+    <span class="k">"maxScore"</span>: 8
+  }
+}</pre>
+          <figcaption>Illustrative payload.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="a11y-band">
+      <div class="inner"><span class="aaa" aria-hidden="true">AAA</span><strong>Accessible by default.</strong><p>Built to WCAG 2.2 AAA, the highest level of the web accessibility standard, so everyone can take part.</p></div>
+    </div>
+
+    <section class="letters" id="contact" aria-labelledby="contact-h">
+      <span class="label kicker">Contact</span>
+      <h2 id="contact-h">Write to us.</h2>
+      <p><span data-name></span> is in early access. If you'd like a look, or have a question, send us a note and a person will reply.</p>
+      <a class="btn" data-mailto href="#contact">Email&nbsp;<span data-email></span></a>
+    </section>
+  </main>
+
+  <div class="rules"></div>
+  <footer class="site-footer">
+    <a class="wordmark" href="#top" aria-label="Back to top"><span data-name></span><span class="dot">.</span></a>
+    <span class="label">© 2026 · Early access</span>
+  </footer>
+</div>
+</body>
+</html>
