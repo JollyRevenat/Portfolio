@@ -1,278 +1,158 @@
-const root = document.documentElement;
-const toggle = document.querySelector(".theme-toggle");
-const toggleLabel = toggle?.querySelector("span");
-const yearEl = document.getElementById("year");
+// Charles Blake — personal site.
+// Small, quiet interactions. Respects prefers-reduced-motion throughout.
 
-const lightTheme = {
-    "--bg": "#f2fbff",
-    "--surface": "#ffffff",
-    "--contrast": "#041025",
-    "--muted": "rgba(4, 16, 37, 0.65)",
-    "--accent": "#7ddcff",
-    "--accent-2": "#0dd59b",
-    "--shadow": "0 15px 35px rgba(0, 0, 0, 0.15)"
-};
+// Where the contact form and "Email" links send mail.
+const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
 
-const darkTheme = {
-    "--bg": "#01030a",
-    "--surface": "#07101f",
-    "--contrast": "#f2f8ff",
-    "--muted": "rgba(242, 248, 255, 0.65)",
-    "--accent": "#7ddcff",
-    "--accent-2": "#64f5c3",
-    "--shadow": "0 25px 60px rgba(0, 0, 0, 0.45)"
-};
+(function () {
+    const root = document.documentElement;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-let theme = "dark";
-
-function applyTheme(tokens) {
-    Object.entries(tokens).forEach(([key, value]) => {
-        root.style.setProperty(key, value);
+    // ---------- Small things ----------
+    document.querySelectorAll("[data-year]").forEach((el) => {
+        el.textContent = new Date().getFullYear();
     });
-}
 
-toggle?.addEventListener("click", () => {
-    theme = theme === "dark" ? "light" : "dark";
-    applyTheme(theme === "dark" ? darkTheme : lightTheme);
-    if (toggleLabel) {
-        toggleLabel.textContent = theme === "dark" ? "Dark" : "Light";
-    }
-});
+    document.querySelectorAll("[data-email]").forEach((a) => {
+        a.href = "mailto:" + CONTACT_EMAIL;
+    });
 
-if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-}
+    // ---------- Header: border once scrolled + mobile menu ----------
+    const header = document.querySelector(".site-header");
+    const menuBtn = document.querySelector(".menu-btn");
 
-if (toggleLabel) {
-    toggleLabel.textContent = "Dark";
-}
-
-const homeStory = document.querySelector(".home-story");
-
-function initHomeStory(story) {
-    const canvas = story.querySelector(".home-story__canvas");
-    const context = canvas?.getContext("2d");
-
-    if (!canvas || !context) {
-        return;
+    if (header) {
+        const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
     }
 
-    const gsapLib = window.gsap;
-    const scrollTrigger = window.ScrollTrigger;
-
-    if (!gsapLib || !scrollTrigger) {
-        story.classList.add("home-story--fallback");
-        return;
+    if (header && menuBtn) {
+        const setMenu = (open) => {
+            header.classList.toggle("menu-open", open);
+            menuBtn.setAttribute("aria-expanded", String(open));
+        };
+        menuBtn.addEventListener("click", () => setMenu(!header.classList.contains("menu-open")));
+        document.addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
+        document.addEventListener("click", (e) => {
+            if (!header.contains(e.target)) setMenu(false);
+        });
     }
 
-    const chapters = gsapLib.utils.toArray("[data-story-chapter]", story);
-    const frameCount = Number(story.dataset.frameCount) || 1;
-    const framePath = story.dataset.framePath || "assets/frames/";
-    const framePrefix = story.dataset.framePrefix || "frame_";
-    const frameExtension = story.dataset.frameExtension || "png";
-    const framePadding = Number(story.dataset.framePadding) || 4;
-    const mobileFrameStep = window.matchMedia("(max-width: 720px)").matches ? 3 : 1;
-    const frameIndexes = Array.from({ length: frameCount }, (_, index) => index)
-        .filter((index) => index % mobileFrameStep === 0 || index === frameCount - 1);
-    const images = new Map();
-    const playhead = { frame: 0 };
-
-    let currentFrame = 0;
-    let lastRenderedFrame = -1;
-    let renderRequested = false;
-    let resizeTimer = 0;
-    let canvasWidth = 0;
-    let canvasHeight = 0;
-
-    function getFrameUrl(index) {
-        const frameNumber = String(index).padStart(framePadding, "0");
-        return `${framePath}${framePrefix}${frameNumber}.${frameExtension}`;
+    // ---------- Contact form -> opens the visitor's mail app ----------
+    const form = document.querySelector("[data-contact-form]");
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const subject = `Hi from ${data.get("name") || "your website"}`;
+            const body = `${data.get("message") || ""}\n\n${data.get("name") || ""} (${data.get("email") || ""})`;
+            window.location.href =
+                `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
     }
 
-    function clampFrame(frame) {
-        return Math.min(frameIndexes.length - 1, Math.max(0, Math.round(frame)));
-    }
+    initSnow(!reduced);
 
-    function drawCover(image) {
-        const scale = Math.max(canvasWidth / image.naturalWidth, canvasHeight / image.naturalHeight);
-        const drawWidth = image.naturalWidth * scale;
-        const drawHeight = image.naturalHeight * scale;
-        const offsetX = (canvasWidth - drawWidth) / 2;
-        const offsetY = (canvasHeight - drawHeight) / 2;
+    // ---------- Scroll reveals: a short fade on each block, staggered a little within groups ----------
+    // Content is visible by default; hiding only happens once this script is running.
+    if (reduced || !("IntersectionObserver" in window)) return;
 
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
-        context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
-    }
+    const targets = [];
+    document.querySelectorAll("[data-reveal]").forEach((group) => {
+        const kids = group.hasAttribute("data-reveal-self") ? [group] : [...group.children];
+        kids.forEach((el, i) => {
+            if (el.getBoundingClientRect().top < window.innerHeight) return; // already on screen: leave it
+            el.classList.add("rv");
+            el.style.setProperty("--d", Math.min(i * 70, 280) + "ms");
+            targets.push(el);
+        });
+    });
 
-    function render() {
-        renderRequested = false;
-        currentFrame = clampFrame(playhead.frame);
+    root.classList.add("js-motion");
 
-        if (currentFrame === lastRenderedFrame) {
-            return;
-        }
+    const io = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("in");
+                io.unobserve(entry.target);
+            });
+        },
+        { rootMargin: "0px 0px -6% 0px", threshold: 0.1 }
+    );
 
-        const image = images.get(currentFrame);
+    targets.forEach((el) => io.observe(el));
+})();
 
-        if (image?.complete && image.naturalWidth) {
-            drawCover(image);
-            lastRenderedFrame = currentFrame;
-        }
-    }
+// ---------- Background snowfall: small, sparse and slow ----------
+function initSnow(animate) {
+    const canvas = document.querySelector(".ambient__snow");
+    const ctx = canvas?.getContext("2d");
+    if (!ctx) return;
 
-    function requestRender() {
-        if (!renderRequested) {
-            renderRequested = true;
-            window.requestAnimationFrame(render);
-        }
-    }
+    let w = 0;
+    let h = 0;
+    let flakes = [];
+    let raf = 0;
 
-    function resizeCanvas() {
-        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-        const bounds = canvas.getBoundingClientRect();
+    const rand = (a, b) => a + Math.random() * (b - a);
 
-        canvasWidth = Math.max(1, Math.round(bounds.width * pixelRatio));
-        canvasHeight = Math.max(1, Math.round(bounds.height * pixelRatio));
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        lastRenderedFrame = -1;
-        requestRender();
-    }
-
-    function queueResize() {
-        window.clearTimeout(resizeTimer);
-        resizeTimer = window.setTimeout(() => {
-            resizeCanvas();
-            scrollTrigger.refresh();
-        }, 120);
-    }
-
-    function loadFrame(sequenceIndex) {
-        if (images.has(sequenceIndex)) {
-            return Promise.resolve(images.get(sequenceIndex));
-        }
-
-        const image = new Image();
-        image.decoding = "async";
-        images.set(sequenceIndex, image);
-
-        return new Promise((resolve, reject) => {
-            image.onload = () => {
-                if (sequenceIndex === currentFrame) {
-                    lastRenderedFrame = -1;
-                    requestRender();
-                }
-
-                resolve(image);
+    function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = Math.round(Math.min(60, (w * h) / 26000));
+        flakes = Array.from({ length: count }, () => {
+            const depth = Math.random();
+            return {
+                x: rand(0, w),
+                y: rand(0, h),
+                r: 0.6 + depth * 1.4,
+                vy: 0.1 + depth * 0.25,
+                sway: rand(0.2, 0.6),
+                phase: rand(0, Math.PI * 2),
+                alpha: 0.12 + depth * 0.28
             };
-            image.onerror = reject;
-            image.src = getFrameUrl(frameIndexes[sequenceIndex]);
         });
     }
 
-    function preloadFrames() {
-        return Promise.all(frameIndexes.map((_, index) => loadFrame(index)));
-    }
-
-    function startStory() {
-        gsapLib.registerPlugin(scrollTrigger);
-        resizeCanvas();
-        story.classList.add("home-story--ready");
-        requestRender();
-
-        gsapLib.set(chapters, { autoAlpha: 0, y: 44 });
-        gsapLib.set(chapters[0], { autoAlpha: 1, y: 0 });
-        gsapLib.set(".story-chapter--card .card", {
-            autoAlpha: 0,
-            y: 72,
-            scale: 0.92,
-            rotationX: 9,
-            rotationZ: -1.5,
-            transformPerspective: 1200
-        });
-
-        const timeline = gsapLib.timeline({
-            scrollTrigger: {
-                trigger: story,
-                start: "top top",
-                end: () => `+=${Math.max(4200, frameIndexes.length * 30, chapters.length * 620)}`,
-                pin: true,
-                scrub: 0.35,
-                invalidateOnRefresh: true
-            }
-        });
-
-        timeline.to(playhead, {
-            frame: frameIndexes.length - 1,
-            ease: "none",
-            duration: 1,
-            onUpdate: requestRender
-        }, 0);
-
-        chapters.forEach((chapter, index) => {
-            const start = index / chapters.length;
-            const hold = chapter.classList.contains("story-chapter--card") ? 0.09 : 0.12;
-            const fade = 0.075;
-            const card = chapter.querySelector(".card");
-
-            if (index > 0) {
-                timeline.to(chapter, {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: fade,
-                    ease: "power1.out"
-                }, Math.max(0, start - fade));
-
-                if (card) {
-                    timeline.to(card, {
-                        autoAlpha: 1,
-                        y: 0,
-                        scale: 1,
-                        rotationX: 0,
-                        rotationZ: 0,
-                        duration: fade * 1.7,
-                        ease: "back.out(1.15)"
-                    }, Math.max(0, start - fade * 0.75));
+    function frame(t) {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "#d6f2ff";
+        for (const f of flakes) {
+            if (animate) {
+                f.y += f.vy;
+                f.x += Math.sin(t * 0.0004 * f.sway + f.phase) * 0.15;
+                if (f.y > h + 4) {
+                    f.y = -4;
+                    f.x = rand(0, w);
                 }
             }
-
-            if (index < chapters.length - 1) {
-                if (card) {
-                    timeline.to(card, {
-                        autoAlpha: 0,
-                        y: -52,
-                        scale: 0.96,
-                        rotationX: -7,
-                        rotationZ: 1.2,
-                        duration: fade,
-                        ease: "power1.in"
-                    }, Math.min(0.94, start + hold - fade * 0.3));
-                }
-
-                timeline.to(chapter, {
-                    autoAlpha: 0,
-                    y: -34,
-                    duration: fade,
-                    ease: "power1.in"
-                }, Math.min(0.94, start + hold));
-            }
-        });
-
-        window.addEventListener("resize", queueResize, { passive: true });
+            ctx.globalAlpha = f.alpha;
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        if (animate) raf = requestAnimationFrame(frame);
     }
 
-    loadFrame(0)
-        .then((firstImage) => {
-            resizeCanvas();
-            drawCover(firstImage);
-            return preloadFrames();
-        })
-        .then(startStory)
-        .catch(() => {
-            story.classList.add("home-story--fallback");
-        });
-}
+    resize();
+    frame(0);
 
-if (homeStory) {
-    initHomeStory(homeStory);
+    window.addEventListener("resize", () => {
+        resize();
+        if (!animate) frame(0);
+    }, { passive: true });
+
+    if (animate) {
+        document.addEventListener("visibilitychange", () => {
+            cancelAnimationFrame(raf);
+            if (!document.hidden) raf = requestAnimationFrame(frame);
+        });
+    }
 }

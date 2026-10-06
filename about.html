@@ -8,237 +8,168 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-R9VES5CG06');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charles | About</title>
+    <title>About | Charles Blake</title>
+    <meta name="description" content="Charles Blake from Bountiful, Utah: freeride skier on the Snowbasin Ski Team, lacrosse player, and builder of AI projects.">
+    <meta name="theme-color" content="#050a14">
+    <meta property="og:title" content="About | Charles Blake">
+    <meta property="og:description" content="Charles Blake from Bountiful, Utah: freeride skier on the Snowbasin Ski Team, lacrosse player, and builder of AI projects.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="assets/logo-primary.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
 <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
     <header class="site-header">
-        <a href="index.html" class="logo" aria-label="Return to homepage">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
-                height="52" loading="lazy" decoding="async">
-            <div class="logo-copy">
-                <span class="logo-eyebrow">Charles Blake</span>
-            </div>
-        </a>
-        <nav class="primary-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="outdoors.html">Outdoors</a>
-            <a href="projects.html">Projects</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="resume.html">Resume</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html" aria-current="page">About</a>
+                <a href="outdoors.html">Outdoors</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="page-hero page-hero--image about-hero-image">
-            <p class="eyebrow">About</p>
-            <h1>Student, teammate, and perpetual learner.</h1>
-            <p>I split time between Bountiful High, the Davis Catalyst Center, and teams that teach me grit on snow and
-                turf. This page dives into that balance.</p>
-        </section>
-
-        <section class="panel split">
-            <div>
-                <p class="eyebrow">Who I Am</p>
-                <h2>The classroom is everywhere.</h2>
-                <p>
-                    I spend my days toggling between academics at Bountiful High and immersive sessions at the Davis
-                    Catalyst Center where I'm leveling up my web development and cyber security skills. When the bell
-                    rings, I swap laptops for skis, mountain bikes, and lacrosse sticks.
-                </p>
-                <p>
-                    My favorite projects blend creativity, clean UI, and just enough challenge to keep me curious. I'm
-                    currently focused on mastering HTML/CSS, getting confident with JavaScript, and exploring backend
-                    basics with PHP and databases.
-                </p>
-            </div>
-            <div class="card-list">
-                <article class="card image-card card-image-ski">
-                    <h3>Snowbasin Ski Team</h3>
-                    <p>The mountain is my classroom for resilience, precision, and reading terrain &mdash; skills that
-                        translate into my code.</p>
-                </article>
-                <article class="card image-card card-image-lacrosse">
-                    <h3>BHS Lacrosse</h3>
-                    <p>On-field communication &amp; strategy help me collaborate better in group projects and
-                        hackathons.</p>
-                </article>
-                <article class="card image-card card-image-gap">
-                    <h3>Gap Year Vision</h3>
-                    <p>Plan: graduate at 17, take a gap year to build real-world experience, then head to college with
-                        momentum.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="panel">
-            <p class="eyebrow">Skills</p>
-            <h2>Toolbox I'm building right now.</h2>
-            <p>From semantic layouts to backend basics, I'm focused on building a modern, versatile stack while staying
-                curious.</p>
-            <div class="skill-grid">
-                <article>
-                    <h4>Web Foundations</h4>
-                    <ul>
-                        <li>Semantic HTML layouts</li>
-                        <li>Responsive CSS / Flex / Grid</li>
-                        <li>Design systems &amp; typography</li>
-                    </ul>
-                </article>
-                <article>
-                    <h4>In Progress</h4>
-                    <ul>
-                        <li>JavaScript fundamentals</li>
-                        <li>React component thinking</li>
-                        <li>Database structure concepts</li>
-                        <li>PHP for dynamic sites</li>
-                    </ul>
-                </article>
-                <article>
-                    <h4>Mindset</h4>
-                    <ul>
-                        <li>Curious &amp; experimental</li>
-                        <li>Outdoor grit fuels focus</li>
-                        <li>Team-first communicator</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <section class="panel certificates">
-            <div>
-                <p class="eyebrow">Certifications</p>
-                <h2>Badges backing up the skills.</h2>
-                <p>Each badge below links out to my Credly page so you can verify the issue date and skill focus.</p>
-                <a class="btn primary" href="https://www.credly.com/users/charles-blake" target="_blank"
-                    rel="noreferrer">View on Credly</a>
-            </div>
-            <div class="cert-grid">
-                <article class="cert-card">
-                    <span class="cert-icon">C+</span>
-                    <div>
-                        <h3>CompTIA Tech+ Certification</h3>
-                        <p class="cert-issuer">CompTIA &middot; Issued May 15, 2025</p>
-                    </div>
-                </article>
-                <article class="cert-card">
-                    <span class="cert-icon">MOS</span>
-                    <div>
-                        <h3>Microsoft Office Specialist: Associate (365 Apps)</h3>
-                        <p class="cert-issuer">Microsoft &middot; Issued Dec 13, 2024</p>
-                    </div>
-                </article>
-                <article class="cert-card">
-                    <span class="cert-icon">XL</span>
-                    <div>
-                        <h3>Microsoft Office Specialist: Excel Associate</h3>
-                        <p class="cert-issuer">Microsoft &middot; Issued Sep 27, 2024</p>
-                    </div>
-                </article>
-                <article class="cert-card">
-                    <span class="cert-icon">PP</span>
-                    <div>
-                        <h3>Microsoft Office Specialist: PowerPoint Associate</h3>
-                        <p class="cert-issuer">Microsoft &middot; Issued Dec 13, 2024</p>
-                    </div>
-                </article>
-                <article class="cert-card">
-                    <span class="cert-icon">WD</span>
-                    <div>
-                        <h3>Microsoft Office Specialist: Word Associate</h3>
-                        <p class="cert-issuer">Microsoft &middot; Issued Nov 18, 2024</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="panel split">
-            <div>
-                <p class="eyebrow">Experience</p>
-                <h2>Learning by doing.</h2>
-                <p>From mock client projects to cyber security labs, I'm iterating fast, asking good questions, and
-                    keeping accessibility and performance in the conversation.</p>
-            </div>
-            <div class="card-list">
-                <article class="card">
-                    <h3>Web dev sprints</h3>
-                    <p>Prototyping responsive layouts with clean HTML/CSS, thoughtful typography, and smooth
-                        interactions.</p>
-                </article>
-                <article class="card">
-                    <h3>Security mindset</h3>
-                    <p>Exploring cyber security fundamentals so every build considers authentication, data safety, and
-                        ethical hacking basics.</p>
-                </article>
-                <article class="card">
-                    <h3>Team energy</h3>
-                    <p>Working with classmates, mentors, and student teams to communicate clearly and ship iteratively.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <section class="panel timeline-wrap">
-            <p class="eyebrow">Timeline</p>
-            <h2>Past wins, current work, future goals.</h2>
-            <div class="timeline">
-                <div class="timeline__item">
-                    <span class="timeline__tag">Past</span>
-                    <h3>Building the foundation</h3>
-                    <ul>
-                        <li>Immersed in HTML/CSS fundamentals and design systems.</li>
-                        <li>Competed with the Snowbasin ski + BHS lacrosse teams to learn grit.</li>
-                        <li>Started Catalyst Center coursework in web dev &amp; cyber security.</li>
-                    </ul>
+    <main id="main">
+        <section class="page-hero">
+            <div class="wrap split">
+                <div>
+                    <span class="label">About</span>
+                    <h1>A little more about me.</h1>
+                    <p class="lede">I like skiing, lacrosse, computers, and building things I don&rsquo;t completely know how to build yet.</p>
                 </div>
-                <div class="timeline__item">
-                    <span class="timeline__tag">Now</span>
-                    <h3>Hands-on catalyst grind</h3>
-                    <ul>
-                        <li>Shipping responsive UI experiments and modern layouts.</li>
-                        <li>Learning databases, PHP, React, and tightening JS fundamentals.</li>
-                        <li>Mixing classroom work with outdoor training for balance and focus.</li>
-                    </ul>
+                <figure class="portrait">
+                    <img src="assets/img/ski-bowl-1600.webp" srcset="assets/img/ski-bowl-800.webp 800w, assets/img/ski-bowl-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Looking down a steep, snowy bowl toward the valley" loading="eager" fetchpriority="high" decoding="async">
+                    <figcaption>March 2025</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap split" data-reveal>
+                <div class="prose">
+                    <h2>Who I am</h2>
+                    <p>I&rsquo;m 16 and live in Bountiful, Utah, with the Wasatch right out the back door. I&rsquo;m a senior at <strong>Bountiful High School</strong>. I skipped freshman year, so I&rsquo;ll graduate at 17. Part of every school day I&rsquo;m at the <strong>Davis Catalyst Center</strong>, studying cybersecurity, web development and AI engineering.</p>
+                    <p>In the winter I compete in freeride with the <strong>Snowbasin Ski Team</strong>. Snowbasin is my home mountain, and this is my second season with the team. In the spring I play <strong>lacrosse</strong> for Bountiful, mostly at close defense and LSM, and I&rsquo;ve been a JV captain and starter.</p>
+                    <p>The rest of the time I&rsquo;m mountain biking, climbing, hiking or lifting. When I&rsquo;m inside, I&rsquo;m usually running local AI models or working on whatever project I&rsquo;m currently way too deep into.</p>
                 </div>
-                <div class="timeline__item">
-                    <span class="timeline__tag">Future</span>
-                    <h3>Gap year &amp; beyond</h3>
-                    <ul>
-                        <li>Graduate at 17 with standout capstone projects.</li>
-                        <li>Take a gap year to learn more about computer science, and travel to ski.</li>
-                        <li>Head to college for computer science while continuing to launch projects.</li>
+                <ul class="facts">
+                        <li><span class="k">Home</span><span>Bountiful, Utah</span></li>
+                        <li><span class="k">School</span><span>Senior at Bountiful High</span></li>
+                        <li><span class="k">Also</span><span>Davis Catalyst Center: cybersecurity, web development and AI engineering</span></li>
+                        <li><span class="k">Winter</span><span>Freeride with the Snowbasin Ski Team</span></li>
+                        <li><span class="k">Spring</span><span>Lacrosse for Bountiful, close defense and LSM</span></li>
+                        <li><span class="k">Anytime</span><span>Mountain biking, climbing, hiking, lifting</span></li>
                     </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2>What keeps me busy</h2>
+                </div>
+                <div class="grid-3" data-reveal>
+                    <article class="card">
+                        <h3>Freeride skiing</h3>
+                        <p>Competing with the Snowbasin Ski Team&rsquo;s freeride program, plus tricks and freestyle whenever I can.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Lacrosse</h3>
+                        <p>Long pole for Bountiful, at close defense and LSM. JV captain and starter, plus practices, lifting and extra sessions in the fall.</p>
+                    </article>
+                    <article class="card">
+                        <h3>AI and computers</h3>
+                        <p>Local models, GPU servers and AI agents. I like running the infrastructure myself, not just using a chatbot.</p>
+                    </article>
                 </div>
             </div>
         </section>
+
+        <section class="section">
+            <div class="wrap split">
+                <div class="section-head" data-reveal>
+                    <h2>What&rsquo;s next</h2>
+                    <p>Still figuring it out, but here&rsquo;s the rough idea.</p>
+                </div>
+                <div class="timeline" data-reveal>
+                    <article class="timeline__item">
+                        <span class="label">Now</span>
+                        <h3>Senior year</h3>
+                        <p style="color: var(--muted)">Bountiful High, Catalyst, my second freeride season at Snowbasin, and lacrosse in the spring.</p>
+                    </article>
+                    <article class="timeline__item">
+                        <span class="label">After graduation</span>
+                        <h3>Probably a gap year</h3>
+                        <p style="color: var(--muted)">Time to build real AI and software projects, try some entrepreneurship, and leave plenty of room for skiing.</p>
+                    </article>
+                    <article class="timeline__item">
+                        <span class="label">Later</span>
+                        <h3>College, likely computer science</h3>
+                        <p style="color: var(--muted)">Not locked in yet. I want to figure out what I actually want to work on first.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head section-head--row" data-reveal>
+                    <div>
+                        <h2>Certifications</h2>
+                        <p>Earned through school. You can verify each one on Credly.</p>
+                    </div>
+                    <a class="btn" href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">View on Credly <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                </div>
+                <ul class="certs" data-reveal data-reveal-self>
+                    <li><strong>CompTIA Tech+</strong><span>May 2025</span></li>
+                    <li><strong>Microsoft Office Specialist: Associate (Microsoft 365 Apps)</strong><span>Dec 2024</span></li>
+                    <li><strong>Microsoft Office Specialist: PowerPoint Associate</strong><span>Dec 2024</span></li>
+                    <li><strong>Microsoft Office Specialist: Word Associate</strong><span>Nov 2024</span></li>
+                    <li><strong>Microsoft Office Specialist: Excel Associate</strong><span>Sep 2024</span></li>
+                </ul>
+            </div>
+        </section>
+
     </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
-                height="48" loading="lazy" decoding="async">
-            <div>
-                <p>&copy; <span id="year"></span> Charles Blake</p>
-                <p>Built in Bountiful, fueled by bluebird days.</p>
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
             </div>
-        </div>
-        <div class="footer-links">
-            <a href="#">LinkedIn</a>
-            <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="mailto:charles@example.com">Email</a>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
         </div>
     </footer>
 

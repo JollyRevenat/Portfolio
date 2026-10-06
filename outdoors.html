@@ -8,91 +8,133 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-R9VES5CG06');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charles | Outdoors</title>
+    <title>Outdoors | Charles Blake</title>
+    <meta name="description" content="Skiing, biking and hiking around the Wasatch.">
+    <meta name="theme-color" content="#050a14">
+    <meta property="og:title" content="Outdoors | Charles Blake">
+    <meta property="og:description" content="Skiing, biking and hiking around the Wasatch.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="assets/logo-primary.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
 <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
     <header class="site-header">
-        <a href="index.html" class="logo" aria-label="Return to homepage">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
-                height="52" loading="lazy" decoding="async">
-            <div class="logo-copy">
-                <span class="logo-eyebrow">Charles Blake</span>
-            </div>
-        </a>
-        <nav class="primary-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="outdoors.html" class="active">Outdoors</a>
-            <a href="projects.html">Projects</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="resume.html">Resume</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="outdoors.html" aria-current="page">Outdoors</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="page-hero page-hero--image outdoors-hero-image">
-            <p class="eyebrow">Outdoors</p>
-            <h1>The mountains fuel every project I take on.</h1>
-            <p>Snowbasin sunrises, Wasatch rides, and long hikes keep me balanced, disciplined, and ready to focus when
-                I'm back at the keyboard.</p>
+    <main id="main">
+        <section class="page-hero">
+            <div class="wrap split">
+                <div>
+                    <span class="label">Outdoors</span>
+                    <h1>Most of my year happens outside.</h1>
+                    <p class="lede">Snowbasin all winter, and bikes, rock and trails the rest of the year.</p>
+                </div>
+                <figure class="portrait">
+                    <img src="assets/img/alpine-lake-1600.webp" srcset="assets/img/alpine-lake-800.webp 800w, assets/img/alpine-lake-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Still alpine lake surrounded by granite boulders" loading="eager" fetchpriority="high" decoding="async">
+                    <figcaption>September 2025</figcaption>
+                </figure>
+            </div>
         </section>
 
-        <section class="panel">
-            <div class="panel__header">
-                <div>
-                    <p class="eyebrow">Mountains | Momentum</p>
-                    <h2>Outdoor energy meets creative energy.</h2>
+        <section class="section">
+            <div class="wrap">
+                <div class="grid-2" data-reveal>
+                    <article class="card card--photo">
+                        <div class="card__img"><img src="assets/img/ski-ridge-1600.webp" srcset="assets/img/ski-ridge-800.webp 800w, assets/img/ski-ridge-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Snow-covered summit ridge" loading="lazy" decoding="async"></div>
+                        <div class="card__body">
+                            <span class="label">Winter</span>
+                            <h3>Freeride skiing</h3>
+                            <p>Snowbasin is my home mountain. I compete in freeride with the Snowbasin Ski Team.</p>
+                        </div>
+                    </article>
+                    <article class="card card--photo">
+                        <div class="card__img"><img src="assets/img/bike-1600.webp" srcset="assets/img/bike-800.webp 800w, assets/img/bike-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Mountain bike resting on rocks above a lake" loading="lazy" decoding="async"></div>
+                        <div class="card__body">
+                            <span class="label">Summer</span>
+                            <h3>Mountain biking</h3>
+                            <p>One of my main sports once the snow melts.</p>
+                        </div>
+                    </article>
+                    <article class="card card--photo">
+                        <div class="card__img"><img src="assets/img/summit-rock-1600.webp" srcset="assets/img/summit-rock-800.webp 800w, assets/img/summit-rock-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Sitting on top of a huge boulder above a valley" loading="lazy" decoding="async"></div>
+                        <div class="card__body">
+                            <span class="label">Spring through fall</span>
+                            <h3>Climbing</h3>
+                            <p>Rock climbing whenever I can find something to get on.</p>
+                        </div>
+                    </article>
+                    <article class="card card--photo">
+                        <div class="card__img"><img src="assets/img/meadow-1600.webp" srcset="assets/img/meadow-800.webp 800w, assets/img/meadow-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Green meadow below snowy cliffs" loading="lazy" decoding="async"></div>
+                        <div class="card__body">
+                            <span class="label">Anytime</span>
+                            <h3>Hiking</h3>
+                            <p>Long days in the mountains. Sometimes I run into some locals, like moose and elk.</p>
+                        </div>
+                    </article>
                 </div>
-                <p>From sunrise ski sessions at Snowbasin to late-day rides on Wasatch trails, being outside keeps me
-                    balanced and energized for deep work.</p>
-            </div>
-            <div class="outdoors-grid">
-                <article class="image-card card-image-outdoor-ski">
-                    <h3>Skiing</h3>
-                    <p>Carving turns with the Snowbasin Ski Team teaches me discipline, patience, and flow.</p>
-                </article>
-                <article class="image-card card-image-outdoor-bike">
-                    <h3>Mountain Biking</h3>
-                    <p>Technical trails sharpen my focus &mdash; perfect for debugging complex layouts.</p>
-                </article>
-                <article class="image-card card-image-outdoor-hike">
-                    <h3>Hiking</h3>
-                    <p>Long climbs mirror long build sessions: steady progress, epic views.</p>
-                </article>
-                <article class="image-card card-image-outdoor-more">
-                    <h3>More Outside</h3>
-                    <p>Anything that keeps me moving outdoors is an instant yes.</p>
-                </article>
             </div>
         </section>
+
+        <section class="section">
+            <div class="wrap split" data-reveal>
+                <div class="prose">
+                    <h2>More photos</h2>
+                    <p>I post the rest on Instagram.</p>
+                </div>
+                <ul class="contact-list">
+                    <li><a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer"><span class="k">Instagram</span><span class="v">@charles_david_blake</span></a></li>
+                </ul>
+            </div>
+        </section>
+
     </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
-                height="48" loading="lazy" decoding="async">
-            <div>
-                <p>&copy; <span id="year"></span> Charles Blake</p>
-                <p>Built in Bountiful, fueled by bluebird days.</p>
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
             </div>
-        </div>
-        <div class="footer-links">
-            <a href="#">LinkedIn</a>
-            <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="mailto:charles@example.com">Email</a>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
         </div>
     </footer>
 

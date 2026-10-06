@@ -8,109 +8,126 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-R9VES5CG06');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charles | Resume</title>
+    <title>Resume | Charles Blake</title>
+    <meta name="description" content="Resume for Charles Blake.">
+    <meta name="theme-color" content="#050a14">
+    <meta property="og:title" content="Resume | Charles Blake">
+    <meta property="og:description" content="Resume for Charles Blake.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="assets/logo-primary.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
 <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
     <header class="site-header">
-        <a href="index.html" class="logo" aria-label="Return to homepage">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
-                height="52" loading="lazy" decoding="async">
-            <div class="logo-copy">
-                <span class="logo-eyebrow">Charles Blake</span>
-            </div>
-        </a>
-        <nav class="primary-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="outdoors.html">Outdoors</a>
-            <a href="projects.html">Projects</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="resume.html" class="active">Resume</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="outdoors.html">Outdoors</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html" aria-current="page">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="page-hero page-hero--image resume-hero-image">
-            <p class="eyebrow">Resume</p>
-            <h1>A quick snapshot of my experience.</h1>
-            <p>Scan the highlights below for a clean, on-page view. Need the full PDF' Grab it anytime with the buttons.
-            </p>
+    <main id="main">
+        <section class="page-hero">
+            <div class="wrap">
+                <span class="label">Resume</span>
+                <h1>Resume</h1>
+            </div>
         </section>
 
-        <section class="panel resume-panel">
-            <div class="resume-actions">
-                <h2>Download &amp; share</h2>
-                <p>Updated for the current school year with Catalyst Center experience, certifications, and leadership
-                    in outdoor sports.</p>
-                <a class="btn primary" href="assets/resume.pdf" download>Download PDF</a>
-                <a class="btn ghost" href="assets/resume.pdf" target="_blank" rel="noreferrer">Open PDF</a>
-            </div>
-            <div class="resume-content">
-                <article>
-                    <h3>Education</h3>
-                    <ul>
-                        <li><strong>Bountiful High School</strong> &mdash; Class of 2026, graduating early at 17.</li>
-                        <li><strong>Davis Catalyst Center</strong> &mdash; Web Development &amp; Cyber Security pathway.
-                        </li>
-                    </ul>
-                </article>
-                <article>
-                    <h3>Experience</h3>
-                    <ul>
-                        <li><strong>Student Web Developer</strong>, Catalyst projects &mdash; responsive UI builds,
-                            accessibility focus, modern tooling experiments.</li>
-                        <li><strong>Cyber Security Learner</strong> &mdash; labs covering ethical hacking basics and
-                            securing the apps I build.</li>
-                    </ul>
-                </article>
-                <article>
-                    <h3>Skills</h3>
-                    <p>Semantic HTML, responsive CSS/Flex/Grid, design systems, JavaScript fundamentals, React basics,
-                        PHP &amp; databases (in progress), teamwork &amp; communication.</p>
-                </article>
-                <article>
-                    <h3>Certifications</h3>
-                    <ul>
-                        <li>CompTIA Tech+ Certification</li>
-                        <li>Microsoft Office Specialist: Associate (365 Apps)</li>
-                        <li>MOS: Excel, PowerPoint, and Word Associate</li>
-                    </ul>
-                </article>
-                <article>
-                    <h3>Activities</h3>
-                    <p>Snowbasin Ski Team, BHS Lacrosse, mountain biking, hiking, and backcountry exploration &mdash;
-                        all fueling grit, focus, and collaboration.</p>
-                </article>
+        <section class="section" style="padding-top: 0;">
+            <div class="wrap resume">
+                <aside class="card resume__aside">
+                    <h2>Download</h2>
+                    <p style="color: var(--muted)">The full one-page resume as a PDF.</p>
+                    <a class="btn btn--primary" href="assets/resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Download PDF</a>
+                    <a class="btn" href="assets/resume.pdf" target="_blank" rel="noreferrer">Open in new tab</a>
+                </aside>
+                <div style="display: grid; gap: 16px;" data-reveal>
+                    <article class="card resume__block">
+                        <h3>Education</h3>
+                        <ul class="ticks">
+                            <li><strong>Bountiful High School</strong>, senior, graduating at 17 (skipped freshman year)</li>
+                            <li><strong>Davis Catalyst Center</strong>, cybersecurity, web development and AI engineering</li>
+                        </ul>
+                    </article>
+                    <article class="card resume__block">
+                        <h3>Projects</h3>
+                        <ul class="ticks">
+                            <li><strong>Robin</strong>, agentic AI platform with local and cloud models, MCP tools and multi-agent workflows</li>
+                            <li><strong>Ollama Summarizer</strong>, Chrome extension (Manifest V3) that summarizes pages with a local model</li>
+                            <li><strong>EHR system</strong>, PHP and SQL health record app built at Catalyst</li>
+                            <li><strong>AI-built web app security</strong>, research into vulnerabilities in AI-generated web apps</li>
+                        </ul>
+                    </article>
+                    <article class="card resume__block">
+                        <h3>Activities</h3>
+                        <ul class="ticks">
+                            <li><strong>Snowbasin Ski Team</strong>, freeride competitive program, 2025&ndash;present</li>
+                            <li><strong>Bountiful lacrosse</strong>, close defense and LSM, JV captain and starter</li>
+                            <li>Mountain biking, rock climbing, hiking and lifting</li>
+                        </ul>
+                    </article>
+                    <article class="card resume__block">
+                        <h3>Certifications</h3>
+                        <ul class="ticks">
+                            <li>CompTIA Tech+</li>
+                            <li>Microsoft Office Specialist: Associate (Microsoft 365 Apps)</li>
+                            <li>Microsoft Office Specialist: Excel, PowerPoint and Word Associate</li>
+                        </ul>
+                    </article>
+                    <article class="card resume__block">
+                        <h3>Skills</h3>
+                        <div class="tags">
+                            <span class="tag">Ollama</span><span class="tag">vLLM</span><span class="tag">llama.cpp</span><span class="tag">MCP</span><span class="tag">Linux</span><span class="tag">CUDA</span><span class="tag">Networking</span><span class="tag">HTML &amp; CSS</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">Microsoft Office</span>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
-                height="48" loading="lazy" decoding="async">
-            <div>
-                <p>&copy; <span id="year"></span> Charles Blake</p>
-                <p>Built in Bountiful, fueled by bluebird days.</p>
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
             </div>
-        </div>
-        <div class="footer-links">
-            <a href="#">LinkedIn</a>
-            <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="mailto:charles@example.com">Email</a>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
         </div>
     </footer>
 

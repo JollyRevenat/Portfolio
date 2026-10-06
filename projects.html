@@ -8,93 +8,134 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-R9VES5CG06');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charles | Projects</title>
+    <title>Projects | Charles Blake</title>
+    <meta name="description" content="Things Charles Blake has built.">
+    <meta name="theme-color" content="#050a14">
+    <meta property="og:title" content="Projects | Charles Blake">
+    <meta property="og:description" content="Things Charles Blake has built.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="assets/logo-primary.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
 <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
     <header class="site-header">
-        <a href="index.html" class="logo" aria-label="Return to homepage">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
-                height="52" loading="lazy" decoding="async">
-            <div class="logo-copy">
-                <span class="logo-eyebrow">Charles Blake</span>
-            </div>
-        </a>
-        <nav class="primary-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="outdoors.html">Outdoors</a>
-            <a href="projects.html" class="active">Projects</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="resume.html">Resume</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="outdoors.html">Outdoors</a>
+                <a href="projects.html" aria-current="page">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="page-hero page-hero--image projects-hero-image">
-            <p class="eyebrow">Projects</p>
-            <h1>Case studies and experiments.</h1>
-            <p>Each card below is ready for a future link &mdash; portfolio builds, class projects, and experiments that
-                show how I think.</p>
-        </section>
-
-        <section class="panel projects-panel">
-            <p class="eyebrow">Lineup</p>
-            <h2>Drop-in cards for upcoming projects.</h2>
-            <div class="projects-grid">
-                <article class="project-card image-card card-image-portfolio">
-                    <div>
-                        <h3>Portfolio Redesign</h3>
-                        <p>A multi-page portfolio built with semantic HTML/CSS and some light interactions.</p>
-                        <p class="project-meta">Role: Frontend &middot; Status: In progress</p>
-                    </div>
-                    <a class="btn ghost" href="#" aria-disabled="true">Add link</a>
-                </article>
-                <article class="project-card image-card card-image-teamhub">
-                    <div>
-                        <h3>Snowbasin Team Hub</h3>
-                        <p>Concept for a ski team dashboard that tracks training, weather, and shared stoke.</p>
-                        <p class="project-meta">Role: Designer/Developer &middot; Status: Concepting</p>
-                    </div>
-                    <a class="btn ghost" href="#" aria-disabled="true">Add link</a>
-                </article>
-                <article class="project-card image-card card-image-security">
-                    <div>
-                        <h3>Secure Notes App</h3>
-                        <p>Experimenting with PHP, databases, and auth patterns learned from Catalyst labs.</p>
-                        <p class="project-meta">Role: Full stack student &middot; Status: Researching</p>
-                    </div>
-                    <a class="btn ghost" href="#" aria-disabled="true">Add link</a>
-                </article>
+    <main id="main">
+        <section class="page-hero">
+            <div class="wrap">
+                <span class="label">Projects</span>
+                <h1>Things I&rsquo;ve built.</h1>
+                <p class="lede">Some started as Catalyst classes and labs. Others are things I couldn&rsquo;t stop working on at home.</p>
             </div>
         </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="wrap">
+                <div class="grid-2" data-reveal>
+                    <article class="card project-card">
+                        <div class="tags"><span class="tag">AI agents</span><span class="tag">MCP</span><span class="tag">Local models</span></div>
+                        <h3>Robin</h3>
+                        <p>An agentic AI platform. You pick local or cloud models, attach MCP tools, and build multi-agent workflows.</p>
+                        <div class="project__meta"><span><b>Status</b> In progress</span></div>
+                    </article>
+                    <article class="card project-card">
+                        <div class="tags"><span class="tag">Chrome extension</span><span class="tag">Manifest V3</span><span class="tag">Ollama</span></div>
+                        <h3>Ollama Summarizer</h3>
+                        <p>A Chrome extension that summarizes the page you&rsquo;re on with a model running locally through Ollama, so nothing leaves your computer.</p>
+                        <div class="project__meta"><span><b>Status</b> Built</span></div>
+                    </article>
+                    <article class="card project-card">
+                        <div class="tags"><span class="tag">PHP</span><span class="tag">SQL</span></div>
+                        <h3>EHR system</h3>
+                        <p>An electronic health record app with patient records, vitals, orders, alerts, prevention and medication screens. Built at Catalyst.</p>
+                        <div class="project__meta"><span><b>Status</b> Built</span></div>
+                    </article>
+                    <article class="card project-card">
+                        <div class="tags"><span class="tag">Security</span><span class="tag">Web apps</span><span class="tag">AI</span></div>
+                        <h3>Security of AI-built web apps</h3>
+                        <p>Research into how secure web apps generated by AI tools really are, and the kinds of vulnerabilities they tend to ship with.</p>
+                        <div class="project__meta"><span><b>Status</b> Research</span></div>
+                    </article>
+                    <article class="card project-card">
+                        <div class="tags"><span class="tag">Linux</span><span class="tag">SSH</span><span class="tag">Wireshark</span></div>
+                        <h3>Cybersecurity labs</h3>
+                        <p>OverTheWire Bandit, SSH, packet analysis in Wireshark, and tracking down hidden wireless networks.</p>
+                        <div class="project__meta"><span><b>Status</b> Ongoing</span></div>
+                    </article>
+                    <article class="card project-card">
+                        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                        <h3>This website</h3>
+                        <p>Written by hand without a framework. The snowflake logo is my own design.</p>
+                        <p><a class="link" href="https://github.com/JollyRevenat/Portfolio" target="_blank" rel="noreferrer">View the code on GitHub</a></p>
+                        <div class="project__meta"><span><b>Status</b> Live</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2>What I work with</h2>
+                    <p>Tools I&rsquo;ve actually used on the projects above.</p>
+                </div>
+                <div class="grid-3" data-reveal>
+                    <article class="card"><h3>AI</h3><div class="tags"><span class="tag">Ollama</span><span class="tag">vLLM</span><span class="tag">llama.cpp</span><span class="tag">Hugging Face</span><span class="tag">MCP</span><span class="tag">CUDA</span></div></article>
+                    <article class="card"><h3>Web</h3><div class="tags"><span class="tag">HTML &amp; CSS</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">PHP</span><span class="tag">SQL</span></div></article>
+                    <article class="card"><h3>Systems &amp; security</h3><div class="tags"><span class="tag">Linux</span><span class="tag">SSH</span><span class="tag">Networking</span><span class="tag">Wireshark</span><span class="tag">Authentication</span></div></article>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
-                height="48" loading="lazy" decoding="async">
-            <div>
-                <p>&copy; <span id="year"></span> Charles Blake</p>
-                <p>Built in Bountiful, fueled by bluebird days.</p>
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
             </div>
-        </div>
-        <div class="footer-links">
-            <a href="#">LinkedIn</a>
-            <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="mailto:charles@example.com">Email</a>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
         </div>
     </footer>
 

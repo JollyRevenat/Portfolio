@@ -8,76 +8,81 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-R9VES5CG06');
     </script>
     <meta charset="UTF-8">
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found | Charles</title>
+    <title>Page not found | Charles Blake</title>
+    <meta name="description" content="Page not found.">
+    <meta name="theme-color" content="#050a14">
+    <meta property="og:title" content="Page not found | Charles Blake">
+    <meta property="og:description" content="Page not found.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="assets/logo-primary.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
 <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
     <header class="site-header">
-        <a href="index.html" class="logo" aria-label="Return to homepage">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="52"
-                height="52" loading="lazy" decoding="async">
-            <div class="logo-copy">
-                <span class="logo-eyebrow">Charles Blake</span>
-            </div>
-        </a>
-        <nav class="primary-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="outdoors.html">Outdoors</a>
-            <a href="projects.html">Projects</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="resume.html">Resume</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="outdoors.html">Outdoors</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="panel not-found">
-            <div>
-                <p class="eyebrow">404</p>
-                <h1>Looks like this page wandered off.</h1>
-                <p>The link you followed might be broken, or the page might have been moved. Use the quick actions below
-                    to get back on track.</p>
-                <div class="not-found__actions">
-                    <a class="btn primary" href="index.html">Go Home</a>
-                    <a class="btn ghost" href="contact.html">Contact Me</a>
+    <main id="main">
+        <section class="lost">
+            <div class="wrap">
+                <img src="assets/logo-primary.png" alt="" width="64" height="72">
+                <h1>Page not found</h1>
+                <p>The link might be broken, or the page has moved.</p>
+                <div class="btn-row">
+                    <a class="btn btn--primary" href="index.html">Back home</a>
+                    <a class="btn" href="contact.html">Contact me</a>
                 </div>
             </div>
-            <div class="not-found__details">
-                <p class="eyebrow">Need a hint'</p>
-                <ul>
-                    <li>Check the URL for typos.</li>
-                    <li>Head back to the About page for my full story.</li>
-                    <li>Browse Projects to see what I'm building next.</li>
-                </ul>
-            </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <img src="assets/logo-primary.png" alt="Charles Blake snowflake monogram" class="logo-icon" width="48"
-                height="48" loading="lazy" decoding="async">
-            <div>
-                <p>&copy; <span id="year"></span> Charles Blake</p>
-                <p>Built in Bountiful, fueled by bluebird days.</p>
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
             </div>
-        </div>
-        <div class="footer-links">
-            <a href="#">LinkedIn</a>
-            <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="mailto:charles@example.com">Email</a>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
         </div>
     </footer>
 

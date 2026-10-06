@@ -1,21 +1,18 @@
-## Charles Blake — Portfolio
+## Charles Blake — Personal Site
 
-This repository holds my personal portfolio site where I document projects from Bountiful High School and the Davis Catalyst Center, along with my outdoor-focused life at Snowbasin and BHS Lacrosse.
+Source for [charlesblake.com](https://charlesblake.com): who I am, freeride skiing with the Snowbasin Ski Team, lacrosse, time outside, and the AI and security projects I'm building at the Davis Catalyst Center and at home.
 
-### Tech Stack
-- **HTML/CSS** for structure and styling.
-- **Vanilla JS** for small enhancements (theme tokens, footer year).
-- **Google Fonts / Space Grotesk** to keep typography consistent.
+### Tech
+- Hand-written HTML, CSS and vanilla JavaScript. No framework or build step.
+- Space Grotesk from Google Fonts.
+- Deployed to GitHub Pages on every push to `main`.
 
 ### Structure
-- `index.html` — Landing page with hero, quick links, and nav.
-- `about.html` — All background content (bio, skills, certifications, experience, timeline).
-- `projects.html`, `resume.html`, `outdoors.html`, `contact.html`, `404.html`.
-- `styles.css` and `script.js` handle styling and light interactivity.
+- `index.html` — home
+- `about.html`, `outdoors.html`, `projects.html`, `resume.html`, `contact.html`, `404.html`
+- `styles.css` — all styles; colors live in the `:root` tokens at the top
+- `script.js` — mobile menu, scroll fades, contact form, background snowfall (`CONTACT_EMAIL` at the top)
+- `assets/img/` — my photos, resized to WebP
+- `assets/new logos/` — snowflake logo variations
 
-
-### Credits
-- Background imagery from Unsplash.
-- Inspiration: clean modern hero layouts from Zendesk-style themes.
-
-Say hi: [GitHub](https://github.com/JollyRevenat)
+Say hi: [Instagram](https://www.instagram.com/charles_david_blake/) · [GitHub](https://github.com/JollyRevenat)
