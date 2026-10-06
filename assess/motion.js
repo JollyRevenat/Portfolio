@@ -10,15 +10,16 @@
 
   // ---- Scroll reveals: fade up a few pixels, staggered within each group ----
   var groups = [
-    ".section > .kicker, .section > h2",
-    ".section .cols > *",
-    ".section .types",
-    ".uses-main > h3, .uses-main > p, .use-list > li",
-    ".uses-also",
-    ".section .split > div:first-child > *",
-    ".section .split > :last-child",
-    ".a11y-band .inner",
-    ".letters > *",
+    ".intro > *",
+    ".cards > *",
+    ".bento > *",
+    ".steps > *",
+    ".also",
+    ".split-copy > *",
+    ".split > .window",
+    ".clients .wrap > *",
+    ".stat-row > *",
+    ".cta-panel > *",
   ];
   groups.forEach(function (sel) {
     var seen = new Map();
