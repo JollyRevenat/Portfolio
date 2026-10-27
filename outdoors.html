@@ -65,59 +65,36 @@
         </div>
     </header>
 
-    <main id="main">
-        <section class="page-hero">
-            <div class="wrap split">
-                <div>
-                    <span class="label">Outdoors</span>
-                    <h1>Away from the keyboard.</h1>
-                    <p class="lede">Snowbasin all winter, and bikes, rock and trails the rest of the year.</p>
-                </div>
-                <figure class="portrait">
-                    <img src="assets/img/alpine-lake-1600.webp" srcset="assets/img/alpine-lake-800.webp 800w, assets/img/alpine-lake-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Still alpine lake surrounded by granite boulders" loading="eager" fetchpriority="high" decoding="async">
-                    <figcaption>September 2025</figcaption>
-                </figure>
+    <main id="main" class="outdoor-story">
+        <section class="outdoor-opening wrap">
+            <div class="outdoor-opening__title">
+                <div><span class="label">Outdoors</span><h1>Away from<br>the keyboard.</h1></div>
+                <p class="lede">Snowbasin all winter, and bikes, rock and trails the rest of the year.</p>
             </div>
+            <figure class="outdoor-opening__photo">
+                <img src="assets/img/alpine-lake-1600.webp" srcset="assets/img/alpine-lake-800.webp 800w, assets/img/alpine-lake-1600.webp 1600w" sizes="(max-width: 1120px) 100vw, 1120px" alt="Still alpine lake reflecting granite cliffs, with boulders along the shore" width="1600" height="1200" fetchpriority="high" decoding="async">
+                <figcaption>September 2025</figcaption>
+            </figure>
         </section>
 
-        <section class="section">
-            <div class="wrap">
-                <div class="grid-2" data-reveal>
-                    <article class="card card--photo">
-                        <div class="card__img"><img src="assets/img/ski-ridge-1600.webp" srcset="assets/img/ski-ridge-800.webp 800w, assets/img/ski-ridge-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Snow-covered summit ridge" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <span class="label">Winter</span>
-                            <h2>Freeride skiing</h2>
-                            <p>Snowbasin is my home mountain. I compete in freeride with the Snowbasin Ski Team.</p>
-                        </div>
-                    </article>
-                    <article class="card card--photo">
-                        <div class="card__img"><img src="assets/img/bike-1600.webp" srcset="assets/img/bike-800.webp 800w, assets/img/bike-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Mountain bike resting on rocks above a lake" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <span class="label">Summer</span>
-                            <h2>Mountain biking</h2>
-                            <p>One of my main sports once the snow melts.</p>
-                        </div>
-                    </article>
-                    <article class="card card--photo">
-                        <div class="card__img"><img src="assets/img/summit-rock-1600.webp" srcset="assets/img/summit-rock-800.webp 800w, assets/img/summit-rock-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Sitting on top of a huge boulder above a valley" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <span class="label">Spring through fall</span>
-                            <h2>Climbing</h2>
-                            <p>Rock climbing whenever I can find something to get on.</p>
-                        </div>
-                    </article>
-                    <article class="card card--photo">
-                        <div class="card__img"><img src="assets/img/meadow-1600.webp" srcset="assets/img/meadow-800.webp 800w, assets/img/meadow-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 50vw" alt="Green meadow below snowy cliffs" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <span class="label">Anytime</span>
-                            <h2>Hiking</h2>
-                            <p>Long days in the mountains. Sometimes I run into some locals, like moose and elk.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
+        <div class="wrap outdoor-gallery">
+            <figure class="outdoor-gallery__winter">
+                <img src="assets/img/ski-ridge-1600.webp" srcset="assets/img/ski-ridge-800.webp 800w, assets/img/ski-ridge-1600.webp 1600w" sizes="(max-width: 700px) 100vw, 55vw" alt="A sharp snow-covered ridge beneath a textured winter sky" width="1200" height="1600" loading="lazy" decoding="async">
+                <figcaption><span class="label">Winter</span><h2>Freeride skiing</h2><p>Snowbasin is my home mountain. I compete in freeride with the Snowbasin Ski Team.</p></figcaption>
+            </figure>
+            <figure class="outdoor-gallery__bike">
+                <img src="assets/img/bike-1600.webp" srcset="assets/img/bike-800.webp 800w, assets/img/bike-1600.webp 1600w" sizes="(max-width: 700px) 85vw, 40vw" alt="Mountain bike resting on a rocky trail above a lake" width="1200" height="1600" loading="lazy" decoding="async">
+                <figcaption><span class="label">When the snow melts</span><h2>Two wheels, more trails.</h2><p>Mountain biking is one of my main sports through the summer.</p></figcaption>
+            </figure>
+            <figure class="outdoor-gallery__canyon">
+                <img src="assets/img/canyon-2048.webp" srcset="assets/img/canyon-1200.webp 1200w, assets/img/canyon-2048.webp 2048w" sizes="(max-width: 700px) 100vw, 80vw" alt="Charles in a light shirt making his way through a red-rock canyon with a companion" width="2048" height="1536" loading="lazy" decoding="async">
+                <figcaption><div><span class="label">Rock &amp; a little route-finding</span><h2>Finding a way through.</h2></div><p>I like climbing whenever I can find something to get on.</p></figcaption>
+            </figure>
+            <figure class="outdoor-gallery__meadow">
+                <img src="assets/img/meadow-1600.webp" srcset="assets/img/meadow-800.webp 800w, assets/img/meadow-1600.webp 1600w" sizes="(max-width: 700px) 100vw, 70vw" alt="Green mountain meadow below cliffs with lingering snow" width="1600" height="1065" loading="lazy" decoding="async">
+                <figcaption><span class="label">Taking the long way</span><h2>Days on foot.</h2><p>Hiking, long days in the mountains, and the occasional moose or elk along the way.</p></figcaption>
+            </figure>
+        </div>
 
         <section class="section">
             <div class="wrap split" data-reveal>

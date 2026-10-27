@@ -443,6 +443,37 @@ ul { margin: 0; padding: 0; list-style: none; }
     .home-page .site-header.hero-nav:not(.menu-open) { background: var(--bg); --hero-nav-color: var(--ink); }
 }
 
+/* Outdoors: an open photo essay, with captions attached to each image. */
+.outdoor-opening { padding-top: clamp(40px, 7vw, 88px); }
+.outdoor-opening__title { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 48px; margin-bottom: clamp(32px, 5vw, 64px); }
+.outdoor-opening h1 { font-size: clamp(2.75rem, 7vw, 5.5rem); letter-spacing: -0.045em; }
+.outdoor-opening__title .lede { max-width: 28ch; padding-bottom: 6px; }
+.outdoor-story figure { margin: 0; min-width: 0; }
+.outdoor-story figure img { width: 100%; height: auto; border-radius: 0; }
+.outdoor-opening__photo img { aspect-ratio: 2 / 1; object-fit: cover; object-position: center 45%; }
+.outdoor-story figcaption { padding-top: 18px; color: var(--muted); }
+.outdoor-opening__photo figcaption { font-size: 0.875rem; }
+.outdoor-gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 3vw, 40px); row-gap: clamp(56px, 8vw, 104px); padding-top: clamp(56px, 8vw, 104px); }
+.outdoor-gallery h2 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); color: var(--ink); margin-bottom: 12px; }
+.outdoor-gallery figcaption p { max-width: 42ch; }
+.outdoor-gallery .label { margin-bottom: 8px; }
+.outdoor-gallery__winter { grid-column: 1 / 7; }
+.outdoor-gallery .outdoor-gallery__bike { grid-column: 8 / 13; margin-top: clamp(64px, 14vw, 180px); }
+.outdoor-gallery__canyon { grid-column: 3 / 13; }
+.outdoor-gallery__canyon figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; }
+.outdoor-gallery__canyon figcaption p { max-width: 28ch; }
+.outdoor-gallery__meadow { grid-column: 1 / 10; }
+@media (max-width: 700px) {
+    .outdoor-gallery { grid-template-columns: minmax(0, 1fr); }
+    .outdoor-gallery > figure, .outdoor-gallery .outdoor-gallery__bike { grid-column: 1; margin-top: 0; }
+    .outdoor-gallery .outdoor-gallery__bike { width: 86%; justify-self: end; }
+    .outdoor-opening__photo img { aspect-ratio: 4 / 3; }
+}
+@media print {
+    .outdoor-gallery { display: block; }
+    .outdoor-gallery > figure { margin-block: 24px; break-inside: avoid; }
+}
+
 /* Quick facts */
 .facts { border-top: 1px solid var(--line); }
 
