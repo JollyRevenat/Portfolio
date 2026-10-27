@@ -42,3 +42,9 @@ The portfolio deliberately excludes local host addresses, internal credentials, 
 Four original browser captures are stored as JPEG files in `assets/projects/ehr/`. Captured at a 1920 x 1080 desktop viewport, using full-page capture where the screen extends below the viewport. No UI content was retouched. Overview and vitals show the newly saved demo record. Order entry shows a partially filled, unsubmitted draft. Dashboard problems, labs, alerts, and appointments were already present on the new patient and are described as sample panels.
 
 Observed EHR issues for a separate application pass: entering temperature 98.4 displayed 98.0 after save; free text displayed as 0 in the history. Verify field handling and storage before diagnosing the cause. The portfolio does not claim these are fixed.
+
+## Assess provenance
+
+Sources: `C:/Users/chuck/OneDrive/Desktop/assess-website/CLAUDE.md` (positioning, 613 to ~285 words, real Insights hero, Paper & Sky wordmark, ruled margin, single config file, favicon script, 320–1440px audit) and the live https://assess.llc. Screenshots in `assets/projects/assess/` were captured from assess.llc on October 27, 2026 with reduced motion, unedited apart from resizing.
+
+Scope Charles approved for public: the marketing site he designed and built, and that he is a developer on the platform team. Do not add CredSpark, the migration, contract terms, client data, or internal team details.

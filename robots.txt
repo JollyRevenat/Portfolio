@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /old_porfolio/
+Disallow: /ugly/
+
+Sitemap: https://charlesblake.com/sitemap.xml

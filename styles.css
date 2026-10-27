@@ -1043,3 +1043,5 @@ body { overflow-wrap: break-word; }
     .js-motion .rv { transform: none; }
     .js-motion .rv { opacity: 1; transition-delay: 0s; }
 }
+.case-figure--phone { max-width: 320px; }
+.page-hero .tags + p { margin-top: 28px; }
