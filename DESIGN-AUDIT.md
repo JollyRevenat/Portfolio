@@ -141,3 +141,23 @@ Replaced the Home placeholder with `assets/img/canyon-2048.jpg`, copied unchange
 ### Fold and hero hierarchy correction
 
 Applied Apple skill `layout.md > Visual hierarchy`: “Order content by relative importance,” and `layout.md > Adaptability`: “Be prepared for text-size changes.” Removed the photo's intrinsic contribution to the hero grid height; the image now fills the text-defined area. The heading region uses a viewport-relative minimum (60svh desktop, 55svh compact) rather than a photo-driven height up to 850px. Text remains in normal flow and can expand the region for large type. Reduced the name's maximum size and the gap to the introduction so identity and opening context appear earlier. No hard clipping of text and no added motion. Whitespace check passed; browser verification remains blocked for local file URLs.
+
+## Motion pass — October 27
+
+Done from `CLAUDE-MOTION-HANDOFF.md` using the Apple Design Skill (`motion.md`, `accessibility.md`). Guiding lines: `motion.md > Best practices`: "Add motion purposefully, supporting the experience without overshadowing it," and `accessibility.md > Cognitive`: "ensure your app or game responds by reducing automatic and repetitive animations, including zooming, scaling, and peripheral motion."
+
+**Added**
+- **One entrance moment, Home only.** The canyon photo settles from 105% to 100% over 1.8s, the label, name and project link rise 14px in sequence, and the ice-blue period lands last. CSS only and ends visible, so it does not depend on JavaScript and never blocks the link.
+- **Project sidebar marker.** The "on this page" bar slides between sections (0.35s) instead of jumping, showing where you moved. Wide layouts only; the compact layout keeps the static marker.
+- **Disclosures** on project pages open and close in place where the browser supports `interpolate-size`; elsewhere they behave as before.
+- **Page transitions** keep the header still while the page crossfades.
+
+**Kept:** drifting tints, snowfall, scroll fades, hover feedback.
+
+**Fixed**
+- Reduced motion is honored during a visit, not only on load: snowfall freezes, hidden blocks appear at once, and cross-page transitions, blob drift, the entrance and hover transforms switch off.
+- A linked block (`about.html#my-story`) is never hidden waiting for a scroll fade.
+- Snowfall runs a single loop and stops while the tab is hidden; printing never catches a block mid-fade.
+- The project sidebar highlighted the section above the one you jumped to, because it ignored the page's `scroll-padding-top`. Fixed.
+
+**Verified** in Chrome via Playwright: dark and light, 320px and 1280px with no horizontal overflow, reduced motion on load and switched mid-visit, no JavaScript, print, hash links, and every page with no script errors. No deployment.

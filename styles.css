@@ -100,7 +100,11 @@ ul { margin: 0; padding: 0; list-style: none; }
     white-space: nowrap;
 }
 
-@view-transition { navigation: auto; }
+/* Page-to-page crossfade only for visitors who allow motion; the header holds still across it. */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition { navigation: auto; }
+    .site-header { view-transition-name: site-header; }
+}
 
 /* ---------- Background: two soft, slow-drifting tints + light snowfall ---------- */
 .ambient {
@@ -893,7 +897,7 @@ body { overflow-wrap: break-word; }
 .case-back { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 24px; }
 .case-layout { display: grid; grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
 .case-nav { position: sticky; top: 96px; display: grid; border-left: 1px solid var(--line-strong); }
-.case-nav a { padding: 12px 16px; min-height: 48px; color: var(--muted); }
+.case-nav a { padding: 12px 16px; min-height: 48px; color: var(--muted); transition: color 0.2s, background 0.2s; }
 .case-nav a:hover, .case-nav a:focus-visible { color: var(--ice); background: var(--surface); text-decoration: underline; }
 .case-nav a[aria-current="location"] { color: var(--ice); background: var(--surface); box-shadow: inset 3px 0 var(--ice); font-weight: 600; }
 .case-content { min-width: 0; }
@@ -980,5 +984,62 @@ body { overflow-wrap: break-word; }
     .resume { display: block; }
     .section { padding-block: 12px; }
     .resume__block { break-inside: avoid; padding: 12px; }
-    .js-motion .rv { opacity: 1; transform: none; }
+    .js-motion .rv { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Motion pass ----------
+   One entrance moment (Home), plus feedback that shows where things move from.
+   Everything here is CSS that ends visible, so content never depends on script for it. */
+
+/* Home: the photo settles, the name rises, and the ice-blue period lands last, like a flake. */
+.identity-hero__photo { overflow: clip; }
+@media (prefers-reduced-motion: no-preference) {
+    .home-page .identity-hero__photo img { animation: hero-settle 1.8s var(--ease) both; }
+    .home-page .identity-hero__heading > * { animation: hero-rise 0.7s var(--ease) both; }
+    .home-page .identity-hero__heading > .label { animation-delay: 0.15s; }
+    .home-page .identity-hero__heading > h1 { animation-delay: 0.25s; }
+    .home-page .identity-hero__heading > .identity-hero__project-link { animation-delay: 0.45s; }
+    .home-page .identity-hero__dot { display: inline-block; animation: dot-land 0.9s var(--ease) 0.75s both; }
+}
+@keyframes hero-settle { from { transform: scale(1.05); } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes dot-land { from { opacity: 0; transform: translate(-0.06em, -0.55em); } }
+
+/* Project pages: the "on this page" marker slides to the section being read. */
+.case-nav.has-indicator::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: var(--ind-h, 0);
+    background: var(--ice);
+    transform: translateY(var(--ind-y, 0));
+}
+.case-nav.has-indicator.is-ready::before { transition: transform 0.35s var(--ease), height 0.35s var(--ease); }
+.case-nav.has-indicator a[aria-current="location"] { box-shadow: none; }
+@media (max-width: 960px) {
+    .case-nav.has-indicator::before { display: none; }
+    .case-nav.has-indicator a[aria-current="location"] { box-shadow: inset 3px 0 var(--ice); }
+}
+
+/* Disclosures open and close in place instead of jumping. */
+@supports (interpolate-size: allow-keywords) {
+    @media (prefers-reduced-motion: no-preference) {
+        .case-disclosures { interpolate-size: allow-keywords; }
+        .case-disclosures details::details-content {
+            height: 0;
+            overflow: clip;
+            transition: height 0.35s var(--ease), content-visibility 0.35s allow-discrete;
+        }
+        .case-disclosures details[open]::details-content { height: auto; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ambient__blob { animation: none; }
+    a.card--photo:hover .card__img img,
+    a.card:hover .card__more svg,
+    .js-motion .rv { transform: none; }
+    .js-motion .rv { opacity: 1; transition-delay: 0s; }
 }

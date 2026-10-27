@@ -6,7 +6,8 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
 
 (function () {
     const root = document.documentElement;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const reduced = motionQuery.matches;
 
     // ---------- Small things ----------
     document.querySelectorAll("[data-year]").forEach((el) => {
@@ -80,12 +81,16 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
         .filter(({ section }) => section);
 
     if (sectionLinks.length) {
+        const caseNav = sectionLinks[0].link.closest(".case-nav");
+        caseNav.classList.add("has-indicator");
         let pending = false;
         const updateSection = () => {
             pending = false;
             let current = sectionLinks[0];
+            // An anchor jump lands at scroll-padding (on <html>) plus the section's scroll-margin.
+            const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
             for (const entry of sectionLinks) {
-                const offset = parseFloat(getComputedStyle(entry.section).scrollMarginTop) || 0;
+                const offset = padding + (parseFloat(getComputedStyle(entry.section).scrollMarginTop) || 0);
                 if (entry.section.getBoundingClientRect().top <= offset + 1) current = entry;
             }
             // A short final section may never reach the top of the viewport.
@@ -96,6 +101,12 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
                 if (link === current.link) link.setAttribute("aria-current", "location");
                 else link.removeAttribute("aria-current");
             });
+            caseNav.style.setProperty("--ind-y", `${current.link.offsetTop}px`);
+            caseNav.style.setProperty("--ind-h", `${current.link.offsetHeight}px`);
+            // Place the marker first, then let later moves slide.
+            if (!caseNav.classList.contains("is-ready")) {
+                requestAnimationFrame(() => caseNav.classList.add("is-ready"));
+            }
         };
         const scheduleSectionUpdate = () => {
             if (pending) return;
@@ -129,17 +140,31 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
         });
     }
 
-    initSnow(!reduced);
+    const snow = initSnow(!reduced);
 
     // ---------- Scroll reveals: a short fade on each block, staggered a little within groups ----------
     // Content is visible by default; hiding only happens once this script is running.
+    let revealAll = () => {};
+    motionQuery.addEventListener("change", (e) => {
+        snow?.setAnimate(!e.matches);
+        if (e.matches) revealAll();
+    });
+
     if (reduced || !("IntersectionObserver" in window)) return;
+
+    // A linked project (projects.html#ehr) must be readable the moment the page lands on it.
+    const hashTarget = () => {
+        try { return location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null; }
+        catch { return null; }
+    };
+    const linked = hashTarget();
 
     const targets = [];
     document.querySelectorAll("[data-reveal]").forEach((group) => {
         const kids = group.hasAttribute("data-reveal-self") ? [group] : [...group.children];
         kids.forEach((el, i) => {
             if (el.getBoundingClientRect().top < window.innerHeight) return; // already on screen: leave it
+            if (linked && (el.contains(linked) || linked.contains(el))) return;
             el.classList.add("rv");
             el.style.setProperty("--d", Math.min(i * 70, 280) + "ms");
             targets.push(el);
@@ -160,6 +185,16 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     );
 
     targets.forEach((el) => io.observe(el));
+
+    revealAll = () => {
+        io.disconnect();
+        targets.forEach((el) => el.classList.add("in"));
+    };
+    window.addEventListener("hashchange", () => {
+        const el = hashTarget();
+        targets.forEach((t) => { if (el && (t.contains(el) || el.contains(t))) t.classList.add("in"); });
+    });
+    window.addEventListener("beforeprint", revealAll);
 })();
 
 // ---------- Background snowfall: small, sparse and slow ----------
@@ -215,7 +250,15 @@ function initSnow(animate) {
             ctx.fill();
         }
         ctx.globalAlpha = 1;
-        if (animate) raf = requestAnimationFrame(frame);
+        raf = animate && !document.hidden ? requestAnimationFrame(frame) : 0;
+    }
+
+    // Exactly one loop at a time: every (re)start cancels whatever was scheduled.
+    function restart() {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        if (animate && !document.hidden) raf = requestAnimationFrame(frame);
+        else frame(0); // still flakes, no loop
     }
 
     resize();
@@ -226,10 +269,12 @@ function initSnow(animate) {
         if (!animate) frame(0);
     }, { passive: true });
 
-    if (animate) {
-        document.addEventListener("visibilitychange", () => {
-            cancelAnimationFrame(raf);
-            if (!document.hidden) raf = requestAnimationFrame(frame);
-        });
-    }
+    document.addEventListener("visibilitychange", restart);
+
+    return {
+        setAnimate(on) {
+            animate = on;
+            restart();
+        }
+    };
 }
