@@ -1,5 +1,5 @@
-%PDF-1.3
-%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
 <<
 /F1 2 0 R /F2 3 0 R
@@ -17,58 +17,90 @@ endobj
 endobj
 4 0 obj
 <<
-/Contents 8 0 R /MediaBox [ 0 0 612 792 ] /Parent 7 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (mailto:charlesdavidblake@gmail.com)
+>> /Border [ 0 0 0 ] /Rect [ 54 673 189.74 685 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
 <<
-/PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/A <<
+/S /URI /Type /Action /URI (https://charlesblake.com)
+>> /Border [ 0 0 0 ] /Rect [ 197.9 673 275.7 685 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
 <<
-/Author (anonymous) /CreationDate (D:20251113224837-07'00') /Creator (ReportLab PDF Library - www.reportlab.com) /Keywords () /ModDate (D:20251113224837-07'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
-  /Subject (unspecified) /Title (untitled) /Trapped /False
+/A <<
+/S /URI /Type /Action /URI (https://github.com/JollyRevenat)
+>> /Border [ 0 0 0 ] /Rect [ 54 654.75 162.93 668.75 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Count 1 /Kids [ 4 0 R ] /Type /Pages
+/A <<
+/S /URI /Type /Action /URI (https://www.credly.com/users/charles-david-blake)
+>> /Border [ 0 0 0 ] /Rect [ 54 169.75 275.17 183.75 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 744
+/Annots [ 4 0 R 5 0 R 6 0 R 7 0 R ] /Contents 12 0 R /MediaBox [ 0 0 612 792 ] /Parent 11 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+9 0 obj
+<<
+/PageMode /UseNone /Pages 11 0 R /Type /Catalog
+>>
+endobj
+10 0 obj
+<<
+/Author (Charles Blake) /CreationDate (D:20261027090929-06'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20261027090929-06'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (Charles Blake - Resume) /Trapped /False
+>>
+endobj
+11 0 obj
+<<
+/Count 1 /Kids [ 8 0 R ] /Type /Pages
+>>
+endobj
+12 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1459
 >>
 stream
-Gat=(_/>bs&A@6Wk*WMl!\@!M[q843D3_'#6Bt1r`XH8g@jB`EZ@<qugLaB`WZ6R$%-B_!H]O"+F@S/oGmgi+i9Y4^;%,l&;0&*jE<Fh3d9)GQ9#pf!1k)JqH\h:GSKS\!*+o`0!Y)46HbpFE*hiB$#K<B,,Kfpk-t,64XAgi)e\)7H<rk*ZdmF3tDj1lrgV-!g]s6%EAAmWZ%_pp0CHI*F>d]UNJS`f%_o#V)(ro+&$FN)iRLUTuhu$Qe1q=G^G$Xd2=]3\?FWS8`m@@Xk).\=:"0.)8N)P6$BQE3lD95&_//(*T+`f9/*oQLkKIbgZP8.W?dM6ia]dCA_k#s;LDZL[;kp51[LRM%[s55IEP6^u(rU'rFl@p)3Rbh`NLtinuL1Kjg#!^LW8fHD-F@t:k#u],aAX2(oBEDS3UG5`2E!jm*dZ1d_=W-j-r?@9r[$_PYPtI)LK4gNpBR=0%<fu@j$'J!N_!D6/aP%.])>^t3>YOSI:F(TXAWfg6Xc(r'!4"]ti&f]!S87C@g`Ho7>*=9C57*kNN;m2<X>aX,YFNKV1N%:T^A$O1,4nrE5'`BdG(2/>6f8&=7+6\0<8//F/tkPeHk,)#\5l)L(4OaC*$Od4',+m\.ING'!k<^<k[s3O4epj^Ou@h`A!C20nH0uZQi9p&IQmRPaXqAO')Dti:T%PNQg37,8J5:*S.)J.@(";=L(-`lFIEVjP.:`B4ZT.T!&Wa'!@]#%!]`d&<W~>endstream
+Gatm;?$"^Z'Re<2\5,2.(C2pdK_/g^9de&E.?/'5dMH&P6&@.<,oK$^J,EWp5a%,e2NnP*Qk0"aF3jf,!'P]5rgi0OVfOiq*'b(P4G.%g*Pd%0BCgb*%YF)iBE1Qt2pLm%DXTRO7t'S*K2F:TDA\=e]joEI"1/a.9h-n`d;0*IOYb`&S^H#!8[Mk0:'J1<+(0O*o048F=+!/^)if4Zg_6FbB/K,U4QE"hNC9Mtk]kFL)ib+gi#"cG<0bo&X;#OHB#t\bL"M\?P8=.JUuW_2\rjs/n/a,oj`O0r4AD@/IkPiZ7@1%0UUQ=dojN3q+56bn'"MZlOVa^,GX!mb4D6=V?'^<L41nNZCp)HK8R`X$__#m>\p]5o6HmM`_[DPL"G)>e4QKXK;I[2"N?Gq(=5&G5aT+<`M^?;`WKcn^%na4%"#6!El&T6?GYt[Z1<n#u-PA=rk\_']kd^X66pG+'(mkk-`5YoH@$5Dko-r)/-=PU^>&%q6D-4+I;@Jsi7?4jaJ]JPF(Vo*`9?&fTMe;Z[s%TbgBm%Ut22rHhW(%s&qiqe"X+X-IPm[nP<XXkJq4Bp45mt@R$WlAB+?!.Z#HFRfP,JNi7>^LX;5),HEg8Cgg2Q/V0N"eF]`n&N.]NVRbSF-6R[:n^:1\^QoN`fng,*P+3$,elhd;$Z3J"]aF/&J+VGVtEls@-GqoMa:S,mrPUqmt%dQ#"FLu]Gk`;8=\VnhY8q#i1o.g'SR"@+G*5aPC:ob&4JBXYh\Wjjmt*RtnCleO`<(c/9>Vm']"+?@]FdOC9PfI6g=mVA[pNS4-O#;?';FghZ`24htB!^F;1<b=)1.uoqbMVkYX0^OC*Mq:;-VW_pQV?0D7L()T@Kl.YOX;bcT(M%p@8\EM)Akn"b)aH9`RDD?]QZXKWa;%1908Qf^<@K3B,iO?MqZa:#[e=n0(r.E;,8U/aZ>n^=QU.C-rJ#kDm9T@TUScL*/&(%1(`^^?WY&rA2]1>%nQIeGT!d0"].jnpe#PB+WD8?QgV[RQL<6o#@t0E3p&NOP@EERhkOY`'h@dkG\0NR;;p>\dce"+P]O5'S>uK7AM_UQ$DP!>fE`q8.5r.d&&&o5V`92!IiGMa0IFflOn@##R`r<O>):O6O%L;G8S62e66EkM3-3h[3ae-cH=hFKq12QE)_(9V2Z"btS]NZcM__*&;e]Ja&guq-S_f2>^=ObP2]23Oq_=F:DORk<hb\`=]iUT',;HSMbe'a4Y\1QMDnRuA#`HUE/h5Q'/+k$cM;8MkBIpHrAp/!lX^Dba5J+0<p:9^SbCffjq83uY<H5aua=aqe9T)$>BUI^`$4VEL](oYZqQON[DL^Q[4&_u"P(`T7>Me2D<dD>f9JoOYT+!5s\bh5-j\GOV%Rd$7"]D^s59p%S,UB\W2pK4^KR^o=+Uh*:$-UoRDIcE$icC)T;f&-!.#b@dRfa&)e"0',."9~>endstream
 endobj
 xref
-0 9
+0 13
 0000000000 65535 f 
-0000000073 00000 n 
-0000000114 00000 n 
-0000000221 00000 n 
-0000000333 00000 n 
-0000000526 00000 n 
-0000000594 00000 n 
-0000000890 00000 n 
-0000000949 00000 n 
+0000000061 00000 n 
+0000000102 00000 n 
+0000000209 00000 n 
+0000000321 00000 n 
+0000000489 00000 n 
+0000000649 00000 n 
+0000000820 00000 n 
+0000001008 00000 n 
+0000001239 00000 n 
+0000001308 00000 n 
+0000001598 00000 n 
+0000001658 00000 n 
 trailer
 <<
 /ID 
-[<f6c2d6c86d4dee885c44b482034d6e45><f6c2d6c86d4dee885c44b482034d6e45>]
-% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+[<1cc729b36e612eb73eb4562cf43cd689><1cc729b36e612eb73eb4562cf43cd689>]
+% ReportLab generated PDF document -- digest (opensource)
 
-/Info 6 0 R
-/Root 5 0 R
-/Size 9
+/Info 10 0 R
+/Root 9 0 R
+/Size 13
 >>
 startxref
-1783
+3209
 %%EOF

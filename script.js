@@ -22,33 +22,110 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     const menuBtn = document.querySelector(".menu-btn");
 
     if (header) {
-        const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
-        onScroll();
+        const heroPhoto = document.body.classList.contains("home-page")
+            ? document.querySelector(".identity-hero__photo") : null;
+        const updateHeader = () => {
+            header.classList.toggle("is-scrolled", window.scrollY > 8);
+            if (!heroPhoto) return;
+            const remaining = heroPhoto.getBoundingClientRect().bottom - header.getBoundingClientRect().height;
+            const progress = Math.max(0, Math.min(1, 1 - remaining / 180));
+            header.style.setProperty("--hero-nav-fill", `${progress * 100}%`);
+        };
+        if (heroPhoto) {
+            header.classList.add("hero-nav");
+            const measureHeader = () => root.style.setProperty("--hero-header-height", `${header.getBoundingClientRect().height}px`);
+            measureHeader();
+            if ("ResizeObserver" in window) {
+                const observer = new ResizeObserver(() => { measureHeader(); updateHeader(); });
+                observer.observe(header);
+                observer.observe(heroPhoto);
+            }
+            else window.addEventListener("resize", measureHeader);
+        }
+        let headerUpdatePending = false;
+        const onScroll = () => {
+            if (headerUpdatePending) return;
+            headerUpdatePending = true;
+            requestAnimationFrame(() => { headerUpdatePending = false; updateHeader(); });
+        };
+        updateHeader();
         window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        window.addEventListener("pageshow", onScroll);
     }
 
     if (header && menuBtn) {
+        root.classList.add("js-nav");
         const setMenu = (open) => {
             header.classList.toggle("menu-open", open);
             menuBtn.setAttribute("aria-expanded", String(open));
         };
         menuBtn.addEventListener("click", () => setMenu(!header.classList.contains("menu-open")));
-        document.addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && header.classList.contains("menu-open")) {
+                setMenu(false);
+                menuBtn.focus();
+            }
+        });
+        header.querySelectorAll(".nav a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+        window.matchMedia("(min-width: 821px)").addEventListener("change", () => setMenu(false));
         document.addEventListener("click", (e) => {
             if (!header.contains(e.target)) setMenu(false);
         });
     }
 
+    // ---------- Project sidebar: mark the section currently being read ----------
+    const sectionLinks = [...document.querySelectorAll('.case-nav a[href^="#"]')]
+        .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+        .filter(({ section }) => section);
+
+    if (sectionLinks.length) {
+        let pending = false;
+        const updateSection = () => {
+            pending = false;
+            let current = sectionLinks[0];
+            for (const entry of sectionLinks) {
+                const offset = parseFloat(getComputedStyle(entry.section).scrollMarginTop) || 0;
+                if (entry.section.getBoundingClientRect().top <= offset + 1) current = entry;
+            }
+            // A short final section may never reach the top of the viewport.
+            if (window.scrollY > 0 && window.scrollY + window.innerHeight >= root.scrollHeight - 2) {
+                current = sectionLinks[sectionLinks.length - 1];
+            }
+            sectionLinks.forEach(({ link }) => {
+                if (link === current.link) link.setAttribute("aria-current", "location");
+                else link.removeAttribute("aria-current");
+            });
+        };
+        const scheduleSectionUpdate = () => {
+            if (pending) return;
+            pending = true;
+            requestAnimationFrame(updateSection);
+        };
+        updateSection();
+        window.addEventListener("scroll", scheduleSectionUpdate, { passive: true });
+        window.addEventListener("resize", scheduleSectionUpdate);
+        window.addEventListener("pageshow", scheduleSectionUpdate);
+        window.addEventListener("hashchange", scheduleSectionUpdate);
+        window.addEventListener("load", scheduleSectionUpdate);
+    }
+
     // ---------- Contact form -> opens the visitor's mail app ----------
     const form = document.querySelector("[data-contact-form]");
     if (form) {
+        form.hidden = false;
+        const status = document.createElement("p");
+        status.className = "form__status";
+        status.setAttribute("role", "status");
+        form.append(status);
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const data = new FormData(form);
             const subject = `Hi from ${data.get("name") || "your website"}`;
-            const body = `${data.get("message") || ""}\n\n${data.get("name") || ""} (${data.get("email") || ""})`;
+            const body = [data.get("message"), data.get("name")].filter(Boolean).join("\n\n");
             window.location.href =
                 `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            status.textContent = "Email draft requested. If your email app did not open, use the email address on this page. Your message has not been sent by this website.";
         });
     }
 

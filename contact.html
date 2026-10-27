@@ -14,7 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Charles Blake</title>
     <meta name="description" content="Get in touch with Charles Blake.">
-    <meta name="theme-color" content="#050a14">
+    <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050a14" media="(prefers-color-scheme: dark)">
     <meta property="og:title" content="Contact | Charles Blake">
     <meta property="og:description" content="Get in touch with Charles Blake.">
     <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
@@ -22,6 +23,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://charlesblake.com/contact.html">
+    <meta property="og:url" content="https://charlesblake.com/contact.html">
+    <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
@@ -46,9 +50,9 @@
             </button>
             <nav class="nav" id="site-nav" aria-label="Primary">
                 <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
                 <a href="about.html">About</a>
                 <a href="outdoors.html">Outdoors</a>
-                <a href="projects.html">Projects</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html" aria-current="page">Contact</a>
             </nav>
@@ -70,23 +74,21 @@
                     <li><a href="mailto:charlesdavidblake@gmail.com" data-email><span class="k">Email</span><span class="v">charlesdavidblake@gmail.com</span></a></li>
                     <li><a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer"><span class="k">Instagram</span><span class="v">@charles_david_blake</span></a></li>
                     <li><a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer"><span class="k">GitHub</span><span class="v">JollyRevenat</span></a></li>
-                    <li><a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer"><span class="k">Credly</span><span class="v">charles-blake</span></a></li>
+                    <li><a href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer"><span class="k">Credly</span><span class="v">charles-david-blake</span></a></li>
                 </ul>
-                <form class="card form" data-contact-form data-reveal data-reveal-self>
+                <form class="card form" hidden data-contact-form data-reveal data-reveal-self aria-labelledby="draft-title" aria-describedby="draft-note">
+                    <h2 id="draft-title">Write a note</h2>
+                    <p class="form__note" id="draft-note">This prepares a draft in your email app. You&rsquo;ll review and send it there.</p>
                     <div class="field">
-                        <label for="f-name">Name</label>
-                        <input id="f-name" name="name" type="text" autocomplete="name" required>
+                        <label for="f-name">Name (optional)</label>
+                        <input id="f-name" name="name" type="text" autocomplete="name">
                     </div>
                     <div class="field">
-                        <label for="f-email">Your email</label>
-                        <input id="f-email" name="email" type="email" autocomplete="email" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-msg">Message</label>
+                        <label for="f-msg">Message (required)</label>
                         <textarea id="f-msg" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn--primary">Send message</button>
-                    <p class="form__note">This opens your email app with the message ready to send.</p>
+                    <button type="submit" class="btn btn--primary">Open email draft</button>
+                    <p class="form__note">Opens a draft in your email app. Review it there, then send. If no app opens, email charlesdavidblake@gmail.com directly.</p>
                 </form>
             </div>
         </section>
@@ -103,7 +105,7 @@
                 <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
                 <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
                 <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+                <a href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer">Credly</a>
             </div>
         </div>
     </footer>

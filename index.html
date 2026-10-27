@@ -13,20 +13,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charles Blake</title>
-    <meta name="description" content="Charles Blake from Bountiful, Utah: freeride skier on the Snowbasin Ski Team, lacrosse player, and builder of AI projects.">
-    <meta name="theme-color" content="#050a14">
+    <meta name="description" content="AI tools, local models, web development, and cybersecurity projects by Charles Blake, a student and freeride skier from Bountiful, Utah.">
+    <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050a14" media="(prefers-color-scheme: dark)">
     <meta property="og:title" content="Charles Blake">
-    <meta property="og:description" content="Charles Blake from Bountiful, Utah: freeride skier on the Snowbasin Ski Team, lacrosse player, and builder of AI projects.">
+    <meta property="og:description" content="AI tools, local models, web development, and cybersecurity projects by Charles Blake, a student and freeride skier from Bountiful, Utah.">
     <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://charlesblake.com/">
+    <meta property="og:url" content="https://charlesblake.com/">
+    <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
-<body>
+<body class="home-page">
     <a class="skip" href="#main">Skip to content</a>
 
     <div class="ambient" aria-hidden="true">
@@ -46,9 +50,9 @@
             </button>
             <nav class="nav" id="site-nav" aria-label="Primary">
                 <a href="index.html" aria-current="page">Home</a>
+                <a href="projects.html">Projects</a>
                 <a href="about.html">About</a>
                 <a href="outdoors.html">Outdoors</a>
-                <a href="projects.html">Projects</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </nav>
@@ -56,29 +60,40 @@
     </header>
 
     <main id="main">
-        <section class="hero">
-            <div class="wrap split">
-                <div>
-                    <h1>Hi, I&rsquo;m Charles.</h1>
-                    <p class="lede">I ski, play lacrosse, build stuff with AI, and spend as much time outside as I can. I&rsquo;m a senior in Bountiful, Utah, and on any given day I&rsquo;m probably either on a mountain or deep in some project.</p>
-                    <div class="btn-row">
-                        <a class="btn btn--primary" href="about.html">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-                        <a class="btn" href="contact.html">Say hi</a>
-                    </div>
+        <section class="identity-hero">
+            <div class="wrap">
+                <div class="identity-hero__heading">
+                    <span class="label">Building things. Getting outside.</span>
+                    <h1>Charles Blake<span class="identity-hero__dot">.</span></h1>
+                    <a class="identity-hero__project-link" href="projects.html">Explore my projects <span aria-hidden="true">&rarr;</span></a>
                 </div>
-                <figure class="portrait">
-                    <img src="assets/img/summit-rock-1600.webp" srcset="assets/img/summit-rock-800.webp 800w, assets/img/summit-rock-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Sitting on top of a huge boulder above a hazy mountain valley" loading="eager" fetchpriority="high" decoding="async">
-                    <figcaption>July 2025</figcaption>
-                </figure>
+                <div class="identity-hero__frame">
+                    <figure class="identity-hero__photo">
+                        <img src="assets/img/canyon-2048.jpg" alt="Charles, in a light shirt, making his way through a red-rock canyon with a companion above him" width="2048" height="1536" fetchpriority="high" decoding="async">
+                    </figure>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="selected-work">
+            <div class="wrap">
+                <div class="section-head section-head--row"><div><span class="label">Selected work</span><h2 id="selected-work">Research, experiments, and things I build.</h2></div><a class="link" href="projects.html">Explore all projects &rarr;</a></div>
+                <div class="grid-3">
+                    <a class="card project-card" href="project-ai-security.html"><span class="label">Security &middot; Research</span><h3>AI Security Fingerprints</h3><p>Investigating whether AI coding models leave repeatable patterns in the security of the apps they build.</p><span class="card__more">Read the research story &rarr;</span></a>
+                    <a class="card project-card" href="projects.html#ollama-summarizer"><span class="label">Browser tools &middot; Built</span><h3>Ollama Summarizer</h3><p>A Chrome extension for summarizing web pages with a model running locally through Ollama.</p><span class="card__more">Explore the extension &rarr;</span></a>
+                    <a class="card project-card" href="project-ehr.html"><span class="label">Web development &middot; Built at Catalyst</span><h3>EHR system</h3><p>A PHP and SQL application with patient records, vitals, orders, and medication screens.</p><span class="card__more">Explore the EHR project &rarr;</span></a>
+                </div>
             </div>
         </section>
 
         <section class="section">
             <div class="wrap split" data-reveal>
                 <div class="prose">
-                    <h2>The short version</h2>
+                    <h2>On a mountain or deep in a project.</h2>
                     <p>Winters are for freeride skiing at Snowbasin. Spring is lacrosse. The rest of the year I&rsquo;m mountain biking, climbing or hiking whenever I can get outside.</p>
-                    <p>When I<p>The rest of my time goes into computers.rsquo;m not outside, I<p>The rest of my time goes into computers.rsquo;m usually on a computer. I split my school day between Bountiful High and the Davis Catalyst Center, and outside of class I spend a weird amount of time running local AI models on GPU servers.</p>
+                    <p><a class="link" href="outdoors.html">Explore life outside &rarr;</a></p>
+                    <p>I split my school day between Bountiful High and the Davis Catalyst Center, where I study cybersecurity, web development, and AI engineering. Outside of class, I run local AI models on GPU servers and build tools around them.</p>
                 </div>
                 <ul class="facts">
                         <li><span class="k">Home</span><span>Bountiful, Utah</span></li>
@@ -88,40 +103,6 @@
                         <li><span class="k">Spring</span><span>Lacrosse for Bountiful, close defense and LSM</span></li>
                         <li><span class="k">Anytime</span><span>Mountain biking, climbing, hiking, lifting</span></li>
                     </ul>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="wrap">
-                <div class="section-head" data-reveal>
-                    <h2>Have a look around</h2>
-                </div>
-                <div class="grid-3" data-reveal>
-                    <a class="card card--photo" href="outdoors.html">
-                        <div class="card__img"><img src="assets/img/ski-ridge-1600.webp" srcset="assets/img/ski-ridge-800.webp 800w, assets/img/ski-ridge-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw" alt="Snow-covered summit ridge under heavy clouds" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <h3>Outdoors</h3>
-                            <p>Freeride skiing, biking, climbing and hiking.</p>
-                            <span class="card__more">See more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-                        </div>
-                    </a>
-                    <a class="card card--photo" href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">
-                        <div class="card__img"><img src="assets/img/alpine-lake-1600.webp" srcset="assets/img/alpine-lake-800.webp 800w, assets/img/alpine-lake-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw" alt="Still alpine lake surrounded by granite boulders" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <h3>Photos</h3>
-                            <p>More pictures from the trail and the mountain are on my Instagram.</p>
-                            <span class="card__more">@charles_david_blake <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-                        </div>
-                    </a>
-                    <a class="card card--photo" href="projects.html">
-                        <div class="card__img"><img src="assets/img/bike-1600.webp" srcset="assets/img/bike-800.webp 800w, assets/img/bike-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw" alt="Mountain bike resting on rocks above a lake" loading="lazy" decoding="async"></div>
-                        <div class="card__body">
-                            <h3>Projects</h3>
-                            <p>AI agents, Chrome extensions, security labs and more.</p>
-                            <span class="card__more">View projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-                        </div>
-                    </a>
-                </div>
             </div>
         </section>
 
@@ -150,7 +131,7 @@
                 <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
                 <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
                 <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+                <a href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer">Credly</a>
             </div>
         </div>
     </footer>

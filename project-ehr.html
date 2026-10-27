@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9VES5CG06"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-R9VES5CG06');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EHR system | Charles Blake</title>
+    <meta name="description" content="A PHP and SQL electronic health record application built at the Davis Catalyst Center.">
+    <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050a14" media="(prefers-color-scheme: dark)">
+    <meta property="og:title" content="EHR system | Charles Blake">
+    <meta property="og:description" content="A PHP and SQL electronic health record application built at the Davis Catalyst Center.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://charlesblake.com/project-ehr.html">
+    <meta property="og:url" content="https://charlesblake.com/project-ehr.html">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html" aria-current="location">Projects</a>
+                <a href="about.html">About</a>
+                <a href="outdoors.html">Outdoors</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main"><section class="page-hero"><div class="wrap"><a class="link case-back" href="projects.html">&larr; All projects</a><span class="label">Web development &middot; Built at Catalyst</span><h1>EHR system</h1><p class="lede">An electronic health record application with screens for patient records, vitals, orders, alerts, prevention, and medications.</p><div class="tags"><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">Davis Catalyst Center</span></div></div></section>
+<div class="wrap case-layout"><nav class="case-nav" aria-label="On this page"><a href="#overview">Overview</a><a href="#inside">Inside the app</a><a href="#technology">Technology</a></nav><div class="case-content">
+<section id="overview" class="case-section">
+    <h2>A closer look at the application.</h2>
+    <p>I built this electronic health record app at the Davis Catalyst Center using PHP and SQL. The project brings patient information, vital signs, and order-entry screens into one web application.</p>
+    <p class="case-note">This walkthrough uses Alex Demo, a fictional patient created for this portfolio. All names and medical details shown are sample data.</p>
+    <figure class="case-figure">
+        <a href="assets/projects/ehr/overview.jpg" aria-label="View the patient overview screenshot at full size"><img src="assets/projects/ehr/overview.jpg" alt="Alex Demo patient overview with saved vital signs alongside sample alerts, lab results, and appointments." width="1904" height="1285" loading="lazy" decoding="async"></a>
+        <figcaption>The patient overview brings several parts of a chart together. Vitals reflect the saved demo entry; the problems, alerts, labs, and appointments shown are prototype sample panels. Select any screenshot to view it at full size.</figcaption>
+    </figure>
+</section>
+<section id="inside" class="case-section">
+    <h2>Follow the chart from entry to overview.</h2>
+    <p>Explore the screens below to see how the application organizes information and captures structured records.</p>
+    <div class="case-disclosures">
+        <details open>
+            <summary>Recording and reviewing vital signs</summary>
+            <div class="case-disclosure-body">
+                <p>The vitals screen combines a timestamped history with summary panels for blood pressure, heart rate, temperature, and other measurements. Saving an entry also updates the recent vitals on the patient overview.</p>
+                <figure class="case-figure">
+                    <a href="assets/projects/ehr/vitals.jpg" aria-label="View saved vital signs at full size"><img src="assets/projects/ehr/vitals.jpg" alt="Saved fictional vital signs in a history table, with measurement summaries beside it." width="1920" height="1080" loading="lazy" decoding="async"></a>
+                    <figcaption>A saved demo entry displayed in the history and summary panels.</figcaption>
+                </figure>
+                <figure class="case-figure">
+                    <a href="assets/projects/ehr/vitals-entry.jpg" aria-label="View the vitals entry form at full size"><img src="assets/projects/ehr/vitals-entry.jpg" alt="Expanded vital-sign entry form above the saved history, with labeled measurement fields." width="1904" height="1388" loading="lazy" decoding="async"></a>
+                    <figcaption>The entry form expands above the history, keeping earlier measurements on the same screen.</figcaption>
+                </figure>
+            </div>
+        </details>
+        <details>
+            <summary>Exploring the order-entry form</summary>
+            <div class="case-disclosure-body">
+                <p>The order form groups medication information, route, frequency, directions, dates, and status in one workflow. It uses selections for structured values and text fields for descriptive information.</p>
+                <figure class="case-figure">
+                    <a href="assets/projects/ehr/orders.jpg" aria-label="View the demo order-entry form at full size"><img src="assets/projects/ehr/orders.jpg" alt="Order-entry form partially filled with an explicitly fictional portfolio example and unsigned status." width="1904" height="1280" loading="lazy" decoding="async"></a>
+                    <figcaption>A partially filled demonstration draft. This example was not submitted as an order.</figcaption>
+                </figure>
+            </div>
+        </details>
+    </div>
+</section>
+<section id="technology" class="case-section">
+    <h2>Built with PHP and SQL.</h2>
+    <p>The project combines a PHP web application with SQL-backed data. It was built as part of my work at Catalyst.</p>
+    <p>This preview shows the current prototype, including its sample dashboard panels. It demonstrates the interface and saved-vitals workflow rather than a finished clinical product.</p>
+</section>
+<div class="case-end"><a class="link" href="projects.html">&larr; All projects</a><a class="link" href="project-ai-security.html">Explore the research &rarr;</a></div>
+</div></div></main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

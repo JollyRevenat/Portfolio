@@ -14,7 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Charles Blake</title>
     <meta name="description" content="Charles Blake from Bountiful, Utah: freeride skier on the Snowbasin Ski Team, lacrosse player, and builder of AI projects.">
-    <meta name="theme-color" content="#050a14">
+    <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050a14" media="(prefers-color-scheme: dark)">
     <meta property="og:title" content="About | Charles Blake">
     <meta property="og:description" content="Charles Blake from Bountiful, Utah: freeride skier on the Snowbasin Ski Team, lacrosse player, and builder of AI projects.">
     <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
@@ -22,11 +23,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://charlesblake.com/about.html">
+    <meta property="og:url" content="https://charlesblake.com/about.html">
+    <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 
-<body>
+<body class="about-page">
     <a class="skip" href="#main">Skip to content</a>
 
     <div class="ambient" aria-hidden="true">
@@ -46,9 +50,9 @@
             </button>
             <nav class="nav" id="site-nav" aria-label="Primary">
                 <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
                 <a href="about.html" aria-current="page">About</a>
                 <a href="outdoors.html">Outdoors</a>
-                <a href="projects.html">Projects</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </nav>
@@ -56,26 +60,37 @@
     </header>
 
     <main id="main">
-        <section class="page-hero">
-            <div class="wrap split">
-                <div>
+        <section class="journal-hero">
+            <div class="wrap">
+                <div class="journal-hero__heading">
                     <span class="label">About</span>
-                    <h1>A little more about me.</h1>
-                    <p class="lede">I like skiing, lacrosse, computers, and building things I don&rsquo;t completely know how to build yet.</p>
+                    <h1>Usually outside.<br>Or deep in a project.</h1>
                 </div>
-                <figure class="portrait">
-                    <img src="assets/img/ski-bowl-1600.webp" srcset="assets/img/ski-bowl-800.webp 800w, assets/img/ski-bowl-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Looking down a steep, snowy bowl toward the valley" loading="eager" fetchpriority="high" decoding="async">
-                    <figcaption>March 2025</figcaption>
-                </figure>
+                <div class="journal-hero__body">
+                    <div class="journal-hero__intro">
+                        <p class="lede">I like building things I don&rsquo;t completely know how to build yet.</p>
+                        <p>That might mean running a local AI model, working on a new app, or spending a little too long figuring out how something works.</p>
+                        <p>There&rsquo;s also skiing, lacrosse, and a lot of reasons to get outside. Here&rsquo;s a bit of both sides of my life.</p>
+                        <a class="link" href="#my-story">More of my story <span aria-hidden="true">&darr;</span></a>
+                    </div>
+                    <figure class="journal-hero__winter">
+                        <img src="assets/img/ski-bowl-1600.webp" srcset="assets/img/ski-bowl-800.webp 800w, assets/img/ski-bowl-1600.webp 1600w" sizes="(max-width: 600px) 55vw, 35vw" alt="Looking down a steep, snowy bowl toward the valley" width="1200" height="1600" fetchpriority="high" decoding="async">
+                        <figcaption>Winter days <span>March 2025</span></figcaption>
+                    </figure>
+                    <figure class="journal-hero__summer">
+                        <img src="assets/img/bike-1600.webp" srcset="assets/img/bike-800.webp 800w, assets/img/bike-1600.webp 1600w" sizes="(max-width: 600px) 40vw, 25vw" alt="Mountain bike resting on a rocky trail above a forest and lake" width="1200" height="1600" decoding="async">
+                        <figcaption>When the snow melts</figcaption>
+                    </figure>
+                </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="my-story">
             <div class="wrap split" data-reveal>
                 <div class="prose">
                     <h2>Who I am</h2>
-                    <p>I&rsquo;m 16 and live in Bountiful, Utah, with the Wasatch right out the back door. I&rsquo;m a senior at <strong>Bountiful High School</strong>. I skipped freshman year, so I&rsquo;ll graduate at 17. Part of every school day I&rsquo;m at the <strong>Davis Catalyst Center</strong>, studying cybersecurity, web development and AI engineering.</p>
-                    <p>In the winter I compete in freeride with the <strong>Snowbasin Ski Team</strong>. Snowbasin is my home mountain, and this is my second season with the team. In the spring I play <strong>lacrosse</strong> for Bountiful, mostly at close defense and LSM, and I&rsquo;ve been a JV captain and starter.</p>
+                    <p>I live in Bountiful, Utah, with the Wasatch right out the back door. I&rsquo;m a senior at <strong>Bountiful High School</strong>. I skipped freshman year, so I&rsquo;ll graduate at 17. Part of every school day I&rsquo;m at the <strong>Davis Catalyst Center</strong>, studying cybersecurity, web development and AI engineering.</p>
+                    <p>In the winter I compete in freeride with the <strong>Snowbasin Ski Team</strong>. Snowbasin is my home mountain. In the spring I play <strong>lacrosse</strong> for Bountiful, mostly at close defense and long-stick midfielder (LSM). I was a JV captain during my junior year.</p>
                     <p>The rest of the time I&rsquo;m mountain biking, climbing, hiking or lifting. When I&rsquo;m inside, I&rsquo;m usually running local AI models or working on whatever project I&rsquo;m currently way too deep into.</p>
                 </div>
                 <ul class="facts">
@@ -101,11 +116,11 @@
                     </article>
                     <article class="card">
                         <h3>Lacrosse</h3>
-                        <p>Long pole for Bountiful, at close defense and LSM. JV captain and starter, plus practices, lifting and extra sessions in the fall.</p>
+                        <p>Long pole for Bountiful, at close defense and LSM. I served as JV captain during junior year, with practices, lifting and extra sessions in the fall.</p>
                     </article>
                     <article class="card">
                         <h3>AI and computers</h3>
-                        <p>Local models, GPU servers and AI agents. I like running the infrastructure myself, not just using a chatbot.</p>
+                        <p>Local models, GPU servers and AI agents. I like understanding and running the infrastructure behind the tools I use.</p>
                     </article>
                 </div>
             </div>
@@ -121,7 +136,7 @@
                     <article class="timeline__item">
                         <span class="label">Now</span>
                         <h3>Senior year</h3>
-                        <p style="color: var(--muted)">Bountiful High, Catalyst, my second freeride season at Snowbasin, and lacrosse in the spring.</p>
+                        <p style="color: var(--muted)">Bountiful High, Catalyst, freeride at Snowbasin, and lacrosse in the spring.</p>
                     </article>
                     <article class="timeline__item">
                         <span class="label">After graduation</span>
@@ -144,7 +159,7 @@
                         <h2>Certifications</h2>
                         <p>Earned through school. You can verify each one on Credly.</p>
                     </div>
-                    <a class="btn" href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">View on Credly <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                    <a class="btn" href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer">View on Credly <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
                 </div>
                 <ul class="certs" data-reveal data-reveal-self>
                     <li><strong>CompTIA Tech+</strong><span>May 2025</span></li>
@@ -168,7 +183,7 @@
                 <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
                 <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
                 <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="https://www.credly.com/users/charles-blake" target="_blank" rel="noreferrer">Credly</a>
+                <a href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer">Credly</a>
             </div>
         </div>
     </footer>

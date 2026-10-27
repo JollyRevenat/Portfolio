@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9VES5CG06"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-R9VES5CG06');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Security Fingerprints | Charles Blake</title>
+    <meta name="description" content="Exploring repeatable security patterns in AI-generated web applications. Research question, method, progress, and limitations.">
+    <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050a14" media="(prefers-color-scheme: dark)">
+    <meta property="og:title" content="AI Security Fingerprints | Charles Blake">
+    <meta property="og:description" content="Exploring repeatable security patterns in AI-generated web applications. Research question, method, progress, and limitations.">
+    <meta property="og:image" content="https://charlesblake.com/assets/img/ski-ridge-1600.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://charlesblake.com/project-ai-security.html">
+    <meta property="og:url" content="https://charlesblake.com/project-ai-security.html">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__blob ambient__blob--1"></div>
+        <div class="ambient__blob ambient__blob--2"></div>
+        <canvas class="ambient__snow"></canvas>
+    </div>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a href="index.html" class="brand" aria-label="Charles Blake, home">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29">
+                <span>Charles Blake</span>
+            </a>
+            <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span class="sr-only">Menu</span>
+            </button>
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html" aria-current="location">Projects</a>
+                <a href="about.html">About</a>
+                <a href="outdoors.html">Outdoors</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main"><section class="page-hero"><div class="wrap"><a class="link case-back" href="projects.html">&larr; All projects</a><span class="label">Research in progress</span><h1>AI Security Fingerprints</h1><p class="lede">Do different AI coding models leave repeatable security patterns when they build the same application?</p><div class="tags"><span class="tag">Cybersecurity</span><span class="tag">AI-generated software</span><span class="tag">Exploratory research</span></div></div></section>
+<div class="wrap case-layout"><nav class="case-nav" aria-label="On this page"><a href="#question">The question</a><a href="#method">The method</a><a href="#progress">Progress</a><a href="#next">What comes next</a></nav><div class="case-content">
+<section id="question" class="case-section"><h2>Beyond how an AI-built site looks.</h2><p>AI-generated websites can have recognizable visual styles. My research asks whether there are similar patterns behind the interface: repeated security weaknesses and implementation choices that might distinguish one coding model from another.</p><p>The question is more specific than whether AI-generated software is secure. I want to understand whether those patterns repeat when the application requirements and testing conditions are held consistent.</p><aside class="case-note"><strong>Research question, not a conclusion.</strong><p>The study has not established a validated model fingerprint or a detector for vulnerable public websites.</p></aside></section>
+<section id="method" class="case-section"><h2>One application. Independent builds.</h2><p>The study uses ProjectHub, a shared application specification, to compare independently generated implementations. A collection harness records attempts and checks whether the requested functionality works before security evaluation.</p><ol class="case-steps"><li><h3>Generate</h3><p>Give models the application requirements and record the model, configuration, and attempt history.</p></li><li><h3>Check and preserve</h3><p>Check functionality and preserve source snapshots, logs, and failures. A failed attempt stays part of the record.</p></li><li><h3>Evaluate</h3><p>Evaluate retained applications against a consistent security rubric, keeping confirmed findings separate from suspected issues.</p></li></ol><p>Security feedback is kept out of generation. Otherwise, the study would measure repaired applications rather than the models&rsquo; original implementation choices.</p></section>
+<section id="progress" class="case-section"><span class="label">Progress snapshot &middot; October 27, 2026</span><h2>Building the evidence base.</h2><p>The work so far includes a generation and collection harness, functional checks, preserved application sources, and a 35-item exploratory security rubric. The project is still in exploratory work; these records are not the final statistical dataset.</p><div class="case-evidence"><h3>A recent collection milestone</h3><dl class="case-facts"><div><dt>Preserved</dt><dd>60 attempt directories from the October 23 weekend collection.</dd></div><div><dt>Completed</dt><dd>3 Nemotron applications reached recorded functional completion within a 15-attempt cohort.</dd></div><div><dt>Functional evidence</dt><dd>Each of those 3 applications retained a source-bound report with 27 of 27 component checks passing.</dd></div><div><dt>Limit</dt><dd>Those applications had not received a new canonical test rerun or security evaluation at the time of recovery.</dd></div></dl></div><p>These counts describe one exploratory collection, not a model ranking. Provider errors, infrastructure problems, and time limits are recorded separately rather than automatically treated as model failures.</p></section>
+<section id="next" class="case-section"><h2>From observations to testable patterns.</h2><p>A further direction is to examine whether publicly visible features&mdash;such as HTML, JavaScript, headers, or cookie settings&mdash;are associated with weaknesses found in the lab. A recurring feature alone does not establish that a website is AI-built or vulnerable.</p><p>The next step is to evaluate the preserved applications and assess candidate patterns separately from the vulnerability labels. Any broader claim will need validation beyond these exploratory examples.</p></section>
+<!-- Add reviewed figures, result tables, or downloadable research artifacts inside the relevant section. See PROJECT-CONTENT.md. -->
+<div class="case-end"><a class="link" href="projects.html">&larr; All projects</a><a class="link" href="project-ehr.html">Next: EHR system &rarr;</a></div>
+</div></div></main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-brand">
+                <img src="assets/logo-primary.png" alt="" width="26" height="29" loading="lazy">
+                <span>&copy; <span data-year>2026</span> Charles Blake &middot; Built in Bountiful, fueled by bluebird days.</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/charles_david_blake/" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="mailto:charlesdavidblake@gmail.com" data-email>Email</a>
+                <a href="https://github.com/JollyRevenat" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.credly.com/users/charles-david-blake" target="_blank" rel="noreferrer">Credly</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
