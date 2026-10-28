@@ -55,6 +55,41 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
         window.addEventListener("pageshow", onScroll);
     }
 
+    // ---------- Light / dark switch: follows the system until someone picks ----------
+    // The choice is applied in each page's <head> before paint; this only adds the button.
+    if (header) {
+        const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+        const metas = document.querySelectorAll('meta[name="theme-color"]');
+        const current = () => root.dataset.theme || (systemLight.matches ? "light" : "dark");
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "theme-toggle";
+        btn.innerHTML =
+            '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg>' +
+            '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
+        const sync = () => {
+            const theme = current();
+            const next = theme === "dark" ? "light" : "dark";
+            btn.dataset.current = theme;
+            btn.setAttribute("aria-label", `Switch to ${next} mode`);
+            btn.title = `Switch to ${next} mode`;
+            if (root.dataset.theme) metas.forEach((m) => { m.content = theme === "light" ? "#f5f7fa" : "#050a14"; });
+        };
+        btn.addEventListener("click", () => {
+            const next = current() === "dark" ? "light" : "dark";
+            const apply = () => {
+                root.dataset.theme = next;
+                try { localStorage.setItem("theme", next); } catch { /* private mode: still switches for this page */ }
+                sync();
+            };
+            if (document.startViewTransition && !motionQuery.matches) document.startViewTransition(apply);
+            else apply();
+        });
+        systemLight.addEventListener("change", sync);
+        header.querySelector(".wrap").append(btn);
+        sync();
+    }
+
     if (header && menuBtn) {
         root.classList.add("js-nav");
         const setMenu = (open) => {
