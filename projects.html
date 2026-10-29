@@ -14,11 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
     <title>Projects | Charles Blake</title>
-    <meta name="description" content="Projects by Charles Blake: AI security research, the Assess quiz platform website, an EHR app, a local AI Chrome extension, and cybersecurity labs.">
+    <meta name="description" content="Projects by Charles Blake: AI security research, the Assess quiz platform website, an EHR app, a local-model news classifier, AI tools and local models, and cybersecurity labs.">
     <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#050a14" media="(prefers-color-scheme: dark)">
     <meta property="og:title" content="Projects | Charles Blake">
-    <meta property="og:description" content="Projects by Charles Blake: AI security research, the Assess quiz platform website, an EHR app, a local AI Chrome extension, and cybersecurity labs.">
+    <meta property="og:description" content="Projects by Charles Blake: AI security research, the Assess quiz platform website, an EHR app, a local-model news classifier, AI tools and local models, and cybersecurity labs.">
     <meta property="og:image" content="https://charlesblake.com/assets/img/og-canyon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,53 +74,89 @@
             </div>
         </section>
 
-        <section class="section" style="padding-top: 0;">
+        <section class="section work-group" style="padding-top: 0;" aria-labelledby="case-studies">
             <div class="wrap">
-                <div class="grid-2 project-index">
-<article class="card project-card" id="ai-security">
-                        <span class="label">Featured research</span>
-                        <div class="tags"><span class="tag">Security</span><span class="tag">Web apps</span><span class="tag">AI</span></div>
-                        <h2>AI Security Fingerprints</h2>
-                        <p>Do AI coding models leave repeatable security patterns? A research project combining controlled app generation, functional checks, and security evaluation.</p>
-                        <p><a class="btn btn--primary" href="project-ai-security.html">Read the research story &rarr;</a></p>
-                        <div class="project__meta"><span><b>Status</b> Exploratory research</span></div>
+                <h2 class="work-group__title" id="case-studies">Case studies</h2>
+                <div class="work-list">
+                    <a class="work-card work-card--featured" id="ai-security" href="project-ai-security.html">
+                        <div class="work-card__media"><img src="assets/projects/ai-security/advisory-board-presentation.jpg" alt="" width="960" height="1280" loading="lazy" decoding="async" style="object-position: 50% 30%;"></div>
+                        <div class="work-card__body">
+                            <span class="label">Featured research</span>
+                            <h3>AI Security Fingerprints</h3>
+                            <p>Do AI coding models leave repeatable security patterns? A research project combining controlled app generation, functional checks, and security evaluation.</p>
+                            <div class="tags"><span class="tag">Security</span><span class="tag">Web apps</span><span class="tag">AI</span></div>
+                            <span class="work-card__more">Read the research story <span aria-hidden="true">&rarr;</span></span>
+                            <div class="project__meta"><span><b>Status</b> Exploratory research</span></div>
+                        </div>
+                    </a>
+                    <a class="work-card" id="assess" href="project-assess.html">
+                        <div class="work-card__media"><img src="assets/projects/assess/home-desktop.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async" style="object-position: 50% 0;"></div>
+                        <div class="work-card__body">
+                            <h3>Assess</h3>
+                            <p>A quiz and assessment platform for company training teams. I designed and built its public site, assess.llc, and I&rsquo;m a developer on the platform team.</p>
+                            <div class="tags"><span class="tag">Web design</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                            <span class="work-card__more">Explore the Assess project <span aria-hidden="true">&rarr;</span></span>
+                            <div class="project__meta"><span><b>Status</b> Live</span></div>
+                        </div>
+                    </a>
+                    <a class="work-card" id="ehr" href="project-ehr.html">
+                        <div class="work-card__media"><img src="assets/projects/ehr/overview.jpg" alt="" width="1904" height="1285" loading="lazy" decoding="async" style="object-position: 0 0;"></div>
+                        <div class="work-card__body">
+                            <h3>EHR system</h3>
+                            <p>An electronic health record app with patient records, vitals, orders, alerts, prevention and medication screens. Built at Catalyst.</p>
+                            <div class="tags"><span class="tag">PHP</span><span class="tag">SQL</span></div>
+                            <span class="work-card__more">Explore the EHR project <span aria-hidden="true">&rarr;</span></span>
+                            <div class="project__meta"><span><b>Status</b> Built</span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section work-group" aria-labelledby="ai-local">
+            <div class="wrap">
+                <h2 class="work-group__title" id="ai-local">AI and local models</h2>
+                <div class="grid-2 work-grid">
+                    <article class="card project-card project-card--wide" id="ai-tools">
+                        <div class="tags"><span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">Ollama</span><span class="tag">llama.cpp</span><span class="tag">vLLM</span><span class="tag">MCP</span></div>
+                        <h3>AI tools and local models</h3>
+                        <p>I build with AI coding agents, mainly Claude Code and Codex. I use them to plan changes, write and review code, and test the results, including on this site.</p>
+                        <p>I also run open-weight models myself. At Catalyst we have access to multiple HP ZGX Nano AI workstations, built on NVIDIA&rsquo;s GB10 Grace Blackwell chip, so I can pull models from Hugging Face and serve them with open-source tools like Ollama, llama.cpp and vLLM on real GPU hardware.</p>
+                        <p>Last year I learned the fundamentals: how agents work, tool calling, connecting models to tools through MCP, and getting local and cloud models to work together on multi-step tasks. This year I&rsquo;ve started putting those ideas to work in my own workflow, using them day to day as I build the other projects on this page.</p>
+                        <div class="project__meta"><span><b>Status</b> Ongoing</span></div>
                     </article>
-                    <article class="card project-card" id="assess">
-                        <div class="tags"><span class="tag">Web design</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-                        <h2>Assess</h2>
-                        <p>A quiz and assessment platform for company training teams. I designed and built its public site, assess.llc, and I&rsquo;m a developer on the platform team.</p>
-                        <p><a class="btn" href="project-assess.html">Explore the Assess project &rarr;</a></p>
-                        <div class="project__meta"><span><b>Status</b> Live</span></div>
-                    </article>
-                    <article class="card project-card" id="ehr">
-                        <div class="tags"><span class="tag">PHP</span><span class="tag">SQL</span></div>
-                        <h2>EHR system</h2>
-                        <p>An electronic health record app with patient records, vitals, orders, alerts, prevention and medication screens. Built at Catalyst.</p>
-                        <p><a class="btn" href="project-ehr.html">Explore the EHR project &rarr;</a></p>
-                        <div class="project__meta"><span><b>Status</b> Built</span></div>
+                    <article class="card project-card" id="news-classifier">
+                        <div class="tags"><span class="tag">llama.cpp</span><span class="tag">Qwen3</span><span class="tag">Hugging Face</span></div>
+                        <h3>News classifier on a local GPU</h3>
+                        <p>An AI engineering lab at Catalyst. I deployed Qwen3-4B with llama.cpp on one of the class&rsquo;s HP ZGX Nano workstations, pulled real articles from the AG News dataset on Hugging Face, and had the model sort each one into World, Sports, Business or Sci/Tech.</p>
+                        <p>Then I measured it. On the same eight test articles, a rewritten prompt with clear category definitions and temperature set to 0 raised accuracy from 5 of 8 to 6 of 8.</p>
+                        <div class="project__meta"><span><b>Status</b> Complete</span></div>
                     </article>
                     <article class="card project-card" id="ollama-summarizer">
                         <div class="tags"><span class="tag">Chrome extension</span><span class="tag">Manifest V3</span><span class="tag">Ollama</span></div>
-                        <h2>Ollama Summarizer</h2>
+                        <h3>Ollama Summarizer</h3>
                         <p>A Chrome extension that summarizes the current web page using a model running locally through Ollama. Built with Chrome&rsquo;s Manifest V3 extension format.</p>
                         <div class="project__meta"><span><b>Status</b> Built</span></div>
                     </article>
-
-
-                    <article class="card project-card" id="security-labs">
-                        <div class="tags"><span class="tag">Linux</span><span class="tag">SSH</span><span class="tag">Wireshark</span></div>
-                        <h2>Cybersecurity labs</h2>
-                        <p>OverTheWire Bandit, SSH, packet analysis in Wireshark, and tracking down hidden wireless networks.</p>
-                        <div class="project__meta"><span><b>Status</b> Ongoing</span></div>
-                    </article>
-                    <article class="card project-card" id="portfolio">
-                        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-                        <h2>This website</h2>
-                        <p>A personal portfolio built with HTML, CSS, and JavaScript, without a framework. The snowflake logo is my own design.</p>
-                        <p><a class="link" href="https://github.com/JollyRevenat/Portfolio" target="_blank" rel="noreferrer">View the code on GitHub</a></p>
-                        <div class="project__meta"><span><b>Status</b> Live</span></div>
-                    </article>
                 </div>
+            </div>
+        </section>
+
+        <section class="section work-group" aria-labelledby="also">
+            <div class="wrap">
+                <h2 class="work-group__title" id="also">Also</h2>
+                <ul class="work-rows">
+                    <li class="work-row" id="security-labs">
+                        <h3>Cybersecurity labs</h3>
+                        <p>OverTheWire Bandit, SSH, packet analysis in Wireshark, and tracking down hidden wireless networks.</p>
+                        <span class="work-row__status">Ongoing</span>
+                    </li>
+                    <li class="work-row" id="portfolio">
+                        <h3>This website</h3>
+                        <p>A personal portfolio built with HTML, CSS, and JavaScript, without a framework. The snowflake logo is my own design. <a class="link" href="https://github.com/JollyRevenat/Portfolio" target="_blank" rel="noreferrer">View the code on GitHub</a></p>
+                        <span class="work-row__status">Live</span>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -131,7 +167,7 @@
                     <p>Tools I&rsquo;ve actually used on the projects above.</p>
                 </div>
                 <div class="grid-3" data-reveal>
-                    <article class="card"><h2>AI</h2><div class="tags"><span class="tag">Ollama</span><span class="tag">vLLM</span><span class="tag">llama.cpp</span><span class="tag">Hugging Face</span><span class="tag">MCP</span><span class="tag">CUDA</span></div></article>
+                    <article class="card"><h2>AI</h2><div class="tags"><span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">Ollama</span><span class="tag">vLLM</span><span class="tag">llama.cpp</span><span class="tag">Hugging Face</span><span class="tag">MCP</span><span class="tag">CUDA</span></div></article>
                     <article class="card"><h2>Web</h2><div class="tags"><span class="tag">HTML &amp; CSS</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">PHP</span><span class="tag">SQL</span></div></article>
                     <article class="card"><h2>Systems &amp; security</h2><div class="tags"><span class="tag">Linux</span><span class="tag">SSH</span><span class="tag">Networking</span><span class="tag">Wireshark</span><span class="tag">Authentication</span></div></article>
                 </div>
