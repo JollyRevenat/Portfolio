@@ -9,7 +9,7 @@ Source for [charlesblake.com](https://charlesblake.com): who I am, freeride skii
 
 ### Structure
 - `index.html` — home
-- `about.html`, `outdoors.html`, `projects.html`, `resume.html`, `contact.html`, `404.html`
+- `about.html`, `outdoors.html`, `projects.html`, `contact.html`, `404.html`
 - `styles.css` — all styles; colors live in the `:root` tokens at the top
 - `script.js` — mobile menu, scroll fades, contact form, background snowfall (`CONTACT_EMAIL` at the top)
 - `assets/img/` — my photos, resized to WebP
