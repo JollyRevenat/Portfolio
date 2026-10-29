@@ -1108,3 +1108,27 @@ body { overflow-wrap: break-word; }
     .js-nav .menu-btn { order: 1; }
 }
 @media print { .theme-toggle { display: none; } }
+
+/* Birch Creek: one even-height strip that supports the story, with the original framing intact.
+   Each item grows by its aspect ratio (--r), so every photo in a row lands at the same height. */
+.birch-gallery {
+    display: flex;
+    gap: 12px;
+    margin-top: clamp(32px, 5vw, 56px);
+}
+.birch-gallery-row {
+    display: flex;
+    flex: var(--r) 1 0;
+    gap: 12px;
+    min-width: 0;
+}
+.birch-photo { flex: var(--r) 1 0; min-width: 0; margin: 0; }
+.birch-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+@media (max-width: 700px) {
+    .birch-gallery { flex-direction: column; }
+}
