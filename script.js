@@ -236,8 +236,9 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     window.addEventListener("beforeprint", revealAll);
 })();
 
-// ---------- Home: scroll through a tunnel of "Go away." to reach "I'm working." ----------
-// Each frame is a ring of words; depth 1 is rest size, nearer grows past the viewer, farther shrinks to the middle.
+// ---------- Home: scroll from "Go away." past the outdoors and the projects to "I'm working." ----------
+// Photos and short facts sit at different depths around the edges; scrolling moves the viewer forward through them.
+// Depth 1 is rest size: nearer things grow out past the edges and fade, farther ones wait small near the middle.
 function initTunnel(live) {
     const tunnel = document.querySelector("[data-tunnel]");
     if (!tunnel) return;
@@ -245,31 +246,63 @@ function initTunnel(live) {
     const away = tunnel.querySelector(".tunnel__away");
     const working = tunnel.querySelector(".tunnel__working");
 
-    const FRAMES = 14;
-    const TRAVEL = 8; // how many frames the viewer passes; "I'm working." sits at the end of it
-    const frames = document.createElement("div");
-    frames.className = "tunnel__frames";
-    frames.setAttribute("aria-hidden", "true");
-    const rings = Array.from({ length: FRAMES }, (_, i) => {
-        const phrase = i < FRAMES / 2 ? "Go away." : "I’m working.";
-        const ring = document.createElement("div");
-        ring.className = "tunnel__frame";
-        for (const side of ["top", "right", "bottom", "left"]) {
-            const wall = document.createElement("span");
-            wall.className = `tunnel__wall tunnel__wall--${side}`;
-            wall.textContent = Array(12).fill(phrase).join("  ");
-            ring.append(wall);
+    const TRAVEL = 8; // how far the viewer moves; "I'm working." sits at depth TRAVEL + 1
+    const ITEMS = [
+        // [photo or label, x, y (-1..1 from the centre at rest size), depth]
+        ["img:ski-ridge", -0.62, -0.42, 1.5],
+        ["Freeride with the Snowbasin Ski Team", 0.5, 0.56, 1.9],
+        ["img:bike", 0.66, -0.36, 2.3],
+        ["img:alpine-lake", -0.6, 0.46, 2.8],
+        ["Lacrosse: close defense and LSM", -0.48, -0.66, 3.2],
+        ["img:summit-rock", 0.6, 0.42, 3.6],
+        ["img:moose", -0.7, -0.08, 4],
+        ["Mountain biking, climbing, hiking", 0.56, -0.64, 4.4],
+        ["img:ski-bowl", 0.72, 0.04, 4.8],
+        ["img:meadow", -0.52, 0.56, 5.2],
+        ["Davis Catalyst Center", -0.6, -0.54, 5.7],
+        ["img:ai-security", 0.62, -0.42, 6.1],
+        ["AI security research", 0.52, 0.6, 6.5],
+        ["img:assess", -0.62, 0.42, 6.9],
+        ["Cybersecurity and AI engineering", -0.46, -0.62, 7.4],
+        ["img:elk-meadow", 0.66, 0.34, 7.8],
+        ["img:ehr", -0.64, -0.4, 9.4],
+        ["Local AI on GPU servers", 0.56, 0.5, 9.6]
+    ];
+    const field = document.createElement("div");
+    field.className = "tunnel__field";
+    field.setAttribute("aria-hidden", "true");
+    const items = ITEMS.map(([what, x, y, depth]) => {
+        let el;
+        if (what.startsWith("img:")) {
+            el = document.createElement("img");
+            el.src = `assets/img/tunnel/${what.slice(4)}.webp`;
+            el.alt = "";
+            el.loading = "lazy";
+            el.decoding = "async";
+        } else {
+            el = document.createElement("span");
+            el.textContent = what;
         }
-        frames.append(ring);
-        return ring;
+        el.className = what.startsWith("img:") ? "tunnel__item tunnel__photo" : "tunnel__item tunnel__label";
+        field.append(el);
+        // Photos sit wide so they sweep past the edges; facts sit closer in so they're still on screen while large enough to read.
+        const spread = el.tagName === "IMG" ? 1.45 : 1;
+        return { el, x: x * spread, y: y * spread, depth };
     });
 
     const clamp = (v) => Math.max(0, Math.min(1, v));
-    const place = (el, depth, strength) => {
+    // Items are laid out at twice their rest size and scaled down, so they stay sharp as they grow past.
+    const BASE = 0.5;
+    const place = (el, depth, strength, dx = 0, dy = 0, base = 1) => {
         const opacity = clamp((depth - 0.35) / 0.45) * strength; // fades as it rushes past
         el.style.opacity = opacity;
-        // Rings skip painting while invisible; the two real lines stay readable to screen readers and find-in-page.
-        if (el.classList.contains("tunnel__frame")) el.style.visibility = opacity > 0.01 ? "" : "hidden";
+        el.style.visibility = opacity > 0.01 ? "" : "hidden";
+        if (opacity > 0.01) el.style.transform = `translate(${dx / depth}px, ${dy / depth}px) scale(${base / depth})`;
+    };
+    // The two real lines only fade, so screen readers and find-in-page always have them.
+    const placeWords = (el, depth, strength) => {
+        const opacity = clamp((depth - 0.35) / 0.45) * strength;
+        el.style.opacity = opacity;
         if (opacity > 0.01) el.style.transform = `scale(${1 / depth})`;
     };
 
@@ -279,15 +312,17 @@ function initTunnel(live) {
         pending = false;
         const rect = tunnel.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const halfW = stage.clientWidth / 2;
+        const halfH = stage.clientHeight / 2;
         const progress = clamp(-rect.top / (rect.height - window.innerHeight));
         // Rest on "Go away." when the section pins, and on "I'm working." before it lets go.
         const camera = TRAVEL * clamp((progress - 0.1) / 0.75);
-        rings.forEach((ring, i) => {
-            const depth = i + 1 - camera;
-            place(ring, depth, 0.75 * clamp(1 - (depth - 1) / 10));
-        });
-        place(away, 1 - camera, 1);
-        place(working, TRAVEL + 1 - camera, clamp((camera - 1) / 3)); // stays out of the way until "Go away." has passed
+        for (const { el, x, y, depth } of items) {
+            const rel = depth - camera;
+            place(el, rel, clamp(3.6 - rel), x * halfW, y * halfH, BASE); // far ones arrive out of the middle
+        }
+        placeWords(away, 1 - camera, 1);
+        placeWords(working, TRAVEL + 1 - camera, clamp((camera - 1) / 3)); // stays out of the way until "Go away." has passed
     };
     const onScroll = () => {
         if (pending || !on) return;
@@ -303,10 +338,10 @@ function initTunnel(live) {
         on = next;
         tunnel.classList.toggle("tunnel--live", on);
         if (on) {
-            stage.prepend(frames);
+            stage.prepend(field);
             update();
         } else {
-            frames.remove();
+            field.remove();
             [away, working].forEach((el) => el.removeAttribute("style"));
         }
     }

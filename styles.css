@@ -1094,7 +1094,7 @@ body { overflow-wrap: break-word; }
 @keyframes dot-land { from { opacity: 0; transform: translate(-0.06em, -0.55em); } }
 
 /* Home: "Go away. I'm working." Static by default; with script and motion allowed, the section
-   pins and scrolling flies through a tunnel of words to reach the second line. */
+   pins and scrolling flies past photos and short facts to reach the second line. */
 .tunnel { padding-block: var(--section-y); }
 .tunnel__words {
     width: min(100% - 2 * var(--pad), var(--max));
@@ -1114,26 +1114,36 @@ body { overflow-wrap: break-word; }
 .tunnel--live .tunnel__words { position: absolute; inset: 0; width: auto; display: grid; place-items: center; }
 .tunnel--live .tunnel__away,
 .tunnel--live .tunnel__working { grid-area: 1 / 1; margin: 0; font-size: clamp(2.5rem, 11vw, 8.5rem); color: var(--ink); }
-.tunnel__frame {
+.tunnel__field { position: absolute; inset: 0; pointer-events: none; }
+.tunnel__item {
     position: absolute;
-    inset: 4vmin;
-    font: 500 clamp(0.95rem, 2.4vmin, 1.35rem) / 1 var(--font);
-    letter-spacing: -0.01em;
-    color: var(--faint);
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
 }
-.tunnel__wall { position: absolute; display: flex; align-items: center; justify-content: center; overflow: hidden; white-space: pre; }
-.tunnel__wall--top, .tunnel__wall--bottom { left: 0; right: 0; height: 1.6em; }
-.tunnel__wall--top { top: 0; }
-.tunnel__wall--bottom { bottom: 0; }
-.tunnel__wall--left, .tunnel__wall--right { top: 1.6em; bottom: 1.6em; width: 1.6em; writing-mode: vertical-rl; text-orientation: sideways; }
-.tunnel__wall--left { left: 0; transform: rotate(180deg); }
-.tunnel__wall--right { right: 0; }
+/* Laid out at twice the size they rest at; script scales them down so they stay sharp as they grow past. */
+.tunnel__photo {
+    width: clamp(280px, 40vw, 640px);
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: calc(var(--radius) * 2);
+    background: var(--surface);
+}
+.tunnel__label {
+    font: 500 clamp(2.4rem, 4.4vw, 3.4rem) / 1.1 var(--font);
+    letter-spacing: -0.02em;
+    color: var(--muted);
+    white-space: nowrap;
+}
+@media (max-width: 600px) {
+    .tunnel__label { width: max-content; max-width: 9em; white-space: normal; text-align: center; text-wrap: balance; }
+}
 @media print {
     .tunnel--live { height: auto; padding-block: 24px; }
     .tunnel--live .tunnel__stage { position: static; height: auto; }
     .tunnel--live .tunnel__words { position: static; display: block; }
     .tunnel--live .tunnel__away, .tunnel--live .tunnel__working { transform: none !important; opacity: 1 !important; }
-    .tunnel__frames { display: none; }
+    .tunnel__field { display: none; }
 }
 
 /* Project pages: the "on this page" marker slides to the section being read. */
