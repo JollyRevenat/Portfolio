@@ -176,12 +176,16 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     }
 
     const snow = initSnow(!reduced);
+    const tunnel = initTunnel(!reduced);
+    const ridges = initRidges(!reduced);
 
     // ---------- Scroll reveals: a short fade on each block, staggered a little within groups ----------
     // Content is visible by default; hiding only happens once this script is running.
     let revealAll = () => {};
     motionQuery.addEventListener("change", (e) => {
         snow?.setAnimate(!e.matches);
+        tunnel?.setLive(!e.matches);
+        ridges?.setAnimate(!e.matches);
         if (e.matches) revealAll();
     });
 
@@ -231,6 +235,345 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     });
     window.addEventListener("beforeprint", revealAll);
 })();
+
+// ---------- Home: scroll through a tunnel of "Go away." to reach "I'm working." ----------
+// Each frame is a ring of words; depth 1 is rest size, nearer grows past the viewer, farther shrinks to the middle.
+function initTunnel(live) {
+    const tunnel = document.querySelector("[data-tunnel]");
+    if (!tunnel) return;
+    const stage = tunnel.querySelector(".tunnel__stage");
+    const away = tunnel.querySelector(".tunnel__away");
+    const working = tunnel.querySelector(".tunnel__working");
+
+    const FRAMES = 14;
+    const TRAVEL = 8; // how many frames the viewer passes; "I'm working." sits at the end of it
+    const frames = document.createElement("div");
+    frames.className = "tunnel__frames";
+    frames.setAttribute("aria-hidden", "true");
+    const rings = Array.from({ length: FRAMES }, (_, i) => {
+        const phrase = i < FRAMES / 2 ? "Go away." : "I’m working.";
+        const ring = document.createElement("div");
+        ring.className = "tunnel__frame";
+        for (const side of ["top", "right", "bottom", "left"]) {
+            const wall = document.createElement("span");
+            wall.className = `tunnel__wall tunnel__wall--${side}`;
+            wall.textContent = Array(12).fill(phrase).join("  ");
+            ring.append(wall);
+        }
+        frames.append(ring);
+        return ring;
+    });
+
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const place = (el, depth, strength) => {
+        const opacity = clamp((depth - 0.35) / 0.45) * strength; // fades as it rushes past
+        el.style.opacity = opacity;
+        // Rings skip painting while invisible; the two real lines stay readable to screen readers and find-in-page.
+        if (el.classList.contains("tunnel__frame")) el.style.visibility = opacity > 0.01 ? "" : "hidden";
+        if (opacity > 0.01) el.style.transform = `scale(${1 / depth})`;
+    };
+
+    let on = false;
+    let pending = false;
+    const update = () => {
+        pending = false;
+        const rect = tunnel.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const progress = clamp(-rect.top / (rect.height - window.innerHeight));
+        // Rest on "Go away." when the section pins, and on "I'm working." before it lets go.
+        const camera = TRAVEL * clamp((progress - 0.1) / 0.75);
+        rings.forEach((ring, i) => {
+            const depth = i + 1 - camera;
+            place(ring, depth, 0.75 * clamp(1 - (depth - 1) / 10));
+        });
+        place(away, 1 - camera, 1);
+        place(working, TRAVEL + 1 - camera, clamp((camera - 1) / 3)); // stays out of the way until "Go away." has passed
+    };
+    const onScroll = () => {
+        if (pending || !on) return;
+        pending = true;
+        requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("pageshow", onScroll);
+
+    function setLive(next) {
+        on = next;
+        tunnel.classList.toggle("tunnel--live", on);
+        if (on) {
+            stage.prepend(frames);
+            update();
+        } else {
+            frames.remove();
+            [away, working].forEach((el) => el.removeAttribute("style"));
+        }
+    }
+
+    setLive(live);
+    return { setLive };
+}
+
+// ---------- Footer: looking down a valley toward the mountains, in terrain lines ----------
+// A low camera looking across a valley at a range: the ground drifts toward the viewer, the snowcaps
+// catch the accent, and the river and the two ridges shift with the pointer. assets/img/ridges.svg is the still, no-script stand-in.
+function initRidges(animate) {
+    const footer = document.querySelector(".site-footer");
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!footer || !ctx) return;
+    canvas.className = "site-footer__ridges";
+    canvas.setAttribute("aria-hidden", "true");
+    footer.append(canvas);
+    footer.classList.add("has-ridges");
+
+    const STEP = 5;      // px between samples along a line
+    const NEAR = 1.4;
+    // Line depths: a few across the valley floor, then closely spaced through the mountains so each peak gets contours.
+    const DEPTHS = [
+        ...Array.from({ length: 18 }, (_, i) => NEAR * (8 / NEAR) ** (i / 18)),
+        ...Array.from({ length: 44 }, (_, i) => 8 + i * 0.47)
+    ];
+    const RIVER = 0.8;   // river half-width, world units
+    // Mountains on the horizon by screen angle: position, height, width.
+    const PEAKS = [
+        [-2.1, 0.5, 0.35], [-1.6, 0.78, 0.22], [-1.25, 0.6, 0.3], [-0.7, 0.95, 0.25], [-0.45, 0.7, 0.18], [0, 0.42, 0.35],
+        [0.38, 0.8, 0.2], [0.64, 1, 0.3], [1.1, 0.55, 0.25], [1.45, 0.9, 0.22], [1.78, 0.62, 0.3], [2.2, 0.75, 0.3]
+    ];
+    const WAVES = [[4.1, 0.3, 2.7], [6.3, 2.1, 5.2], [3.4, 4.4, 3.9], [8.2, 1.2, 6.1], [5.6, 5.3, 2.2], [7.4, 3.6, 4.6]];
+    const noise = (x, z) => {
+        let n = 0;
+        for (const [fx, px, fz] of WAVES) n += Math.sin(fx * x + px + fz * z);
+        return n / WAVES.length;
+    };
+    const ramp = (v, a, b) => Math.max(0, Math.min(1, (v - a) / (b - a)));
+
+    let cw = 0;
+    let ch = 0;
+    let focal = 0;
+    let skyline = 0;
+    let raf = 0;
+    let visible = false;
+    let bend = 0;    // px the near river is pushed sideways, eased toward the pointer
+    let target = 0;
+    let time = 0;
+    let last = 0;
+    let squeeze = 1;
+    const waveSin = new Float64Array(WAVES.length);
+    const waveCos = new Float64Array(WAVES.length);
+    const stepSin = new Float64Array(WAVES.length);
+    const stepCos = new Float64Array(WAVES.length);
+    let colours = { line: "", ice: "" };
+    // Theme colours, read when the theme changes rather than every frame.
+    const readColours = () => {
+        const style = getComputedStyle(canvas);
+        colours = { line: style.color, ice: style.getPropertyValue("--ice").trim() || style.color };
+        cachedLean = NaN;
+    };
+    let horizon = new Float32Array(0);
+    let far = new Float32Array(0);
+    let fronts = new Float32Array(0); // ridge heights per column: they depend only on screen angle and the pointer
+    let backs = new Float32Array(0);
+    // The far range only changes when the pointer moves it, so it's drawn once into a cache and reused.
+    const cache = document.createElement("canvas");
+    const cacheCtx = cache.getContext("2d");
+    let cachedLean = NaN;
+
+    function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5); // thin lines stay crisp; full 2x costs more than it shows
+        cw = canvas.clientWidth;
+        ch = canvas.clientHeight;
+        canvas.width = cache.width = cw * dpr;
+        canvas.height = cache.height = ch * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cacheCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        focal = ch * 1.15;
+        skyline = ch * 0.62;
+        squeeze = Math.max(1, 0.65 / (cw / 2 / focal)); // narrow screens still see several peaks, a little lower
+        horizon = new Float32Array(Math.ceil(cw / STEP) + 1);
+        far = new Float32Array(horizon.length);
+        fronts = new Float32Array(horizon.length);
+        cachedLean = NaN;
+        backs = new Float32Array(horizon.length);
+    }
+
+    // The range by screen angle: 0..1. Front ridge is lower and offset; both slide a little with the pointer.
+    function profile(angle, shift) {
+        let p = 0;
+        for (const [pa, ph, pw] of PEAKS) p = Math.max(p, ph * Math.exp(-((Math.abs(angle - pa - shift) / pw) ** 1.4) * 1.8));
+        return p * (0.8 + 0.3 * noise((angle - shift) * 4.3, 0.2));
+    }
+
+    // One line of the scene at depth z, drawn onto c. Only what rises above everything nearer (edge) is seen.
+    // Anything that depends only on depth is worked out once per line; mountain and snow strokes are batched.
+    function slice(c, edge, z, t, peaks, snow) {
+        const valley = z < 11;
+        const zt = z + t;
+        const centre = (0.8 * Math.sin(zt * 0.21) + 0.4 * Math.sin(zt * 0.5 + 2)) * (1 - ramp(z, 4, 10))
+            + bend * (1 - ramp(z, NEAR, 10)) * z / focal; // the river winds, and its near end follows the pointer
+        const rise = (0.6 + 0.4 * ramp(z, NEAR, 5)) * (1 - ramp(z, 7, 11));
+        const scale = focal / z;
+        // The valley's ripples are sine waves across the line. Each sample steps every wave by a fixed angle,
+        // so they're rotated forward with two multiplies instead of a Math.sin per wave per sample.
+        if (valley) {
+            for (let w = 0; w < WAVES.length; w++) {
+                const freq = WAVES[w][0] * 0.35 / scale;
+                const start = -freq * cw / 2 + WAVES[w][1] + WAVES[w][2] * zt * 0.25;
+                waveSin[w] = Math.sin(start);
+                waveCos[w] = Math.cos(start);
+                stepSin[w] = Math.sin(freq * STEP);
+                stepCos[w] = Math.cos(freq * STEP);
+            }
+        }
+        // Each ridge is a solid with its summit line at one depth, so nearer lines cut it lower down.
+        const front = z < 6 ? 0 : Math.exp(-(((z - 11.5) / 2.2) ** 2));
+        const back = z < 6 ? 0 : Math.exp(-(((z - 22) / 4.5) ** 2));
+        const lift = 0.42 / Math.sqrt(squeeze) * z;
+        const ground = new Path2D();
+        let drawing = false;
+        let prev = ground;
+        let px = 0;
+        let py = 0;
+        for (let k = 0; k < edge.length; k++) {
+            const sx = k * STEP;
+            let hills = 0;
+            if (valley) { // banks rising either side of a flat river floor
+                const x = (sx - cw / 2) / scale;
+                const side = Math.abs(x - centre);
+                const d = (side / RIVER) ** 2;
+                let n = 0;
+                for (let w = 0; w < WAVES.length; w++) {
+                    const sin = waveSin[w];
+                    n += sin;
+                    waveSin[w] = sin * stepCos[w] + waveCos[w] * stepSin[w];
+                    waveCos[w] = waveCos[w] * stepCos[w] - sin * stepSin[w];
+                }
+                hills = (1 - Math.exp(-d * d)) * (0.5 + 0.5 * n / WAVES.length) * (0.3 + 0.14 * Math.min(side, 3)) * rise;
+            }
+            const peak = Math.max(fronts[k] * front, backs[k] * back);
+            const mountain = peak * lift;
+            const y = skyline + (1 - Math.max(hills, mountain)) * scale;
+            const path = mountain > hills ? (peak > 0.6 ? snow : peaks) : ground;
+            if (y < edge[k] - 0.4) {
+                if (!drawing) path.moveTo(sx, y);
+                else if (path === prev) path.lineTo(sx, y);
+                else { path.moveTo(px, py); path.lineTo(sx, y); }
+                drawing = true;
+                edge[k] = y;
+            } else drawing = false;
+            prev = path;
+            px = sx;
+            py = y;
+        }
+        // The valley fades with distance; the mountains hold their weight so they stay the subject.
+        c.globalAlpha = 0.65 - 0.5 * ramp(z, NEAR, 10);
+        c.stroke(ground);
+    }
+
+    function strokeRange(c, peaks, snow) {
+        c.globalAlpha = 0.8;
+        c.strokeStyle = colours.line;
+        c.stroke(peaks);
+        c.globalAlpha = 0.9;
+        c.strokeStyle = colours.ice;
+        c.stroke(snow);
+        c.globalAlpha = 1;
+    }
+
+    // The lines from the valley's far edge back: they move only with the pointer.
+    function drawRange(lean) {
+        for (let k = 0; k < fronts.length; k++) {
+            const angle = (k * STEP - cw / 2) / focal * squeeze;
+            fronts[k] = 0.6 * profile(angle + 0.33, lean * 0.25);
+            backs[k] = profile(angle, lean * 0.1);
+        }
+        cacheCtx.clearRect(0, 0, cw, ch);
+        cacheCtx.lineJoin = "round";
+        cacheCtx.strokeStyle = colours.line;
+        far.fill(ch + 10);
+        const peaks = new Path2D();
+        const snow = new Path2D();
+        for (const z of DEPTHS) if (z >= 11) slice(cacheCtx, far, z, 0, peaks, snow);
+        strokeRange(cacheCtx, peaks, snow);
+        cachedLean = lean;
+    }
+
+    function draw(t) {
+        const lean = bend / cw; // -0.35..0.35
+        if (!(Math.abs(lean - cachedLean) < 0.0005)) drawRange(lean);
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = colours.line;
+        horizon.fill(ch + 10);
+        const peaks = new Path2D();
+        const snow = new Path2D();
+        for (const z of DEPTHS) if (z < 11) slice(ctx, horizon, z, t, peaks, snow);
+        strokeRange(ctx, peaks, snow);
+        // The cached range shows only above the valley in front of it.
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(cw, 0);
+        ctx.lineTo(0, 0);
+        for (let k = 0; k < horizon.length; k++) ctx.lineTo(k * STEP, horizon[k]);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(cache, 0, 0, cw, ch);
+        ctx.restore();
+    }
+
+    // Timed by the clock, not the frame count, so it moves at the same pace at 60 or 120 fps.
+    function frame(now) {
+        const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
+        last = now;
+        bend += (target - bend) * (1 - Math.exp(-dt / 0.5));
+        time += dt * 0.35;
+        draw(time);
+        raf = requestAnimationFrame(frame);
+    }
+
+    // Runs only while the footer is on screen and the tab is showing.
+    function restart() {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        last = 0;
+        if (animate && visible && !document.hidden) raf = requestAnimationFrame(frame);
+        else draw(time);
+    }
+
+    window.addEventListener("pointermove", (e) => {
+        target = (e.clientX / window.innerWidth - 0.5) * cw * 0.7;
+    }, { passive: true });
+    window.addEventListener("resize", () => {
+        resize();
+        if (!raf) draw(time);
+    }, { passive: true });
+    document.addEventListener("visibilitychange", restart);
+    // Still frames pick up a theme switch too.
+    const redraw = () => {
+        readColours();
+        if (!raf) draw(time);
+    };
+    new MutationObserver(redraw).observe(document.documentElement, { attributeFilter: ["data-theme"] });
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", redraw);
+    if ("IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+            visible = entry.isIntersecting;
+            restart();
+        }).observe(canvas);
+    }
+
+    resize();
+    readColours();
+    draw(0);
+
+    return {
+        setAnimate(on) {
+            animate = on;
+            restart();
+        }
+    };
+}
 
 // ---------- Background snowfall: small, sparse and slow ----------
 function initSnow(animate) {

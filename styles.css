@@ -811,6 +811,42 @@ a.card--photo:hover .card__img img { transform: scale(1.03); }
 
 .footer-links a:hover { color: var(--ice); }
 
+/* A range of mountains drawn as stacked terrain lines, closing every page. The SVG is a mask, so it takes the theme's colour. */
+.site-footer::after {
+    content: "";
+    display: block;
+    height: clamp(150px, 21vw, 300px);
+    background: var(--faint);
+    -webkit-mask: url("assets/img/ridges.svg") center bottom / cover no-repeat;
+    mask: url("assets/img/ridges.svg") center bottom / cover no-repeat;
+    pointer-events: none;
+}
+/* With script, the same range is drawn live: the valley floor drifts toward you and bends toward the pointer. */
+/* The scene is the footer's background: the links sit in the open sky, and the scene's top edge fades
+   into the page instead of a border, so the footer reads as one piece. */
+.site-footer.has-ridges {
+    --scene: clamp(220px, 26vw, 380px);
+    position: relative;
+    isolation: isolate;
+    border-top: 0;
+    padding-bottom: var(--scene);
+}
+.site-footer.has-ridges::after { content: none; }
+.site-footer__ridges {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    color: var(--faint);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 8%, #000 48%);
+    mask-image: linear-gradient(to bottom, transparent 8%, #000 48%);
+    pointer-events: none;
+}
+@media (prefers-contrast: more) {
+    .site-footer__ridges { opacity: 0.4; }
+}
+
 /* ---------- Motion: one quiet fade per block, only when script.js is running ---------- */
 .js-motion .rv {
     opacity: 0;
@@ -1056,6 +1092,49 @@ body { overflow-wrap: break-word; }
 @keyframes hero-settle { from { transform: scale(1.05); } }
 @keyframes hero-rise { from { opacity: 0; transform: translateY(14px); } }
 @keyframes dot-land { from { opacity: 0; transform: translate(-0.06em, -0.55em); } }
+
+/* Home: "Go away. I'm working." Static by default; with script and motion allowed, the section
+   pins and scrolling flies through a tunnel of words to reach the second line. */
+.tunnel { padding-block: var(--section-y); }
+.tunnel__words {
+    width: min(100% - 2 * var(--pad), var(--max));
+    margin: 0 auto;
+    font-family: var(--font);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    text-align: center;
+}
+.tunnel__away { display: block; margin-bottom: 0.45em; font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--muted); }
+.tunnel__working { display: block; font-size: clamp(2.5rem, 11vw, 8.5rem); white-space: nowrap; }
+.tunnel__dot { color: var(--ice); }
+
+.tunnel--live { height: 320vh; height: 320svh; padding: 0; }
+.tunnel--live .tunnel__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.tunnel--live .tunnel__words { position: absolute; inset: 0; width: auto; display: grid; place-items: center; }
+.tunnel--live .tunnel__away,
+.tunnel--live .tunnel__working { grid-area: 1 / 1; margin: 0; font-size: clamp(2.5rem, 11vw, 8.5rem); color: var(--ink); }
+.tunnel__frame {
+    position: absolute;
+    inset: 4vmin;
+    font: 500 clamp(0.95rem, 2.4vmin, 1.35rem) / 1 var(--font);
+    letter-spacing: -0.01em;
+    color: var(--faint);
+}
+.tunnel__wall { position: absolute; display: flex; align-items: center; justify-content: center; overflow: hidden; white-space: pre; }
+.tunnel__wall--top, .tunnel__wall--bottom { left: 0; right: 0; height: 1.6em; }
+.tunnel__wall--top { top: 0; }
+.tunnel__wall--bottom { bottom: 0; }
+.tunnel__wall--left, .tunnel__wall--right { top: 1.6em; bottom: 1.6em; width: 1.6em; writing-mode: vertical-rl; text-orientation: sideways; }
+.tunnel__wall--left { left: 0; transform: rotate(180deg); }
+.tunnel__wall--right { right: 0; }
+@media print {
+    .tunnel--live { height: auto; padding-block: 24px; }
+    .tunnel--live .tunnel__stage { position: static; height: auto; }
+    .tunnel--live .tunnel__words { position: static; display: block; }
+    .tunnel--live .tunnel__away, .tunnel--live .tunnel__working { transform: none !important; opacity: 1 !important; }
+    .tunnel__frames { display: none; }
+}
 
 /* Project pages: the "on this page" marker slides to the section being read. */
 .case-nav.has-indicator::before {
