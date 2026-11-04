@@ -249,22 +249,19 @@ function initTunnel(live) {
     const TRAVEL = 8; // how far the viewer moves; "I'm working." sits at depth TRAVEL + 1
     const ITEMS = [
         // [photo or label, x, y (-1..1 from the centre at rest size), depth]
-        ["img:ski-ridge", -0.62, -0.42, 1.5],
+        ["img:ski-jump", -0.62, -0.42, 1.5],
         ["Freeride with the Snowbasin Ski Team", 0.5, 0.56, 1.9],
-        ["img:bike", 0.66, -0.36, 2.3],
-        ["img:alpine-lake", -0.6, 0.46, 2.8],
+        ["img:lacrosse", 0.66, -0.36, 2.6],
         ["Lacrosse: close defense and LSM", -0.48, -0.66, 3.2],
-        ["img:summit-rock", 0.6, 0.42, 3.6],
-        ["img:moose", -0.7, -0.08, 4],
+        ["img:boulder-portrait", -0.6, 0.46, 3.7],
         ["Mountain biking, climbing, hiking", 0.56, -0.64, 4.4],
-        ["img:ski-bowl", 0.72, 0.04, 4.8],
-        ["img:meadow", -0.52, 0.56, 5.2],
+        ["img:rock-climbing", 0.66, -0.36, 4.7],
+        ["img:wakesurf", -0.62, 0.42, 5.5],
         ["Davis Catalyst Center", -0.6, -0.54, 5.7],
         ["img:ai-security", 0.62, -0.42, 6.1],
         ["AI security research", 0.52, 0.6, 6.5],
         ["img:assess", -0.62, 0.42, 6.9],
         ["Cybersecurity and AI engineering", -0.46, -0.62, 7.4],
-        ["img:elk-meadow", 0.66, 0.34, 7.8],
         ["img:ehr", -0.64, -0.4, 9.4],
         ["Local AI on GPU servers", 0.56, 0.5, 9.6]
     ];
@@ -276,6 +273,7 @@ function initTunnel(live) {
         if (what.startsWith("img:")) {
             el = document.createElement("img");
             el.src = `assets/img/tunnel/${what.slice(4)}.webp`;
+            el.dataset.photo = what.slice(4);
             el.alt = "";
             el.loading = "lazy";
             el.decoding = "async";

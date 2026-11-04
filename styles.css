@@ -1129,8 +1129,29 @@ body { overflow-wrap: break-word; }
     border-radius: calc(var(--radius) * 2);
     background: var(--surface);
 }
+/* Frame original photographs without altering the people or their surroundings. */
+.tunnel__photo[data-photo="ski-jump"] {
+    aspect-ratio: 591 / 530;
+    object-fit: cover;
+    object-position: 50% 48.9%;
+}
+.tunnel__photo[data-photo="boulder-portrait"] {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 50% 75%;
+}
+.tunnel__photo[data-photo="rock-climbing"],
+.tunnel__photo[data-photo="lacrosse"],
+.tunnel__photo[data-photo="wakesurf"] {
+    width: clamp(220px, 28vw, 440px);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+.tunnel__photo[data-photo="rock-climbing"] { object-position: 50% 35%; }
+.tunnel__photo[data-photo="lacrosse"] { object-position: 50% 65%; }
+.tunnel__photo[data-photo="wakesurf"] { object-position: 50% 72%; }
 .tunnel__label {
-    font: 500 clamp(2.4rem, 4.4vw, 3.4rem) / 1.1 var(--font);
+    font: 500 clamp(2rem, 3.2vw, 2.75rem) / 1.2 var(--font);
     letter-spacing: -0.02em;
     color: var(--muted);
     white-space: nowrap;
