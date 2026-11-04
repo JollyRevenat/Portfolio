@@ -241,25 +241,25 @@ dialog#viewer::backdrop{background:color-mix(in srgb,var(--fg) 78%,transparent)}
   <div class="head"><span>SPECIMEN CARD / AI-GENERATED WEB APPLICATIONS</span></div>
   <div class="hero">
     <h1>Do AI models leave fingerprints in the security of the sites they build?</h1>
-    <p>I gave different AI coding models the same specification for the same web app, then tested every finished site for the same security weaknesses. This is what happened, including the parts that did not work.</p>
+    <p>I gave different AI coding models the same specification for the same web app, then tested the finished sites for the same security weaknesses. This is what happened, including the parts that did not work.</p>
   </div>
   <div class="fields">
     <div class="field who"><small class="lbl">Investigator</small><b>Charles Blake</b></div>
-    <div class="field"><small class="lbl">Completed sites</small><b>23, from 3 models</b></div>
-    <div class="field"><small class="lbl">Generation attempts</small><b>110</b></div>
+    <div class="field"><small class="lbl">Completed sites</small><b>25, from 4 models</b></div>
+    <div class="field"><small class="lbl">Generation attempts</small><b>150</b></div>
     <div class="field"><small class="lbl">Weakness checklist</small><b>35 items</b></div>
-    <div class="field"><small class="lbl">Data as of</small><b>2 Nov 2026</b></div>
+    <div class="field"><small class="lbl">Data as of</small><b>4 Nov 2026</b></div>
   </div>
   <section class="sites" id="sites" aria-labelledby="sites-title">
     <div class="sites-head">
       <div>
-        <h2 id="sites-title">The 23 sites</h2>
+        <h2 id="sites-title">The 25 sites</h2>
         <p>Each one is a separate build of the same app, written by the model named above it and never edited afterward. <span class="hover-only">Hover over a print to flip it, then click to look through the site.</span><span class="touch-only">Tap a print to look through the site.</span></p>
       </div>
-      <button class="btn" type="button" id="flip-all" aria-pressed="false">Flip all 23</button>
+      <button class="btn" type="button" id="flip-all" aria-pressed="false">Flip all 25</button>
     </div>
     <div id="site-groups"></div>
-    <p class="cap sites-foot">These are screenshots, because the sites are left unhardened and stay on my lab machines. Every site shows the same demo project, so the differences come from the builder. I took them on the evening of 3 Nov 2026, so dates on the pages read 4 Nov UTC. The prints are drawn for illustration and do not encode data.</p>
+    <p class="cap sites-foot">These are screenshots, because the sites are left unhardened and stay on my lab machines. Every site shows the same demo project, so the differences come from the builder. I took them on 3 and 4 Nov 2026, so dates on the pages read 4 Nov UTC. The prints are drawn for illustration and do not encode data.</p>
   </section>
 
   <section class="sec"><header><span>A</span>QUESTION</header><div class="body">
@@ -280,12 +280,12 @@ dialog#viewer::backdrop{background:color-mix(in srgb,var(--fg) 78%,transparent)}
   </div></section>
 
   <section class="sec"><header><span>C</span>ATTEMPT LOG</header><div class="body">
-    <h2>23 sites took 110 tries</h2>
-    <div class="prose"><p>Getting models to finish the same app turned out to be most of the project. Each square below is one attempt, in date order by batch. Cloud models usually finished. Local models almost never did.</p></div>
-    <div class="ruled" id="log" role="img" aria-label="110 attempts in five batches. Claude Sonnet 5.5: 10 of 11 finished. Local models, weekend: 3 of 60. Local models, next run: 0 of 9. Claude Haiku 5.5: 10 of 13. Local models, third run: 0 of 17."></div>
+    <h2>25 sites took 150 tries</h2>
+    <div class="prose"><p>Getting models to finish the same app turned out to be most of the project. Each square below is one attempt, in date order by batch. Sonnet 5.5 and Haiku 5.5 usually finished. Haiku 4.5, GPT-6 Luna and the local models almost never did.</p></div>
+    <div class="ruled" id="log" role="img" aria-label="150 attempts in eight batches. Claude Sonnet 5.5: 10 of 11 finished. Local models, weekend: 3 of 60. Local models, next run: 0 of 9. Claude Haiku 5.5: 10 of 13. Local models, third run: 0 of 17. Local models, fourth run: 0 of 3. Claude Haiku 4.5: 2 of 30. GPT-6 Luna: 0 of 7."></div>
     <div class="legend" id="legend"></div>
-    <p class="cap">Within the local-model batches, squares are grouped by outcome instead of run order.</p>
-    <h3>How the 110 attempts ended</h3>
+    <p class="cap">Within the local-model batches, squares are grouped by outcome instead of run order. “Lab or harness blocked it” is the label my harness recorded, and for Haiku 4.5 it hides a problem described below.</p>
+    <h3>How the 150 attempts ended</h3>
     <div class="bars" id="outcomes"></div>
     <h3>What broke, and what I changed</h3>
     <div class="ruled" id="fixes"></div>
@@ -294,10 +294,10 @@ dialog#viewer::backdrop{background:color-mix(in srgb,var(--fg) 78%,transparent)}
   <section class="sec"><header><span>D</span>FINDINGS</header><div class="body">
     <h2>What the sites got wrong</h2>
     <div class="scroll"><table class="matrix" id="matrix"></table></div>
-    <p class="cap">Darker cells mean a larger share of that model's sites. Nemotron has only 3 sites, so its shares move in big steps.</p>
+    <p class="cap">Darker cells mean a larger share of that model's sites. Nemotron has only 3 sites, so its shares move in big steps. The 2 Haiku 4.5 sites have not been evaluated yet, so this table covers 23 sites.</p>
     <div class="prose">
-      <p>Across all 23 sites I confirmed no injection flaws, though one Nemotron site served uploaded files in a way that allowed stored XSS. Most weaknesses cluster in things the functional tests never check, such as session secrets, rate limits and security headers. Models build what gets tested.</p>
-      <p>Some items do differ by model. All 10 Haiku sites set a SameSite cookie, while 7 of 10 Sonnet sites and all 3 Nemotron sites left it out. This is an early hint, not a result: the samples are small and the Sonnet and Haiku evaluators had different tools.</p>
+      <p>Across the 23 evaluated sites I confirmed no injection flaws, though one Nemotron site served uploaded files in a way that allowed stored XSS. Most weaknesses cluster in things the functional tests never check, such as session secrets, rate limits and security headers. Models build what gets tested.</p>
+      <p>Some items do differ by model. All 10 Haiku 5.5 sites set a SameSite cookie, while 7 of 10 Sonnet sites and all 3 Nemotron sites left it out. This is an early hint, not a result: the samples are small and the Sonnet and Haiku 5.5 evaluators had different tools.</p>
     </div>
   </div></section>
 
@@ -306,7 +306,7 @@ dialog#viewer::backdrop{background:color-mix(in srgb,var(--fg) 78%,transparent)}
     <h2>The search for one sign that gives a weak AI site away</h2>
     <div class="prose">
       <p>The idea was simple and useful: find something visible from outside a site that shows up on AI-built sites and also goes along with real weaknesses. A real flag has to pass three tests. It recurs across sites, it comes from the AI and not from my setup, and anyone can see it from outside.</p>
-      <p>I checked public signals on the 3 Nemotron sites: pages, headers, cookies and the 404 page. The evaluation labels were saved first, so this search could not influence them. Items from the checklist cover all 23 sites. None of the 9 candidates passed all three tests.</p>
+      <p>I checked public signals on the 3 Nemotron sites: pages, headers, cookies and the 404 page. The evaluation labels were saved first, so this search could not influence them. Items from the checklist cover the 23 evaluated sites. None of the 9 candidates passed all three tests.</p>
     </div>
     <div class="scroll"><table class="flag-grid" id="flags"></table></div>
     <div class="prose">
@@ -329,8 +329,8 @@ dialog#viewer::backdrop{background:color-mix(in srgb,var(--fg) 78%,transparent)}
 
   <section class="sec"><header><span>H</span>LIMITS AND NEXT</header><div class="body">
     <div class="prose">
-      <p>This is exploratory work and leaves out final statistics. It has 3 models, small samples and one evaluator per site. The checklist is a pilot, and the evaluator setup changed between the Sonnet and Haiku sets. The count of 23 leaves out earlier calibration runs, one GPT-5.6 Sol site that was validated separately, and the Haiku 4.5 and GPT-6 Luna runs that began on Nov 2. I cannot yet claim that fingerprints exist.</p>
-      <p>Next: finish the Haiku 4.5 set, get a Codex set working, run the same public check on every set, try another hosting setup, and add human-written sites to compare against.</p>
+      <p>This is exploratory work and leaves out final statistics. It has 4 models, small samples and one evaluator per site. The checklist is a pilot, and the evaluator setup changed between the Sonnet and Haiku 5.5 sets. The count of 25 leaves out earlier calibration runs and one GPT-5.6 Sol site that was validated separately. I cannot yet claim that fingerprints exist.</p>
+      <p>Next: evaluate the 2 Haiku 4.5 sites, get a Codex set working, run the same public check on every set, try another hosting setup, and add human-written sites to compare against.</p>
     </div>
   </div></section>
 
@@ -373,14 +373,18 @@ var BATCHES=[
   {date:'Oct 23',name:'Local models, weekend',s:rep('done',3).concat(rep('stop',28),rep('time',9),rep('infra',8),rep('other',12))},
   {date:'Oct 27',name:'Local models, next run',s:rep('stop',4).concat(rep('infra',3),['time','other'])},
   {date:'Oct 29',name:'Claude Haiku 5.5',s:rep('done',5).concat(['infra','other','done','time'],rep('done',4))},
-  {date:'Oct 29 – Nov 2',name:'Local models, third run',s:['other'].concat(rep('time',8),rep('infra',6),['other','other'])}
+  {date:'Oct 29 – Nov 2',name:'Local models, third run',s:['other'].concat(rep('time',8),rep('infra',6),['other','other'])},
+  {date:'Nov 2',name:'Local models, fourth run',s:['other','infra','other']},
+  {date:'Nov 2',name:'Claude Haiku 4.5',s:['stop'].concat(rep('infra',9),['done'],rep('stop',3),rep('infra',3),['stop','infra','stop','done'],rep('infra',3),['time','infra','infra','stop','infra','stop'])},
+  {date:'Nov 2',name:'GPT-6 Luna',s:['other','stop','stop','other','stop','other','stop']}
 ];
 var FIXES=[
   ['Sep 23 – Oct 11','Building the lab came first','Spec, rules, isolated containers and functional checks all had to work before any comparison meant anything.','First full pass of all 27 functional checks on Oct 11.'],
   ['Oct 19–29','A tool quietly cut off long checks','Cloud models finished 20 sites in 24 tries, but Claude Code aborted some long checks after 300 seconds of silence.','Found it in the logs and turned off the idle limit.'],
   ['Oct 23–27','My harness ended 28 attempts early','A run ended the first time a model replied without using a tool. This was the biggest single cause in the weekend batch.','Added a bounded nudge so a model can keep going.'],
   ['Oct 27–29','Long runs overflowed','Long chats overflowed the context window of local models, and long commands hit a Windows length limit.','Added context trimming and sent long commands over stdin.'],
-  ['Oct 29 – Nov 2','Servers froze whole attempts','Models started servers in the foreground, which froze attempts for about 14 hours in total.','Added a 120-second limit per command.']
+  ['Oct 29 – Nov 2','Servers froze whole attempts','Models started servers in the foreground, which froze attempts for about 14 hours in total.','Added a 120-second limit per command.'],
+  ['Nov 2','Broken sites were filed as lab failures','At least 11 of the 19 blocked Haiku 4.5 attempts were crashes in the generated site, such as bad syntax or a missing module. My harness filed them as lab failures and halted the run after any two in a row.','Nothing yet. I still have to decide how the harness should treat them.']
 ];
 var FINDINGS=[
   ['No login throttling','Low',10,10,3],
@@ -399,12 +403,12 @@ var FLAGS=[
   ['Server: Werkzeug banner','It comes from the Flask development server my lab uses.',[[1,'All 3 sites in the public check.'],[0,'It comes from the Flask development server my lab uses.'],[1,'Any visitor can see it.']]],
   ['Default 404 page','A human-written Flask app would serve the same bytes.',[[1,'Byte-identical on all 3 sites.'],[0,'It is the framework default.'],[1,'Request any missing page.']]],
   ['Vary: Cookie','Flask adds it to session pages by default.',[[1,'All 3 sites.'],[0,'Flask adds it to session pages.'],[1,'It appears in every session response.']]],
-  ['Missing security headers','My strongest lead and a real weakness, but it does not separate AI code from human code.',[[1,'Confirmed on all 23 sites.'],[0,'Not shown: I have no human-written sites to compare, and my tests never ask for headers.'],[1,'Visible in any response.']]],
+  ['Missing security headers','My strongest lead and a real weakness, but it does not separate AI code from human code.',[[1,'Confirmed on all 23 evaluated sites.'],[0,'Not shown: I have no human-written sites to compare, and my tests never ask for headers.'],[1,'Visible in any response.']]],
   ['App name and form fields','I caused this one by giving every model the same spec.',[[1,'All 3 sites.'],[0,'The spec requires them.'],[1,'On the public pages.']]],
-  ['Cookie without SameSite','Too uneven to be universal. It may help tell models apart, which is the main question.',[[0,'Sonnet 7 of 10, Haiku 0 of 10, Nemotron 3 of 3.'],[1,'It looks like a model choice.'],[1,'Visible after login.']]],
+  ['Cookie without SameSite','Too uneven to be universal. It may help tell models apart, which is the main question.',[[0,'Sonnet 7 of 10, Haiku 5.5 0 of 10, Nemotron 3 of 3.'],[1,'It looks like a model choice.'],[1,'Visible after login.']]],
   ['HTML and CSS style','Three builds from one model looked different, with no shared tag or asset.',[[0,'External CSS, no CSS and inline CSS across three builds from one model.'],[1,'The markup is written by the model.'],[1,'Visible on any page.']]],
-  ['Forgeable default secret','The most serious common finding, on 18 of 23 sites, but outsiders cannot see it.',[[1,'18 of 23 sites, High severity.'],[1,"The default is written into the site's own files."],[0,'It takes the source to find.']]],
-  ['No login throttling','Common, but you cannot check it just by looking.',[[1,'Confirmed on all 23 sites.'],[0,'Not shown: my tests never ask for it, and I have no human comparison.'],[0,'It takes source review or repeated login attempts.']]]
+  ['Forgeable default secret','The most serious common finding, on 18 of the 23 evaluated sites, but outsiders cannot see it.',[[1,'18 of 23 evaluated sites, High severity.'],[1,"The default is written into the site's own files."],[0,'It takes the source to find.']]],
+  ['No login throttling','Common, but you cannot check it just by looking.',[[1,'Confirmed on all 23 evaluated sites.'],[0,'Not shown: my tests never ask for it, and I have no human comparison.'],[0,'It takes source review or repeated login attempts.']]]
 ];
 var TIMELINE=[
   ['Sep 23','Set the question, hypotheses and rules, then wrote the spec every model must build.'],
@@ -416,7 +420,8 @@ var TIMELINE=[
   ['Oct 23','First multi-model weekend on local models: 60 attempts, 3 sites.'],
   ['Oct 27','Traced the main failure to my own harness, fixed it, evaluated the 3 Nemotron sites, and ran the public flag check.'],
   ['Oct 29','Collected 10 Haiku 5.5 sites in 13 attempts and evaluated them.'],
-  ['Nov 2','Next local run: 0 sites in 17 attempts. Fixed a hang that had wasted about 14 hours, added a memory check, and started a Haiku 4.5 set.']
+  ['Nov 2','Next local run: 0 sites in 17 attempts. Fixed a hang that had wasted about 14 hours, and added a memory check.'],
+  ['Nov 2','Haiku 4.5 finished with 2 sites in 30 attempts and GPT-6 Luna with 0 in 7.']
 ];
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -490,7 +495,8 @@ function print(canvas,seed){
 var GROUPS=[
   {key:'sonnet',name:'Claude Sonnet 5.5',n:10,tries:'10 sites in 11 attempts'},
   {key:'haiku',name:'Claude Haiku 5.5',n:10,tries:'10 sites in 13 attempts'},
-  {key:'nemotron',name:'Nemotron',n:3,tries:'3 sites',note:'Local models finished 3 of 86 attempts, and all 3 came from Nemotron.'}
+  {key:'nemotron',name:'Nemotron',n:3,tries:'3 sites',note:'Local models finished 3 of 89 attempts, and all 3 came from Nemotron.'},
+  {key:'haiku45',name:'Claude Haiku 4.5',n:2,tries:'2 sites in 30 attempts',note:'These 2 sites have not had the security evaluation yet.'}
 ];
 var PAGES=[['home','Home page'],['dashboard','Dashboard'],['project','Project'],['task','Task']];
 var SITES=[];
@@ -512,7 +518,7 @@ FLIPS.forEach(function(f){print(f.querySelector('canvas'),hash(SITES[+f.dataset.
 $('flip-all').addEventListener('click',function(){
   var on=$('sites').classList.toggle('show-all');
   this.setAttribute('aria-pressed',on);
-  this.textContent=on?'Show prints':'Flip all 23';
+  this.textContent=on?'Show prints':'Flip all 25';
 });
 
 /* Once, when the gallery first comes into view, run a wave across the cards so people see they flip. */
