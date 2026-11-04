@@ -236,29 +236,34 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     window.addEventListener("beforeprint", revealAll);
 })();
 
-// ---------- Home: a run of photos, one at a time, coming forward out of the depth as you scroll ----------
+// ---------- Home: the opening. My name across the top, then a run of photos coming forward one at a time ----------
 // Each photo alternates a little left and right with its caption beside it, and the background takes its colour
-// from whichever photo is nearest, so the mood shifts with the pictures. Without motion it's a plain grid.
+// from whichever photo is nearest. The last one, the canyon, keeps coming until it fills the screen and becomes
+// the hero the page carries on from. Without motion it's the name, a plain grid, then the canyon.
 // Depth 1 is rest size: nearer things grow out past the edges and fade, farther ones wait small near the middle.
 function initTunnel(live) {
     const tunnel = document.querySelector("[data-tunnel]");
     if (!tunnel) return;
     const stage = tunnel.querySelector(".tunnel__stage");
+    const intro = tunnel.querySelector(".tunnel__intro");
+    const finale = tunnel.querySelector(".tunnel__finale");
+    const finaleImg = finale.querySelector("img");
 
     // In order: the photo (assets/img/tunnel/<name>.webp) and its caption, which can be empty.
     const PHOTOS = [
         ["ski-jump", "Freeride with the Snowbasin Ski Team"],
-        ["lacrosse", "Lacrosse: close defense and LSM"],
+        ["lacrosse", "Bountiful High lacrosse"],
         ["boulder-portrait", "Mountain biking, climbing, hiking"],
-        ["rock-climbing", ""],
-        ["wakesurf", ""],
+        ["rock-climbing", "Rock climbing"],
+        ["wakesurf", "Wakesurfing"],
         ["ai-security", "AI security research"],
         ["assess", "Designed and built assess.llc"],
-        ["ehr", "EHR system, built at Davis Catalyst Center"]
+        ["ehr", "Medical charting system, built at Davis Catalyst Center"]
     ];
     const FIRST = 1.6; // depth of the first photo when the section pins
     const GAP = 1.1;   // depth between photos
-    const TRAVEL = FIRST + GAP * (PHOTOS.length - 1) - 1.1; // ends with the last photo at rest
+    const CANYON = FIRST + GAP * PHOTOS.length; // the canyon comes after the last photo
+    const CARD = 0.21; // the canyon's half-width at rest, as a share of the screen width
 
     const clamp = (v) => Math.max(0, Math.min(1, v));
     const mood = document.createElement("div");
@@ -290,7 +295,11 @@ function initTunnel(live) {
         img.addEventListener("load", () => { item.colour = sample(img); onScroll(); }, { once: true });
         return item;
     });
-    stage.append(field);
+    stage.insertBefore(field, finale);
+    let finaleColour = null;
+    const takeFinaleColour = () => { finaleColour = sample(finaleImg); onScroll(); };
+    if (finaleImg.complete && finaleImg.naturalWidth) queueMicrotask(takeFinaleColour);
+    else finaleImg.addEventListener("load", takeFinaleColour, { once: true });
 
     // A photo's colour: the average of its more colourful pixels, so a snowfield reads as its blue sky, not grey.
     function sample(img) {
@@ -329,20 +338,46 @@ function initTunnel(live) {
         if (!on) return;
         const rect = tunnel.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-        const halfW = stage.clientWidth / 2;
-        const wide = halfW > stage.clientHeight / 2;
+        const w = stage.clientWidth;
+        const h = stage.clientHeight;
+        const halfW = w / 2;
+        const wide = halfW > h / 2;
         const progress = clamp(-rect.top / (rect.height - window.innerHeight));
-        const camera = TRAVEL * clamp((progress - 0.04) / 0.9);
+        // The canyon card is full screen once it covers both the width and the height.
+        const aspect = finaleImg.naturalHeight / finaleImg.naturalWidth || 0.75;
+        const full = 0.97 * Math.min(CARD * w / halfW, CARD * w * aspect / (h / 2));
+        // Hold on the full-screen canyon for the last stretch before the section lets go.
+        const camera = (CANYON - full) * clamp((progress - 0.02) / 0.84);
         let r = 0, g = 0, b = 0, weight = 0;
+        const blend = (colour, w) => {
+            if (!colour) return;
+            r += colour[0] * w; g += colour[1] * w; b += colour[2] * w; weight += w;
+        };
         for (const item of items) {
             const rel = item.depth - camera;
             const shown = clamp((2.3 - rel) / 0.7); // the current photo, and the next one waiting behind it
             place(item.figure, rel, shown, wide ? 0.22 * item.side * halfW : 0);
-            if (item.colour) {
-                const w = Math.exp(-(((rel - 1.1) / 0.9) ** 2)); // the photo coming up to rest owns the colour
-                r += item.colour[0] * w; g += item.colour[1] * w; b += item.colour[2] * w; weight += w;
-            }
+            blend(item.colour, Math.exp(-(((rel - 1.1) / 0.9) ** 2))); // the photo coming up to rest owns the colour
         }
+
+        // The canyon: a card that grows like the others, then keeps growing until it fills the screen.
+        // It's cropped with clip-path rather than scaled, so the full-resolution photo stays sharp.
+        const rel = CANYON - camera;
+        const fill = clamp((1 / rel - 1 / 1.6) / (1 / full - 1 / 1.6));
+        const cardW = CARD * w / rel;
+        const cardH = cardW * aspect;
+        const fieldMid = field.offsetTop + field.offsetHeight / 2;
+        const cy = fieldMid + (h / 2 - fieldMid) * fill;
+        const top = Math.max(0, cy - cardH);
+        const side = Math.max(0, halfW - cardW);
+        finale.style.clipPath = `inset(${top}px ${side}px ${Math.max(0, h - cy - cardH)}px ${side}px round ${18 * (1 - fill)}px)`;
+        finale.style.opacity = clamp((2.3 - rel) / 0.7);
+        finale.style.zIndex = Math.round(1000 - rel * 100); // in depth order with the photos
+        finaleImg.style.transform = `scale(${1 + 0.12 * (1 - fill)})`;
+        blend(finaleColour, Math.exp(-(((rel - 1.1) / 0.9) ** 2)) + fill);
+        // Once the photo is behind the name, the name turns white over a shadow at the top of the photo.
+        tunnel.classList.toggle("is-over", top < intro.offsetTop + intro.offsetHeight);
+
         if (weight > 0) mood.style.setProperty("--mood", `${Math.round(r / weight)} ${Math.round(g / weight)} ${Math.round(b / weight)}`);
         mood.style.opacity = clamp(weight);
     };
@@ -365,6 +400,9 @@ function initTunnel(live) {
         } else {
             mood.remove();
             items.forEach(({ figure }) => figure.removeAttribute("style"));
+            finale.removeAttribute("style");
+            finaleImg.removeAttribute("style");
+            tunnel.classList.remove("is-over");
         }
     }
 

@@ -1095,14 +1095,28 @@ body { overflow-wrap: break-word; }
 
 /* Home: "Go away. I'm working." Static by default; with script and motion allowed, the section
    pins and scrolling flies past photos and short facts to reach the second line. */
-/* Without motion (or before script runs) the photos sit in a plain grid; with it, the section pins and they come forward one at a time. */
+/* Home opening. Without motion (or before script runs): the name, the photos in a plain grid, then the canyon.
+   With it, the section pins under the name and the photos come forward one at a time, ending on the canyon full screen. */
+.tunnel__intro { position: relative; z-index: 5000; width: min(100% - 2 * var(--pad), var(--max)); margin: 0 auto; padding-top: clamp(40px, 7vh, 72px); }
+.tunnel__intro h1 { font-size: clamp(3rem, 11vw, 9.5rem); line-height: 0.95; letter-spacing: -0.055em; text-wrap: initial; margin-top: 10px; }
+.tunnel__dot { color: var(--ice); }
+.tunnel__intro, .tunnel__intro .label { transition: color 0.3s; }
+.tunnel__finale { margin: 40px auto 0; width: min(100% - 2 * var(--pad), var(--max)); }
+.tunnel__finale img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
 .tunnel__field { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 24px; width: min(100% - 2 * var(--pad), var(--max)); margin: var(--section-y) auto 0; }
 .tunnel__item { margin: 0; }
 .tunnel__photo { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .tunnel__caption { margin-top: 10px; color: var(--muted); font-size: 0.95rem; }
 
-.tunnel--live { height: 440vh; height: 440svh; }
-.tunnel--live .tunnel__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.tunnel--live { height: 520vh; height: 520svh; }
+.tunnel--live .tunnel__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; }
+.tunnel--live .tunnel__intro { flex: none; padding-top: calc(68px + clamp(12px, 3vh, 36px)); }
+.tunnel--live .tunnel__finale { position: absolute; inset: 0; width: auto; margin: 0; overflow: hidden; pointer-events: none; }
+.tunnel--live .tunnel__finale img { width: 100%; height: 100%; object-fit: cover; object-position: 46% 45%; border-radius: 0; }
+/* A shadow at the top of the canyon so the name reads over it, and a fade at the bottom into the page below. */
+.tunnel--live .tunnel__finale::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(5, 10, 20, 0.75), rgba(5, 10, 20, 0.1) 40%, transparent 60%, transparent 72%, var(--bg)); opacity: 0; transition: opacity 0.3s; }
+.tunnel--live.is-over .tunnel__finale::after { opacity: 1; }
+.tunnel--live.is-over .tunnel__intro, .tunnel--live.is-over .tunnel__intro .label { color: #fff; }
 .tunnel__mood {
     --mood: 125 220 255;
     position: absolute;
@@ -1114,7 +1128,7 @@ body { overflow-wrap: break-word; }
 }
 :root[data-theme="light"] .tunnel__mood { mix-blend-mode: multiply; }
 @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tunnel__mood { mix-blend-mode: multiply; } }
-.tunnel--live .tunnel__field { display: block; position: absolute; inset: 0; width: auto; margin: 0; pointer-events: none; }
+.tunnel--live .tunnel__field { display: block; position: relative; flex: 1; width: auto; margin: 0; pointer-events: none; }
 .tunnel--live .tunnel__item {
     position: absolute;
     left: 50%;
@@ -1163,11 +1177,13 @@ body { overflow-wrap: break-word; }
 .tunnel--live .tunnel__item[data-side="left"] .tunnel__caption { left: calc(100% + 32px); }
 @media (max-width: 600px), (orientation: portrait) {
     .tunnel--live .tunnel__item[data-side] .tunnel__caption { top: calc(100% + 28px); left: 50%; right: auto; translate: -50% 0; width: 11em; text-align: center; }
-    .tunnel--live .tunnel__photo, .tunnel--live .tunnel__photo:is([data-photo]) { width: 72vw; }
+    .tunnel--live .tunnel__photo, .tunnel--live .tunnel__photo:is([data-photo]) { width: 96vw; }
 }
 @media print {
     .tunnel--live { height: auto; }
-    .tunnel--live .tunnel__stage { position: static; height: auto; }
+    .tunnel--live .tunnel__stage { position: static; height: auto; display: block; }
+    .tunnel--live .tunnel__finale { position: static; clip-path: none !important; opacity: 1 !important; }
+    .tunnel--live .tunnel__finale img { height: auto; transform: none !important; }
     .tunnel--live .tunnel__field { position: static; display: grid; width: 100%; margin-top: 24px; }
     .tunnel--live .tunnel__item { position: static; translate: none; transform: none !important; opacity: 1 !important; visibility: visible !important; }
     .tunnel--live .tunnel__photo { width: 100%; }
