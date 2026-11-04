@@ -44,6 +44,7 @@
 /* Keep the original photographs uncropped, with a single column on small screens. */
 .education-gallery { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .education-gallery figure { margin: 0; }
+.education-gallery .education-gallery__portrait { grid-column: 1 / -1; width: min(100%, 560px); justify-self: center; }
 .education-gallery img { display: block; width: 100%; height: auto; }
 .education-gallery figcaption { color: var(--faint); font-size: .875rem; padding-top: 10px; }
 @media (max-width: 1000px) {
