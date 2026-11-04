@@ -251,14 +251,15 @@ function initTunnel(live) {
 
     // In order: the photo (assets/img/tunnel/<name>.webp) and its caption, which can be empty.
     const PHOTOS = [
-        ["ski-jump", "Snowbasin freeride ski team"],
-        ["lacrosse", "Bountiful High lacrosse"],
-        ["boulder-portrait", "Mountain biking, climbing, hiking"],
-        ["rock-climbing", "Rock climbing"],
-        ["wakesurf", "Wakesurfing"],
         ["ai-security", "AI security research"],
+        ["ski-jump", "Snowbasin freeride ski team"],
+        ["ehr", "Medical charting system, built at Davis Catalyst Center"],
+        ["lacrosse", "Bountiful High lacrosse"],
+        ["kenya-tree-planting", "Planting a tree in Kenya"],
         ["assess", "Designed and built Assess.llc"],
-        ["ehr", "Medical charting system, built at Davis Catalyst Center"]
+        ["wakesurf", "Wakesurfing"],
+        ["boulder-portrait", "Mountain biking, climbing, hiking"],
+        ["rock-climbing", "Rock climbing"]
     ];
     const FIRST = 1.6; // depth of the first photo when the section pins
     const GAP = 1.1;   // depth between photos

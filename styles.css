@@ -1108,7 +1108,7 @@ body { overflow-wrap: break-word; }
 .tunnel__photo { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .tunnel__caption { margin-top: 10px; color: var(--muted); font-size: 0.95rem; }
 
-.tunnel--live { height: 520vh; height: 520svh; }
+.tunnel--live { height: 575vh; height: 575svh; }
 .tunnel--live .tunnel__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; }
 .tunnel--live .tunnel__intro { flex: none; padding-top: calc(68px + clamp(12px, 3vh, 36px)); }
 .tunnel--live .tunnel__finale { position: absolute; inset: 0; width: auto; margin: 0; overflow: hidden; pointer-events: none; }
