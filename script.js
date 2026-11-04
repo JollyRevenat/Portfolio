@@ -236,91 +236,115 @@ const CONTACT_EMAIL = "charlesdavidblake@gmail.com";
     window.addEventListener("beforeprint", revealAll);
 })();
 
-// ---------- Home: scroll from "Go away." past the outdoors and the projects to "I'm working." ----------
-// Photos and short facts sit at different depths around the edges; scrolling moves the viewer forward through them.
+// ---------- Home: a run of photos, one at a time, coming forward out of the depth as you scroll ----------
+// Each photo alternates a little left and right with its caption beside it, and the background takes its colour
+// from whichever photo is nearest, so the mood shifts with the pictures. Without motion it's a plain grid.
 // Depth 1 is rest size: nearer things grow out past the edges and fade, farther ones wait small near the middle.
 function initTunnel(live) {
     const tunnel = document.querySelector("[data-tunnel]");
     if (!tunnel) return;
     const stage = tunnel.querySelector(".tunnel__stage");
-    const away = tunnel.querySelector(".tunnel__away");
-    const working = tunnel.querySelector(".tunnel__working");
 
-    const TRAVEL = 8; // how far the viewer moves; "I'm working." sits at depth TRAVEL + 1
-    const ITEMS = [
-        // [photo or label, x, y (-1..1 from the centre at rest size), depth]
-        ["img:ski-jump", -0.62, -0.42, 1.5],
-        ["Freeride with the Snowbasin Ski Team", 0.5, 0.56, 1.9],
-        ["img:lacrosse", 0.66, -0.36, 2.6],
-        ["Lacrosse: close defense and LSM", -0.48, -0.66, 3.2],
-        ["img:boulder-portrait", -0.6, 0.46, 3.7],
-        ["Mountain biking, climbing, hiking", 0.56, -0.64, 4.4],
-        ["img:rock-climbing", 0.66, -0.36, 4.7],
-        ["img:wakesurf", -0.62, 0.42, 5.5],
-        ["Davis Catalyst Center", -0.6, -0.54, 5.7],
-        ["img:ai-security", 0.62, -0.42, 6.1],
-        ["AI security research", 0.52, 0.6, 6.5],
-        ["img:assess", -0.62, 0.42, 6.9],
-        ["Cybersecurity and AI engineering", -0.46, -0.62, 7.4],
-        ["img:ehr", -0.64, -0.4, 9.4],
-        ["Local AI on GPU servers", 0.56, 0.5, 9.6]
+    // In order: the photo (assets/img/tunnel/<name>.webp) and its caption, which can be empty.
+    const PHOTOS = [
+        ["ski-jump", "Freeride with the Snowbasin Ski Team"],
+        ["lacrosse", "Lacrosse: close defense and LSM"],
+        ["boulder-portrait", "Mountain biking, climbing, hiking"],
+        ["rock-climbing", ""],
+        ["wakesurf", ""],
+        ["ai-security", "AI security research"],
+        ["assess", "Designed and built assess.llc"],
+        ["ehr", "EHR system, built at Davis Catalyst Center"]
     ];
-    const field = document.createElement("div");
-    field.className = "tunnel__field";
-    field.setAttribute("aria-hidden", "true");
-    const items = ITEMS.map(([what, x, y, depth]) => {
-        let el;
-        if (what.startsWith("img:")) {
-            el = document.createElement("img");
-            el.src = `assets/img/tunnel/${what.slice(4)}.webp`;
-            el.dataset.photo = what.slice(4);
-            el.alt = "";
-            el.loading = "lazy";
-            el.decoding = "async";
-        } else {
-            el = document.createElement("span");
-            el.textContent = what;
-        }
-        el.className = what.startsWith("img:") ? "tunnel__item tunnel__photo" : "tunnel__item tunnel__label";
-        field.append(el);
-        // Photos sit wide so they sweep past the edges; facts sit closer in so they're still on screen while large enough to read.
-        const spread = el.tagName === "IMG" ? 1.45 : 1;
-        return { el, x: x * spread, y: y * spread, depth };
-    });
+    const FIRST = 1.6; // depth of the first photo when the section pins
+    const GAP = 1.1;   // depth between photos
+    const TRAVEL = FIRST + GAP * (PHOTOS.length - 1) - 1.1; // ends with the last photo at rest
 
     const clamp = (v) => Math.max(0, Math.min(1, v));
-    // Items are laid out at twice their rest size and scaled down, so they stay sharp as they grow past.
-    const BASE = 0.5;
-    const place = (el, depth, strength, dx = 0, dy = 0, base = 1) => {
-        const opacity = clamp((depth - 0.35) / 0.45) * strength; // fades as it rushes past
+    const mood = document.createElement("div");
+    mood.className = "tunnel__mood";
+    mood.setAttribute("aria-hidden", "true");
+    const field = document.createElement("div");
+    field.className = "tunnel__field";
+    const items = PHOTOS.map(([name, caption], i) => {
+        const side = i % 2 ? 1 : -1;
+        const figure = document.createElement("figure");
+        figure.className = "tunnel__item";
+        figure.dataset.side = side > 0 ? "right" : "left"; // which side of centre the photo sits; its caption faces in
+        const img = document.createElement("img");
+        img.className = "tunnel__photo";
+        img.src = `assets/img/tunnel/${name}.webp`;
+        img.dataset.photo = name;
+        img.alt = "";
+        img.loading = "lazy";
+        img.decoding = "async";
+        figure.append(img);
+        if (caption) {
+            const text = document.createElement("figcaption");
+            text.className = "tunnel__caption";
+            text.textContent = caption;
+            figure.append(text);
+        }
+        field.append(figure);
+        const item = { figure, side, depth: FIRST + i * GAP, colour: null };
+        img.addEventListener("load", () => { item.colour = sample(img); onScroll(); }, { once: true });
+        return item;
+    });
+    stage.append(field);
+
+    // A photo's colour: the average of its more colourful pixels, so a snowfield reads as its blue sky, not grey.
+    function sample(img) {
+        try {
+            const c = document.createElement("canvas");
+            c.width = c.height = 24;
+            const x = c.getContext("2d", { willReadFrequently: true });
+            x.drawImage(img, 0, 0, 24, 24);
+            const px = x.getImageData(0, 0, 24, 24).data;
+            let r = 0, g = 0, b = 0, w = 0;
+            for (let i = 0; i < px.length; i += 4) {
+                const max = Math.max(px[i], px[i + 1], px[i + 2]);
+                const min = Math.min(px[i], px[i + 1], px[i + 2]);
+                const weight = 0.15 + (max - min) / 255; // saturation, with a floor so grey photos still count
+                r += px[i] * weight; g += px[i + 1] * weight; b += px[i + 2] * weight; w += weight;
+            }
+            return [r / w, g / w, b / w];
+        } catch { return null; }
+    }
+
+    // Photos are laid out larger than they rest at and scaled down, so they stay sharp as they grow past.
+    const BASE = 0.85;
+    const place = (el, depth, strength, dx) => {
+        const opacity = clamp((depth - 0.75) / 0.35) * strength; // gone before it covers the next one
         el.style.opacity = opacity;
         el.style.visibility = opacity > 0.01 ? "" : "hidden";
-        if (opacity > 0.01) el.style.transform = `translate(${dx / depth}px, ${dy / depth}px) scale(${base / depth})`;
-    };
-    // The two real lines only fade, so screen readers and find-in-page always have them.
-    const placeWords = (el, depth, strength) => {
-        const opacity = clamp((depth - 0.35) / 0.45) * strength;
-        el.style.opacity = opacity;
-        if (opacity > 0.01) el.style.transform = `scale(${1 / depth})`;
+        el.style.zIndex = Math.round(1000 - depth * 100); // nearer in front
+        el.style.setProperty("--caption", clamp((1.75 - depth) / 0.4)); // a caption shows once its photo arrives
+        if (opacity > 0.01) el.style.transform = `translate(${dx / depth}px, 0) scale(${BASE / depth})`;
     };
 
     let on = false;
     let pending = false;
     const update = () => {
         pending = false;
+        if (!on) return;
         const rect = tunnel.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) return;
         const halfW = stage.clientWidth / 2;
-        const halfH = stage.clientHeight / 2;
+        const wide = halfW > stage.clientHeight / 2;
         const progress = clamp(-rect.top / (rect.height - window.innerHeight));
-        // Rest on "Go away." when the section pins, and on "I'm working." before it lets go.
-        const camera = TRAVEL * clamp((progress - 0.1) / 0.75);
-        for (const { el, x, y, depth } of items) {
-            const rel = depth - camera;
-            place(el, rel, clamp(3.6 - rel), x * halfW, y * halfH, BASE); // far ones arrive out of the middle
+        const camera = TRAVEL * clamp((progress - 0.04) / 0.9);
+        let r = 0, g = 0, b = 0, weight = 0;
+        for (const item of items) {
+            const rel = item.depth - camera;
+            const shown = clamp((2.3 - rel) / 0.7); // the current photo, and the next one waiting behind it
+            place(item.figure, rel, shown, wide ? 0.22 * item.side * halfW : 0);
+            if (item.colour) {
+                const w = Math.exp(-(((rel - 1.1) / 0.9) ** 2)); // the photo coming up to rest owns the colour
+                r += item.colour[0] * w; g += item.colour[1] * w; b += item.colour[2] * w; weight += w;
+            }
         }
-        placeWords(away, 1 - camera, 1);
-        placeWords(working, TRAVEL + 1 - camera, clamp((camera - 1) / 3)); // stays out of the way until "Go away." has passed
+        if (weight > 0) mood.style.setProperty("--mood", `${Math.round(r / weight)} ${Math.round(g / weight)} ${Math.round(b / weight)}`);
+        mood.style.opacity = clamp(weight);
     };
     const onScroll = () => {
         if (pending || !on) return;
@@ -336,11 +360,11 @@ function initTunnel(live) {
         on = next;
         tunnel.classList.toggle("tunnel--live", on);
         if (on) {
-            stage.prepend(field);
+            stage.prepend(mood);
             update();
         } else {
-            field.remove();
-            [away, working].forEach((el) => el.removeAttribute("style"));
+            mood.remove();
+            items.forEach(({ figure }) => figure.removeAttribute("style"));
         }
     }
 

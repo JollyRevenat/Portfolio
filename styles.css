@@ -1095,39 +1095,36 @@ body { overflow-wrap: break-word; }
 
 /* Home: "Go away. I'm working." Static by default; with script and motion allowed, the section
    pins and scrolling flies past photos and short facts to reach the second line. */
-.tunnel { padding-block: var(--section-y); }
-.tunnel__words {
-    width: min(100% - 2 * var(--pad), var(--max));
-    margin: 0 auto;
-    font-family: var(--font);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.045em;
-    text-align: center;
-}
-.tunnel__away { display: block; margin-bottom: 0.45em; font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--muted); }
-.tunnel__working { display: block; font-size: clamp(2.5rem, 11vw, 8.5rem); white-space: nowrap; }
-.tunnel__dot { color: var(--ice); }
+/* Without motion (or before script runs) the photos sit in a plain grid; with it, the section pins and they come forward one at a time. */
+.tunnel__field { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 24px; width: min(100% - 2 * var(--pad), var(--max)); margin: var(--section-y) auto 0; }
+.tunnel__item { margin: 0; }
+.tunnel__photo { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.tunnel__caption { margin-top: 10px; color: var(--muted); font-size: 0.95rem; }
 
-.tunnel--live { height: 320vh; height: 320svh; padding: 0; }
+.tunnel--live { height: 440vh; height: 440svh; }
 .tunnel--live .tunnel__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.tunnel--live .tunnel__words { position: absolute; inset: 0; width: auto; display: grid; place-items: center; }
-.tunnel--live .tunnel__away,
-.tunnel--live .tunnel__working { grid-area: 1 / 1; margin: 0; font-size: clamp(2.5rem, 11vw, 8.5rem); color: var(--ink); }
-.tunnel__field { position: absolute; inset: 0; pointer-events: none; }
-.tunnel__item {
+.tunnel__mood {
+    --mood: 125 220 255;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(60% 70% at 30% 40%, rgb(var(--mood) / 0.5), transparent 70%),
+        radial-gradient(55% 60% at 75% 65%, rgb(var(--mood) / 0.36), transparent 70%);
+}
+:root[data-theme="light"] .tunnel__mood { mix-blend-mode: multiply; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tunnel__mood { mix-blend-mode: multiply; } }
+.tunnel--live .tunnel__field { display: block; position: absolute; inset: 0; width: auto; margin: 0; pointer-events: none; }
+.tunnel--live .tunnel__item {
     position: absolute;
     left: 50%;
     top: 50%;
     translate: -50% -50%;
 }
-/* Laid out at twice the size they rest at; script scales them down so they stay sharp as they grow past. */
-.tunnel__photo {
+/* Laid out larger than they rest at; script scales them down so they stay sharp as they grow past. */
+.tunnel--live .tunnel__photo {
     width: clamp(280px, 40vw, 640px);
-    height: auto;
-    border: 1px solid var(--line);
     border-radius: calc(var(--radius) * 2);
-    background: var(--surface);
 }
 /* Frame original photographs without altering the people or their surroundings. */
 .tunnel__photo[data-photo="ski-jump"] {
@@ -1143,29 +1140,41 @@ body { overflow-wrap: break-word; }
 .tunnel__photo[data-photo="rock-climbing"],
 .tunnel__photo[data-photo="lacrosse"],
 .tunnel__photo[data-photo="wakesurf"] {
-    width: clamp(220px, 28vw, 440px);
     aspect-ratio: 4 / 5;
     object-fit: cover;
 }
+.tunnel--live .tunnel__photo:is([data-photo="rock-climbing"], [data-photo="lacrosse"], [data-photo="wakesurf"]) { width: clamp(220px, 28vw, 440px); }
 .tunnel__photo[data-photo="rock-climbing"] { object-position: 50% 35%; }
 .tunnel__photo[data-photo="lacrosse"] { object-position: 50% 65%; }
 .tunnel__photo[data-photo="wakesurf"] { object-position: 50% 72%; }
-.tunnel__label {
-    font: 500 clamp(2rem, 3.2vw, 2.75rem) / 1.2 var(--font);
-    letter-spacing: -0.02em;
-    color: var(--muted);
-    white-space: nowrap;
+/* Live, the caption sits beside the photo's inner edge (toward the centre) and scales with it. */
+.tunnel--live .tunnel__caption {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    width: 14em;
+    margin: 0;
+    font: 500 clamp(1.9rem, 2.8vw, 2.4rem) / 1.25 var(--font);
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    opacity: var(--caption, 1);
 }
-@media (max-width: 600px) {
-    .tunnel__label { width: max-content; max-width: 9em; white-space: normal; text-align: center; text-wrap: balance; }
+.tunnel--live .tunnel__item[data-side="right"] .tunnel__caption { right: calc(100% + 32px); text-align: right; }
+.tunnel--live .tunnel__item[data-side="left"] .tunnel__caption { left: calc(100% + 32px); }
+@media (max-width: 600px), (orientation: portrait) {
+    .tunnel--live .tunnel__item[data-side] .tunnel__caption { top: calc(100% + 28px); left: 50%; right: auto; translate: -50% 0; width: 11em; text-align: center; }
+    .tunnel--live .tunnel__photo, .tunnel--live .tunnel__photo:is([data-photo]) { width: 72vw; }
 }
 @media print {
-    .tunnel--live { height: auto; padding-block: 24px; }
+    .tunnel--live { height: auto; }
     .tunnel--live .tunnel__stage { position: static; height: auto; }
-    .tunnel--live .tunnel__words { position: static; display: block; }
-    .tunnel--live .tunnel__away, .tunnel--live .tunnel__working { transform: none !important; opacity: 1 !important; }
-    .tunnel__field { display: none; }
+    .tunnel--live .tunnel__field { position: static; display: grid; width: 100%; margin-top: 24px; }
+    .tunnel--live .tunnel__item { position: static; translate: none; transform: none !important; opacity: 1 !important; visibility: visible !important; }
+    .tunnel--live .tunnel__photo { width: 100%; }
+    .tunnel--live .tunnel__caption { position: static; translate: none; width: auto; font: inherit; text-align: left !important; }
+    .tunnel__mood { display: none; }
 }
+
 
 /* Project pages: the "on this page" marker slides to the section being read. */
 .case-nav.has-indicator::before {
