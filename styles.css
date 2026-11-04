@@ -1396,3 +1396,18 @@ body { overflow-wrap: break-word; }
     .work-row { grid-template-columns: 1fr auto; }
     .work-row p { grid-column: 1 / -1; grid-row: 2; }
 }
+
+/* ---------- Nov 2026 audit fixes ---------- */
+/* The stage darkens behind the name before the canyon reaches it (script sets --dim). */
+.tunnel--live .tunnel__stage::before { content: ""; position: absolute; inset: 0; background: #050a14; opacity: var(--dim, 0); pointer-events: none; }
+.tunnel--live.is-over .tunnel__dot { color: #7ddcff; }
+/* The footer already adds the space above it, so the last section doesn't need to as well. */
+main > .section:last-child { padding-bottom: 0; }
+/* Links that stand alone get a comfortable touch target. */
+@media (pointer: coarse) {
+    .link--solo, .section-head--row > .link { display: inline-flex; align-items: center; min-height: 44px; }
+}
+/* When the footer stacks, keep the mountains below its links rather than behind them. */
+@media (max-width: 900px) {
+    .site-footer__ridges { inset: auto 0 0; height: calc(var(--scene) + 24px); }
+}

@@ -1,11 +1,5 @@
 /* The project titles are the labels on the hardware, not decoration around it. */
 .projects-page .ambient { display: none; }
-.projects-rack-page {
-    --rack-shell: color-mix(in srgb, var(--surface-2) 70%, var(--bg));
-    --rack-face: var(--surface);
-    --rack-edge: var(--line-strong);
-    --rack-cutout: var(--bg);
-}
 .rack-opening {
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr);
@@ -15,66 +9,219 @@
 }
 .rack-opening h1 { font-size: clamp(2.5rem, 5.4vw, 4.75rem); line-height: 1.04; letter-spacing: -.045em; max-width: 11ch; }
 .rack-opening p { max-width: 35ch; color: var(--muted); font-size: 1.0625rem; line-height: 1.65; margin: 0 0 5px; }
-.rack-section { padding-bottom: clamp(56px, 7vw, 88px); }
-.project-rack {
-    position: relative;
-    padding: 0 30px;
-    border: 1px solid var(--rack-edge);
-    border-radius: 12px;
-    background: var(--rack-shell);
-    box-shadow: 0 20px 50px -32px #0007;
-}
-.project-rack::before, .project-rack::after {
+/* The rack stands on the floor: it overlaps the top of the band below, which runs edge to edge and carries the rest of the page. */
+.rack-section { --overlap: 30px; position: relative; z-index: 1; margin-bottom: calc(var(--overlap) * -1); }
+.rack-floor { position: relative; padding-block: calc(30px + clamp(56px, 7vw, 88px)) var(--section-y); border-top: 1px solid var(--line-strong); background: var(--surface-2); }
+.rack-floor::before {
     content: "";
     position: absolute;
-    top: 69px;
-    bottom: 42px;
-    width: 9px;
-    background: radial-gradient(circle, var(--rack-cutout) 2px, transparent 2.5px) center top / 9px 22px;
-    opacity: .8;
+    top: 6px;
+    left: 50%;
+    width: min(calc(var(--max) + 48px), 100%);
+    height: 44px;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, #05101c38, transparent);
     pointer-events: none;
 }
-.project-rack::before { left: 10px; }
-.project-rack::after { right: 10px; }
-.project-rack__header { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 21px 7px; }
+.projects-page .site-footer { margin-top: 0; }
+
+/* Dark steel on the dark page, light steel on the light one, so the rack belongs to the room it stands in. */
+.project-rack {
+    --ink: #eef4fb;
+    --muted: #a9b6c8;
+    --faint: #8f9db1;
+    --ice: #7ddcff;
+    --line: #232e3f;
+    --line-strong: #35445a;
+    --rack-steel: #121923;
+    --rack-face: #171f2b;
+    --rack-face-top: #1e2734;
+    --rack-inside: #03060a;
+    --rack-tray: #0b1119;
+    --rack-edge: #000;
+    --rack-highlight: #2b3646;
+    --rack-shine: #ffffff14;
+    --rack-low: #00000080;
+    --rack-seam: #0006;
+    --rack-foot: #0a0e15;
+    --rack-standby: #3d6f86;
+    --rack-led-ring: #00000080;
+    --rack-button: #03060a;
+    --rack-tray-shade: #000;
+    --rail: 30px;
+    --rail-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 54' width='30' height='54'%3E%3Crect x='11.5' y='6.5' width='7' height='7' fill='%23020407' stroke='%233a4a61'/%3E%3Crect x='11.5' y='22.5' width='7' height='7' fill='%23020407' stroke='%233a4a61'/%3E%3Crect x='11.5' y='38.5' width='7' height='7' fill='%23020407' stroke='%233a4a61'/%3E%3C/svg%3E");
+    --screw: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%2339465a' stroke='%230a0e15'/%3E%3Cpath d='M4 7h6M7 4v6' stroke='%230a0e15' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    --bay: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 44' width='26' height='44'%3E%3Crect x='1.5' y='.5' width='23' height='43' rx='1.5' fill='%230b1018' stroke='%2335445a'/%3E%3Cpath d='M6 6h14M6 10h14M6 14h14M6 18h14M6 22h14' stroke='%232a3648'/%3E%3Crect x='6' y='29' width='14' height='5' rx='1' fill='%23232e3e'/%3E%3Ccircle cx='13' cy='39' r='1.4' fill='%236b7c93'/%3E%3C/svg%3E");
+    --port: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 40' width='18' height='40'%3E%3Cpath d='M2 3h14v11h-3v3H5v-3H2z' fill='%2303060a' stroke='%233a4a61'/%3E%3Cpath d='M2 23h14v11h-3v3H5v-3H2z' fill='%2303060a' stroke='%233a4a61'/%3E%3C/svg%3E");
+    --vent: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' width='8' height='7'%3E%3Ccircle cx='2' cy='1.75' r='1.35' fill='%2303060a'/%3E%3Ccircle cx='6' cy='5.25' r='1.35' fill='%2303060a'/%3E%3C/svg%3E");
+    --slot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 14' width='10' height='14'%3E%3Crect x='2' y='2' width='6' height='10' rx='1' fill='%2303060a'/%3E%3C/svg%3E");
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    border: 1px solid var(--rack-edge);
+    border-radius: 6px;
+    background: var(--rack-steel);
+    color: var(--ink);
+    box-shadow: inset 1px 0 0 var(--rack-highlight), inset -1px 0 0 var(--rack-highlight), inset 0 1px 0 var(--rack-highlight);
+}
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .project-rack {
+    --ink: #152638;
+    --muted: #475a6e;
+    --faint: #53677b;
+    --ice: #00658c;
+    --line: #d5dfe8;
+    --line-strong: #a9b9c8;
+    --rack-steel: #d3dce5;
+    --rack-face: #e6ecf2;
+    --rack-face-top: #f4f7fa;
+    --rack-inside: #8a99a8;
+    --rack-tray: #ffffff;
+    --rack-edge: #8393a3;
+    --rack-highlight: #f0f4f8;
+    --rack-shine: #ffffffb0;
+    --rack-low: #0000001f;
+    --rack-seam: #00000026;
+    --rack-foot: #5f6f7f;
+    --rack-standby: #8fb0c0;
+    --rack-led-ring: #5f6f7f66;
+    --rack-button: #ffffff;
+    --rack-tray-shade: #15263833;
+    --rail-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 54' width='30' height='54'%3E%3Crect width='30' height='54' fill='%23c3cdd7'/%3E%3Crect x='11.5' y='6.5' width='7' height='7' fill='%232c3845' stroke='%23eef2f6'/%3E%3Crect x='11.5' y='22.5' width='7' height='7' fill='%232c3845' stroke='%23eef2f6'/%3E%3Crect x='11.5' y='38.5' width='7' height='7' fill='%232c3845' stroke='%23eef2f6'/%3E%3C/svg%3E");
+    --screw: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%23b9c5d0' stroke='%236b7b8b'/%3E%3Cpath d='M4 7h6M7 4v6' stroke='%234f5f6f' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    --bay: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 44' width='26' height='44'%3E%3Crect x='1.5' y='.5' width='23' height='43' rx='1.5' fill='%23f8fafc' stroke='%238a99a8'/%3E%3Cpath d='M6 6h14M6 10h14M6 14h14M6 18h14M6 22h14' stroke='%23b4c2cf'/%3E%3Crect x='6' y='29' width='14' height='5' rx='1' fill='%238a99a8'/%3E%3Ccircle cx='13' cy='39' r='1.4' fill='%235f7488'/%3E%3C/svg%3E");
+    --port: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 40' width='18' height='40'%3E%3Cpath d='M2 3h14v11h-3v3H5v-3H2z' fill='%231f2a36' stroke='%237d8d9c'/%3E%3Cpath d='M2 23h14v11h-3v3H5v-3H2z' fill='%231f2a36' stroke='%237d8d9c'/%3E%3C/svg%3E");
+    --vent: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' width='8' height='7'%3E%3Ccircle cx='2' cy='1.75' r='1.35' fill='%234a5866'/%3E%3Ccircle cx='6' cy='5.25' r='1.35' fill='%234a5866'/%3E%3C/svg%3E");
+    --slot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 14' width='10' height='14'%3E%3Crect x='2' y='2' width='6' height='10' rx='1' fill='%234a5866'/%3E%3C/svg%3E");
+    }
+}
+:root[data-theme="light"] .project-rack {
+    --ink: #152638;
+    --muted: #475a6e;
+    --faint: #53677b;
+    --ice: #00658c;
+    --line: #d5dfe8;
+    --line-strong: #a9b9c8;
+    --rack-steel: #d3dce5;
+    --rack-face: #e6ecf2;
+    --rack-face-top: #f4f7fa;
+    --rack-inside: #8a99a8;
+    --rack-tray: #ffffff;
+    --rack-edge: #8393a3;
+    --rack-highlight: #f0f4f8;
+    --rack-shine: #ffffffb0;
+    --rack-low: #0000001f;
+    --rack-seam: #00000026;
+    --rack-foot: #5f6f7f;
+    --rack-standby: #8fb0c0;
+    --rack-led-ring: #5f6f7f66;
+    --rack-button: #ffffff;
+    --rack-tray-shade: #15263833;
+    --rail-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 54' width='30' height='54'%3E%3Crect width='30' height='54' fill='%23c3cdd7'/%3E%3Crect x='11.5' y='6.5' width='7' height='7' fill='%232c3845' stroke='%23eef2f6'/%3E%3Crect x='11.5' y='22.5' width='7' height='7' fill='%232c3845' stroke='%23eef2f6'/%3E%3Crect x='11.5' y='38.5' width='7' height='7' fill='%232c3845' stroke='%23eef2f6'/%3E%3C/svg%3E");
+    --screw: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%23b9c5d0' stroke='%236b7b8b'/%3E%3Cpath d='M4 7h6M7 4v6' stroke='%234f5f6f' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    --bay: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 44' width='26' height='44'%3E%3Crect x='1.5' y='.5' width='23' height='43' rx='1.5' fill='%23f8fafc' stroke='%238a99a8'/%3E%3Cpath d='M6 6h14M6 10h14M6 14h14M6 18h14M6 22h14' stroke='%23b4c2cf'/%3E%3Crect x='6' y='29' width='14' height='5' rx='1' fill='%238a99a8'/%3E%3Ccircle cx='13' cy='39' r='1.4' fill='%235f7488'/%3E%3C/svg%3E");
+    --port: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 40' width='18' height='40'%3E%3Cpath d='M2 3h14v11h-3v3H5v-3H2z' fill='%231f2a36' stroke='%237d8d9c'/%3E%3Cpath d='M2 23h14v11h-3v3H5v-3H2z' fill='%231f2a36' stroke='%237d8d9c'/%3E%3C/svg%3E");
+    --vent: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 7' width='8' height='7'%3E%3Ccircle cx='2' cy='1.75' r='1.35' fill='%234a5866'/%3E%3Ccircle cx='6' cy='5.25' r='1.35' fill='%234a5866'/%3E%3C/svg%3E");
+    --slot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 14' width='10' height='14'%3E%3Crect x='2' y='2' width='6' height='10' rx='1' fill='%234a5866'/%3E%3C/svg%3E");
+}
+
+/* Top panel, screwed to the frame */
+.project-rack__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-inline: -10px;
+    padding: 18px 44px;
+    border-bottom: 1px solid var(--rack-edge);
+    background: var(--screw) 14px center / 14px no-repeat, var(--screw) calc(100% - 14px) center / 14px no-repeat;
+}
 .project-rack__header > span { font: 600 .875rem / 1.4 var(--font); }
-.project-rack__count { color: var(--faint); margin-left: 6px; font-weight: 400; }
+.project-rack__count { color: var(--muted); margin-left: 6px; font-weight: 400; }
 .project-rack__header p { margin: 0; color: var(--muted); font-size: .875rem; }
-.project-rack__units { display: grid; gap: 7px; }
-.rack-unit { position: relative; border: 1px solid var(--rack-edge); border-radius: 5px; background: var(--rack-face); scroll-margin-top: 100px; }
-.rack-unit__face {
+
+/* The inside of the cabinet, with a punched mounting rail down each side */
+.project-rack__units {
     display: grid;
-    grid-template-columns: 7px minmax(0, 1fr) auto 52px 24px;
+    gap: 4px;
+    padding: 6px var(--rail);
+    counter-reset: rack-u 9;
+    background:
+        var(--rail-tile) left top / var(--rail) calc(var(--rail) * 1.8) repeat-y,
+        var(--rail-tile) right top / var(--rail) calc(var(--rail) * 1.8) repeat-y,
+        var(--rack-inside);
+}
+.project-rack__units > li { counter-increment: rack-u -1; min-width: 0; }
+
+.rack-unit { position: relative; scroll-margin-top: 100px; }
+.rack-unit__face {
+    position: relative;
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1fr) auto 104px 28px;
     align-items: center;
     gap: 22px;
     min-height: 116px;
-    padding: 20px 24px;
+    margin-inline: calc(var(--rail) * -1);
+    padding: 20px calc(var(--rail) + 16px);
     cursor: pointer;
     list-style: none;
-    border-radius: 4px;
-    background: linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 26%, transparent), transparent);
+    border: 1px solid var(--rack-edge);
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--rack-face-top), var(--rack-face));
+    box-shadow: inset 0 1px 0 var(--rack-shine), inset 0 -1px 0 var(--rack-low);
 }
 .rack-unit__face::-webkit-details-marker { display: none; }
 .rack-unit__face::marker { content: ""; }
-.rack-unit__face:focus-visible { outline: 3px solid var(--ice); outline-offset: 3px; }
-.rack-unit__light { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
-.rack-unit--featured .rack-unit__light, .rack-unit[open] .rack-unit__light { background: var(--ice); }
+.rack-unit__face:focus-visible { outline: 3px solid var(--ice); outline-offset: -3px; }
+
+/* Mounting ears: two screws each, and the unit's position on the left */
+.rack-unit__face::before, .rack-unit__face::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--rail);
+    background: var(--screw) center 10px / 14px no-repeat, var(--screw) center calc(100% - 10px) / 14px no-repeat;
+}
+.rack-unit__face::before {
+    left: 0;
+    border-right: 1px solid var(--rack-seam);
+    display: grid;
+    place-items: center;
+    color: var(--faint);
+    font-size: .6875rem;
+    font-variant-numeric: tabular-nums;
+    content: "";
+    content: counter(rack-u) / "";
+}
+.rack-unit__face::after { right: 0; border-left: 1px solid var(--rack-seam); }
+
+/* Standby when closed, fully lit when open */
+.rack-unit__light { width: 8px; height: 8px; border-radius: 50%; background: var(--rack-standby); box-shadow: 0 0 0 2px var(--rack-led-ring); }
+.rack-unit[open] .rack-unit__light { background: var(--ice); }
 .rack-unit__identity { min-width: 0; display: grid; gap: 4px; }
 .rack-unit__category { color: var(--faint); font-size: .75rem; font-weight: 500; line-height: 1.4; }
 .rack-unit__identity h2 { color: var(--ink); font-size: clamp(1.125rem, 1.75vw, 1.375rem); line-height: 1.22; letter-spacing: -.02em; text-wrap: pretty; }
 .rack-unit__description { color: var(--muted); font-size: .9375rem; line-height: 1.5; }
-.rack-unit--featured .rack-unit__face { min-height: 138px; }
+.rack-unit--featured .rack-unit__face { min-height: 148px; }
 .rack-unit--featured .rack-unit__identity h2 { font-size: clamp(1.375rem, 2.4vw, 1.875rem); }
 .rack-unit__status { max-width: 15ch; color: var(--muted); font-size: .8125rem; line-height: 1.4; text-align: right; }
-.rack-unit__vent { width: 52px; height: 26px; background: repeating-linear-gradient(90deg, var(--rack-edge) 0 2px, transparent 2px 6px); opacity: .6; }
-.rack-unit__toggle { width: 24px; height: 24px; position: relative; }
+
+/* The front of each machine differs, the way a real rack mixes storage, switches and servers. */
+.rack-unit__vent { justify-self: end; width: 104px; height: 44px; border-radius: 2px; background: var(--vent) 0 0 / 8px 7px; }
+.project-rack__units > li:nth-child(3n + 2) .rack-unit__vent { width: 90px; height: 40px; background: var(--port) 0 0 / 18px 40px repeat-x; }
+.project-rack__units > li:nth-child(3n) .rack-unit__vent { background: var(--bay) 0 0 / 26px 44px repeat-x; }
+.project-rack__units > li .rack-unit--featured .rack-unit__vent { height: 76px; background: var(--bay) 0 0 / 26px 44px repeat-x, linear-gradient(var(--rack-face-top), var(--rack-face-top)) 0 0 / 100% 49px no-repeat, var(--vent) 0 0 / 8px 7px; }
+
+.rack-unit__toggle { width: 28px; height: 28px; position: relative; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--rack-button); }
 .rack-unit__toggle::before, .rack-unit__toggle::after { content: ""; position: absolute; background: var(--muted); border-radius: 1px; }
-.rack-unit__toggle::before { width: 12px; height: 2px; top: 11px; left: 6px; }
-.rack-unit__toggle::after { width: 2px; height: 12px; top: 6px; left: 11px; }
+.rack-unit__toggle::before { width: 12px; height: 2px; top: 12px; left: 7px; }
+.rack-unit__toggle::after { width: 2px; height: 12px; top: 7px; left: 12px; }
 .rack-unit[open] .rack-unit__toggle::after { display: none; }
-.rack-unit[open] { border-color: var(--ice); }
-.rack-unit[open] .rack-unit__face { border-bottom: 1px solid var(--line); border-radius: 4px 4px 0 0; }
-.rack-unit__tray { padding: 28px 53px 32px; }
+.rack-unit[open] .rack-unit__face { border-color: var(--ice); }
+
+/* The tray slides out between the rails, so they stay visible beside it. */
+.rack-unit__tray { padding: 28px 24px 32px 48px; border: 1px solid var(--ice); border-top: 0; border-radius: 0 0 3px 3px; background: var(--rack-tray); box-shadow: inset 0 8px 10px -8px var(--rack-tray-shade); }
 .rack-unit__tray--with-image { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 28px; align-items: start; }
 .rack-unit__copy p { max-width: 65ch; color: var(--muted); font-size: 1rem; line-height: 1.7; margin: 0 0 18px; }
 .rack-unit__tags { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 20px; color: var(--faint); font-size: .8125rem; }
@@ -82,56 +229,85 @@
 .rack-unit__link:hover { text-decoration-thickness: 2px; }
 .rack-unit__image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: left top; border: 1px solid var(--line); border-radius: 4px; }
 .rack-unit__image--presentation { object-position: 50% 30%; }
-.project-rack__base { height: 42px; display: flex; justify-content: center; align-items: center; gap: 6px; }
-.project-rack__base span { width: 32px; height: 3px; background: var(--rack-edge); border-radius: 2px; }
-.rack-tools { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 48px; padding-bottom: var(--section-y); }
+
+/* Vented plinth and feet */
+.project-rack__base {
+    position: relative;
+    height: 44px;
+    margin-inline: -10px;
+    border-top: 1px solid var(--rack-edge);
+    background: var(--slot) center / 10px 14px repeat-x;
+}
+.project-rack__base::before, .project-rack__base::after {
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    width: 72px;
+    height: 10px;
+    border-radius: 0 0 3px 3px;
+    background: var(--rack-foot);
+}
+.project-rack__base::before { left: 24px; }
+.project-rack__base::after { right: 24px; }
+
+.rack-tools { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 48px; }
 .rack-tools h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .rack-tools dl { margin: 0; }
 .rack-tools dl > div { display: grid; grid-template-columns: minmax(100px, .7fr) minmax(0, 1.3fr); gap: 24px; padding: 16px 0; border-top: 1px solid var(--line); }
 .rack-tools dt { color: var(--ink); font-weight: 500; font-size: .9375rem; }
 .rack-tools dd { margin: 0; color: var(--muted); font-size: .9375rem; line-height: 1.7; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .rack-unit { transition: border-color .18s, box-shadow .18s; }
-    .rack-unit__face { transition: background-color .18s; }
-    .rack-unit__face:hover { background-color: var(--surface-2); }
-    .rack-unit:has(.rack-unit__face:hover) { border-color: var(--faint); box-shadow: 0 3px 9px -5px #0007; }
+    .rack-unit__face { transition: border-color .18s, filter .18s; }
+    .rack-unit__face:hover { filter: brightness(1.12); }
 }
 @media (max-width: 900px) {
-    .rack-unit__face { grid-template-columns: 7px minmax(0, 1fr) auto 24px; gap: 18px; padding-inline: 20px; }
-    .rack-unit__vent { display: none; }
-    .rack-unit__tray { padding-inline: 45px; }
+    .rack-unit__face { grid-template-columns: 10px minmax(0, 1fr) auto 78px 28px; gap: 16px; }
+    .project-rack__units > li .rack-unit__vent { width: 78px; }
+    .project-rack__units > li:nth-child(3n + 2) .rack-unit__vent { width: 72px; }
+    .rack-unit__tray { padding-left: 40px; }
     .rack-unit__tray--with-image { grid-template-columns: minmax(0, 1fr) 180px; }
 }
 @media (max-width: 640px) {
     .rack-opening { grid-template-columns: minmax(0, 1fr); gap: 20px; }
     .rack-opening p { max-width: 42ch; }
-    .project-rack { padding-inline: 14px; border-radius: 8px; }
-    .project-rack::before, .project-rack::after { width: 5px; background-size: 5px 22px; }
-    .project-rack::before { left: 4px; }
-    .project-rack::after { right: 4px; }
-    .project-rack__header { display: block; padding: 17px 3px; }
+    .project-rack { --rail: 16px; padding-inline: 5px; }
+    .project-rack__header { display: block; margin-inline: -5px; padding: 15px 30px; background-size: 10px; background-position: 9px center, calc(100% - 9px) center; }
     .project-rack__header p { font-size: .8125rem; margin-top: 3px; }
-    .rack-unit__face { grid-template-columns: minmax(0, 1fr) 24px; gap: 10px 12px; padding: 17px 15px; }
-    .rack-unit__light { display: none; }
-    .rack-unit__identity { grid-column: 1; grid-row: 1; gap: 5px; }
+    .project-rack__base { margin-inline: -5px; height: 32px; }
+    .project-rack__base::before { left: 14px; }
+    .project-rack__base::after { right: 14px; }
+    .rack-unit__face { grid-template-columns: 8px minmax(0, 1fr) 28px; gap: 10px 12px; padding: 16px calc(var(--rail) + 10px); }
+    .rack-unit__face::before, .rack-unit__face::after { background-size: 9px; background-position: center 6px, center calc(100% - 6px); }
+    .rack-unit__face::before { content: ""; }
+    .rack-unit__light { grid-column: 1; grid-row: 1; align-self: start; margin-top: 6px; }
+    .rack-unit__identity { grid-column: 2; grid-row: 1; gap: 5px; }
     .rack-unit__identity h2 { font-size: 1.125rem; }
     .rack-unit--featured .rack-unit__identity h2 { font-size: 1.375rem; }
     .rack-unit__description { font-size: .875rem; }
-    .rack-unit__status { grid-column: 1; text-align: left; max-width: none; font-size: .75rem; }
-    .rack-unit__toggle { grid-column: 2; grid-row: 1 / 3; }
-    .rack-unit__tray { padding: 20px 15px 24px; }
+    .rack-unit__status { grid-column: 2; text-align: left; max-width: none; font-size: .75rem; }
+    .rack-unit__toggle { grid-column: 3; grid-row: 1; }
+    /* A narrow strip of vent holes keeps the hardware look without taking room from the text. */
+    .project-rack__units > li:nth-child(n) .rack-unit__vent { grid-column: 2 / -1; justify-self: stretch; width: auto; height: 14px; background: var(--vent) 0 0 / 8px 7px; }
+    .rack-unit__tray { padding: 20px 14px 24px; }
     .rack-unit__tray--with-image { grid-template-columns: minmax(0, 1fr); gap: 24px; }
     .rack-unit__image { max-width: 360px; }
     .rack-tools { grid-template-columns: minmax(0, 1fr); gap: 24px; }
     .rack-tools dl > div { grid-template-columns: minmax(0, 1fr); gap: 6px; }
 }
 @media (forced-colors: active) {
-    .project-rack, .rack-unit { border-color: CanvasText; }
+    .project-rack, .rack-unit__face { border-color: CanvasText; }
     .rack-unit__toggle::before, .rack-unit__toggle::after { background: ButtonText; }
 }
 @media print {
-    .project-rack { padding: 0; border: 0; box-shadow: none; }
-    .project-rack::before, .project-rack::after, .rack-unit__vent, .rack-unit__toggle, .project-rack__base, .project-rack__header p { display: none; }
+    .project-rack { --ink: #000; --muted: #222; --faint: #444; --ice: #000; padding: 0; border: 0; box-shadow: none; background: none; margin: 0; }
+    .project-rack__units { padding: 0; background: none; }
+    .project-rack__header { margin: 0; padding: 0 0 12px; background: none; }
+    .rack-unit__face { margin: 0; padding: 12px 0; min-height: 0; border: 0; background: none; box-shadow: none; }
+    .rack-unit__face::before, .rack-unit__face::after, .rack-unit__vent, .rack-unit__toggle, .rack-unit__light, .project-rack__base, .project-rack__header p { display: none; }
+    .rack-unit__tray { padding: 0 0 12px; border: 0; background: none; box-shadow: none; }
+    .rack-section { margin: 0; }
+    .rack-floor { padding-block: 24px 0; border: 0; background: none; }
+    .rack-floor::before { display: none; }
     .rack-unit { break-inside: avoid; }
     .rack-opening { padding-top: 0; }
 }

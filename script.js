@@ -251,13 +251,13 @@ function initTunnel(live) {
 
     // In order: the photo (assets/img/tunnel/<name>.webp) and its caption, which can be empty.
     const PHOTOS = [
-        ["ski-jump", "Freeride with the Snowbasin Ski Team"],
+        ["ski-jump", "Snowbasin freeride ski team"],
         ["lacrosse", "Bountiful High lacrosse"],
         ["boulder-portrait", "Mountain biking, climbing, hiking"],
         ["rock-climbing", "Rock climbing"],
         ["wakesurf", "Wakesurfing"],
         ["ai-security", "AI security research"],
-        ["assess", "Designed and built assess.llc"],
+        ["assess", "Designed and built Assess.llc"],
         ["ehr", "Medical charting system, built at Davis Catalyst Center"]
     ];
     const FIRST = 1.6; // depth of the first photo when the section pins
@@ -375,8 +375,11 @@ function initTunnel(live) {
         finale.style.zIndex = Math.round(1000 - rel * 100); // in depth order with the photos
         finaleImg.style.transform = `scale(${1 + 0.12 * (1 - fill)})`;
         blend(finaleColour, Math.exp(-(((rel - 1.1) / 0.9) ** 2)) + fill);
-        // Once the photo is behind the name, the name turns white over a shadow at the top of the photo.
-        tunnel.classList.toggle("is-over", top < intro.offsetTop + intro.offsetHeight);
+        // The stage darkens as the photo nears the name, so in light mode the name is never white on a pale page.
+        const nameEnd = intro.offsetTop + intro.offsetHeight;
+        const dim = clamp((nameEnd + 100 - top) / 100) * clamp((1.7 - rel) / 0.4);
+        stage.style.setProperty("--dim", dim.toFixed(3));
+        tunnel.classList.toggle("is-over", dim > 0.5);
 
         if (weight > 0) mood.style.setProperty("--mood", `${Math.round(r / weight)} ${Math.round(g / weight)} ${Math.round(b / weight)}`);
         mood.style.opacity = clamp(weight);
@@ -399,6 +402,7 @@ function initTunnel(live) {
             update();
         } else {
             mood.remove();
+            stage.style.removeProperty("--dim");
             items.forEach(({ figure }) => figure.removeAttribute("style"));
             finale.removeAttribute("style");
             finaleImg.removeAttribute("style");
@@ -639,10 +643,12 @@ function initRidges(animate) {
     window.addEventListener("pointermove", (e) => {
         target = (e.clientX / window.innerWidth - 0.5) * cw * 0.7;
     }, { passive: true });
-    window.addEventListener("resize", () => {
+    // Follow the canvas itself, not the window: the footer can settle after this first runs, and a stale size stretches the lines.
+    new ResizeObserver(() => {
+        if (!canvas.clientWidth || !canvas.clientHeight) return; // hidden, as when printing
         resize();
         if (!raf) draw(time);
-    }, { passive: true });
+    }).observe(canvas);
     document.addEventListener("visibilitychange", restart);
     // Still frames pick up a theme switch too.
     const redraw = () => {
