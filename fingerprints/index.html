@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans+Condensed:wght@400;500;700&display=swap">
 <style>
-/* Layout: one long fingerprint card. Ruled form sections on cool card stock, ten-print boxes as the
+/* Layout: one long fingerprint card. Ruled form sections on cool card stock, one flip card per site as the
    signature, and charts drawn as entries on the form. Deliberately one look in both viewer themes,
    because the page is a printed card. */
 :root{
@@ -48,17 +48,60 @@ table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
 .hero p{font-size:1.2rem;max-width:58ch}
 .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-top:2px solid var(--line)}
 .field{padding:8px 16px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-small.lbl,.box small{display:block;font:400 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+small.lbl{display:block;font:400 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .field b{font:700 1.05rem/1.3 var(--mono)}
 .field.who{background:var(--fg);color:var(--panel);border-right-color:var(--fg)}
 .field.who small.lbl{color:var(--faint)}
 .field.who b{font-size:1.45rem;line-height:1.2;letter-spacing:-.01em}
-.prints{display:grid;grid-template-columns:repeat(10,minmax(0,1fr))}
-.box{border-right:1px solid var(--line);padding:6px 4px 4px;min-width:0}
-.box:last-child{border-right:0}
-.box canvas{display:block;width:100%;height:auto;aspect-ratio:4/5}
 .cap{font:400 13px/1.45 var(--mono);color:var(--muted)}
-.prints+.cap{padding:8px 16px;border-top:1px solid var(--line)}
+
+/* Site gallery: a print on the front of each card, the site on the back. */
+.sites-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 24px;align-items:end;padding:20px 24px 18px}
+.sites-head h2{font-weight:700;font-size:1.9rem;line-height:1.1;margin-bottom:8px}
+.sites-head p{max-width:66ch}
+.touch-only{display:none}
+@media (hover:none){.touch-only{display:inline}.hover-only{display:none}}
+.btn{font:700 14px/1.2 var(--mono);color:var(--fg);background:transparent;border:2px solid var(--line);padding:9px 14px;min-height:44px;cursor:pointer}
+.btn:hover,.btn[aria-pressed="true"]{background:var(--fg);color:var(--panel)}
+.group-name{display:flex;justify-content:space-between;gap:12px;padding:6px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);font:700 13px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.04em}
+.group-name span{font-weight:400;white-space:nowrap}
+.site-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.flip{display:block;width:100%;padding:0;margin:0;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);color:inherit;font:inherit;cursor:zoom-in;perspective:900px;min-width:0}
+.flip:nth-child(5n){border-right:0}
+.site-grid>:nth-last-child(-n+5){border-bottom:0}
+.flip:focus-visible{outline-offset:-3px;position:relative;z-index:1}
+.flip-in{display:block;position:relative;aspect-ratio:16/10;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,.7,.3,1)}
+.face{position:absolute;inset:0;display:block;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face canvas{display:block;width:100%;height:100%}
+.face small{position:absolute;left:0;top:0;padding:3px 7px;background:var(--panel);font:700 12px/1.3 var(--mono)}
+.back{transform:rotateY(180deg);background:#fff}
+.back img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.flip.flipped .flip-in,.show-all .flip-in,.flip:focus-visible .flip-in{transform:rotateY(180deg)}
+@media (hover:hover){.flip:hover .flip-in{transform:rotateY(180deg)}}
+.group-note{grid-column:span 2;padding:12px 16px;font:400 13px/1.45 var(--mono);color:var(--muted);align-self:center;min-width:0}
+.sites-foot{padding:8px 16px;border-top:1px solid var(--line)}
+
+/* Viewer */
+dialog#viewer{width:min(1120px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);padding:0;background:var(--panel);color:var(--fg);border:2px solid var(--line);font:400 16px/1.45 var(--sans)}
+dialog#viewer::backdrop{background:color-mix(in srgb,var(--fg) 78%,transparent)}
+.v-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 16px;border-bottom:2px solid var(--line)}
+.v-head h2{font:700 1.15rem/1.2 var(--mono);margin:0}
+.v-pages{display:flex;flex-wrap:wrap;gap:6px;padding:8px 16px;border-bottom:1px solid var(--line)}
+.v-pages .btn{border-width:1px;min-height:36px;padding:6px 12px}
+.v-shot{background:var(--bg);display:grid;place-items:center;min-height:0}
+.v-shot img{display:block;width:100%;height:auto;max-height:calc(100dvh - 226px);object-fit:contain}
+.v-foot{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 16px;border-top:1px solid var(--line)}
+@media (max-width:760px){
+  .v-foot{grid-template-columns:1fr 1fr}
+  .v-foot .cap{grid-column:1/-1;grid-row:1}
+  .v-pages .btn{min-height:44px;flex:1 1 40%}
+}
+@media (prefers-reduced-motion:reduce){
+  .flip-in{transition:none;transform:none!important;transform-style:flat}
+  .back{transform:none;opacity:0;transition:opacity .2s}
+  .flip.flipped .back,.show-all .back,.flip:focus-visible .back{opacity:1}
+}
+@media (prefers-reduced-motion:reduce) and (hover:hover){.flip:hover .back{opacity:1}}
 
 .sec{border-top:2px solid var(--line);display:grid;grid-template-columns:150px minmax(0,1fr)}
 .sec>header{padding:18px 16px;border-right:1px solid var(--line);font:700 14px/1.3 var(--mono)}
@@ -135,6 +178,10 @@ small.lbl,.box small{display:block;font:400 12px/1.3 var(--mono);text-transform:
 .foot-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:-1;pointer-events:none}
 #foot-hot{opacity:0;transition:opacity .25s ease;-webkit-mask-image:radial-gradient(circle 190px at var(--mx,50%) var(--my,50%),#000 0,transparent 100%);mask-image:radial-gradient(circle 190px at var(--mx,50%) var(--my,50%),#000 0,transparent 100%)}
 .foot-wrap:hover #foot-hot{opacity:1}
+/* The scanner stays bright in the open area, and text gets a dark backing while it runs. */
+.foot>div,.foot-end,.foot-print-label span{transition:background-color .25s ease}
+.foot-wrap:hover .foot>div,.foot-wrap:hover .foot-end,.foot-wrap:hover .foot-print-label span{background-color:color-mix(in srgb,var(--fg) 92%,transparent)}
+.foot-print-label span{padding:2px 6px;margin-left:-6px}
 .foot-print-label{padding:112px 16px 12px;font:400 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
 .foot{border-top:1px solid var(--foot-line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr)}
 .foot>div{padding:14px 16px 16px;border-right:1px solid var(--foot-line);min-width:0;display:grid;gap:6px;align-content:start}
@@ -156,8 +203,14 @@ small.lbl,.box small{display:block;font:400 12px/1.3 var(--mono);text-transform:
   .foot a{min-height:44px}
   .sec>header{border-right:0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;padding:12px 16px}
   .sec>header span{margin:0;font-size:1.7rem}
-  .prints{grid-template-columns:repeat(5,minmax(0,1fr))}
-  .box:nth-child(5){border-right:0}.box:nth-child(-n+5){border-bottom:1px solid var(--line)}
+  .sites-head{grid-template-columns:minmax(0,1fr);padding:18px 16px 16px}
+  .sites-head .btn{justify-self:start}
+  .site-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flip:nth-child(5n){border-right:1px solid var(--line)}
+  .flip:nth-child(2n){border-right:0}
+  .site-grid>:nth-last-child(-n+5){border-bottom:1px solid var(--line)}
+  .site-grid>:nth-last-child(-n+2){border-bottom:0}
+  .group-note{grid-column:span 1;padding:8px 10px;font-size:12px}
   .body{padding:18px 16px 22px}.hero{padding:22px 16px 16px}
   .log-row{grid-template-columns:minmax(0,1fr) 74px}
   .log-name{border-right:0;border-bottom:1px solid var(--line)}
@@ -197,8 +250,17 @@ small.lbl,.box small{display:block;font:400 12px/1.3 var(--mono);text-transform:
     <div class="field"><small class="lbl">Weakness checklist</small><b>35 items</b></div>
     <div class="field"><small class="lbl">Data as of</small><b>2 Nov 2026</b></div>
   </div>
-  <div class="prints" id="prints"></div>
-  <div class="cap">One print for each of the 10 Claude Sonnet 5.5 sites. The patterns are drawn for illustration and do not encode data.</div>
+  <section class="sites" id="sites" aria-labelledby="sites-title">
+    <div class="sites-head">
+      <div>
+        <h2 id="sites-title">The 23 sites</h2>
+        <p>Each one is a separate build of the same app, written by the model named above it and never edited afterward. <span class="hover-only">Hover over a print to flip it, then click to look through the site.</span><span class="touch-only">Tap a print to look through the site.</span></p>
+      </div>
+      <button class="btn" type="button" id="flip-all" aria-pressed="false">Flip all 23</button>
+    </div>
+    <div id="site-groups"></div>
+    <p class="cap sites-foot">These are screenshots, because the sites are left unhardened and stay on my lab machines. Every site shows the same demo project, so the differences come from the builder. I took them on the evening of 3 Nov 2026, so dates on the pages read 4 Nov UTC. The prints are drawn for illustration and do not encode data.</p>
+  </section>
 
   <section class="sec"><header><span>A</span>QUESTION</header><div class="body">
     <h2>Frontends often look AI-made. What about the code you cannot see?</h2>
@@ -275,7 +337,7 @@ small.lbl,.box small{display:block;font:400 12px/1.3 var(--mono);text-transform:
   <footer class="foot-wrap" id="foot-wrap">
     <canvas id="foot-base" aria-hidden="true"></canvas>
     <canvas id="foot-hot" aria-hidden="true"></canvas>
-    <div class="foot-print-label">Drawn for illustration</div>
+    <div class="foot-print-label"><span>Drawn for illustration</span></div>
     <div class="foot">
       <div><small class="lbl">Investigator</small><b>Charles Blake</b></div>
       <div><small class="lbl">About this card</small><p>A student research project. Results are exploratory and run through 2 Nov 2026. The sites I tested stay on my own lab machines and are never public.</p></div>
@@ -285,6 +347,16 @@ small.lbl,.box small{display:block;font:400 12px/1.3 var(--mono);text-transform:
   </footer>
 </article>
 <div id="tip" hidden></div>
+<dialog id="viewer" aria-labelledby="v-title">
+  <div class="v-head"><h2 id="v-title"></h2><button class="btn" type="button" id="v-close">Close</button></div>
+  <div class="v-pages" id="v-pages"></div>
+  <div class="v-shot"><img id="v-img" width="1280" height="800" alt=""></div>
+  <div class="v-foot">
+    <button class="btn" type="button" id="v-prev">Previous site</button>
+    <p class="cap">Screenshot from my lab machine, with demo data. This site is not online.</p>
+    <button class="btn" type="button" id="v-next">Next site</button>
+  </div>
+</dialog>
 
 <script>
 var KINDS={
@@ -397,27 +469,87 @@ document.addEventListener('pointerleave',function(){tip.hidden=true});
 
 function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function print(canvas,seed){
-  var W=canvas.width=200,H=canvas.height=250,c=canvas.getContext('2d'),r=seed;
+  var W=canvas.width=320,H=canvas.height=200,c=canvas.getContext('2d'),r=seed;
   function rnd(){r=(r*1664525+1013904223)>>>0;return r/4294967296}
-  var cx=W*(.4+rnd()*.2),cy=H*(.42+rnd()*.16),a1=rnd()*6,a2=rnd()*6,sk=.75+rnd()*.3;
-  c.strokeStyle='#14233a';c.lineWidth=2.3;c.lineCap='round';
-  for(var k=4;k<170;k+=7){
+  var cx=W*(.4+rnd()*.2),cy=H*(.42+rnd()*.16),a1=rnd()*6,a2=rnd()*6,sk=1.05+rnd()*.3;
+  c.strokeStyle='#14233a';c.lineWidth=1.7;c.lineCap='round';
+  for(var k=4;k<230;k+=6){
     c.beginPath();var pen=false;
-    for(var t=0;t<=6.3;t+=.05){
+    for(var t=0;t<=6.3;t+=.035){
       var w=k*(1+.12*Math.sin(t*2+a1+k*.02)+.06*Math.sin(t*5+a2));
-      var x=cx+w*Math.cos(t)*sk,y=cy+w*Math.sin(t)*1.18;
+      var x=cx+w*Math.cos(t)*sk,y=cy+w*Math.sin(t)*.92;
       var gap=Math.sin(t*9+k*.33+a1)>.93;
-      if(x<8||x>W-8||y<8||y>H-8||gap){pen=false;continue}
+      if(x<6||x>W-6||y<6||y>H-6||gap){pen=false;continue}
       if(pen)c.lineTo(x,y);else{c.moveTo(x,y);pen=true}
     }
     c.stroke();
   }
 }
-var P=$('prints');
-P.innerHTML=Array.from({length:10},function(_,i){return '<div class="box"><small>Site '+(i+1)+'</small><canvas aria-hidden="true"></canvas></div>'}).join('');
-P.querySelectorAll('canvas').forEach(function(cv,i){print(cv,hash('sonnet-'+i))});
 
-/* Footer: the same ridge formula as the ten prints, scaled up until it bleeds off the card. */
+/* Site gallery */
+var GROUPS=[
+  {key:'sonnet',name:'Claude Sonnet 5.5',n:10,tries:'10 sites in 11 attempts'},
+  {key:'haiku',name:'Claude Haiku 5.5',n:10,tries:'10 sites in 13 attempts'},
+  {key:'nemotron',name:'Nemotron',n:3,tries:'3 sites',note:'Local models finished 3 of 86 attempts, and all 3 came from Nemotron.'}
+];
+var PAGES=[['home','Home page'],['dashboard','Dashboard'],['project','Project'],['task','Task']];
+var SITES=[];
+$('site-groups').innerHTML=GROUPS.map(function(g){
+  var cells='';
+  for(var i=1;i<=g.n;i++){
+    var id=g.key+'-'+(i<10?'0':'')+i;
+    SITES.push({id:id,model:g.name,num:i,of:g.n});
+    cells+='<button class="flip" type="button" data-index="'+(SITES.length-1)+'" aria-label="Open screenshots of '+esc(g.name)+' site '+i+'">'+
+      '<span class="flip-in"><span class="face front"><canvas aria-hidden="true"></canvas><small>Site '+i+'</small></span>'+
+      '<span class="face back"><img src="shots/'+id+'-thumb.webp" width="480" height="300" alt=""></span></span></button>';
+  }
+  return '<h3 class="group-name">'+esc(g.name)+'<span>'+esc(g.tries)+'</span></h3><div class="site-grid">'+cells+
+    (g.note?'<p class="group-note">'+esc(g.note)+'</p>':'')+'</div>';
+}).join('');
+var FLIPS=[].slice.call(document.querySelectorAll('.flip'));
+FLIPS.forEach(function(f){print(f.querySelector('canvas'),hash(SITES[+f.dataset.index].id))});
+
+$('flip-all').addEventListener('click',function(){
+  var on=$('sites').classList.toggle('show-all');
+  this.setAttribute('aria-pressed',on);
+  this.textContent=on?'Show prints':'Flip all 23';
+});
+
+/* Once, when the gallery first comes into view, run a wave across the cards so people see they flip. */
+if(window.IntersectionObserver&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  var wave=new IntersectionObserver(function(rows){
+    if(!rows[0].isIntersecting)return;
+    wave.disconnect();
+    FLIPS.forEach(function(f,i){
+      setTimeout(function(){f.classList.add('flipped')},300+i*45);
+      setTimeout(function(){f.classList.remove('flipped')},1300+i*45);
+    });
+  },{threshold:.2});
+  wave.observe($('site-groups'));
+}
+
+var viewer=$('viewer'),vSite=0,vPage=2;
+$('v-pages').innerHTML=PAGES.map(function(p,i){return '<button class="btn" type="button" data-page="'+i+'">'+p[1]+'</button>'}).join('');
+function showShot(){
+  var s=SITES[vSite],p=PAGES[vPage];
+  $('v-title').textContent=s.model+', site '+s.num+' of '+s.of;
+  $('v-img').src='shots/'+s.id+'-'+p[0]+'.webp';
+  $('v-img').alt='Screenshot of the '+p[1].toLowerCase()+' on '+s.model+' site '+s.num;
+  [].forEach.call($('v-pages').children,function(b,i){b.setAttribute('aria-pressed',i===vPage)});
+  PAGES.forEach(function(q){new Image().src='shots/'+s.id+'-'+q[0]+'.webp'});
+}
+function move(step){vSite=(vSite+step+SITES.length)%SITES.length;showShot()}
+FLIPS.forEach(function(f){f.addEventListener('click',function(){
+  vSite=+f.dataset.index;showShot();viewer.showModal();
+})});
+$('v-pages').addEventListener('click',function(e){var b=e.target.closest('[data-page]');if(b){vPage=+b.dataset.page;showShot()}});
+$('v-prev').addEventListener('click',function(){move(-1)});
+$('v-next').addEventListener('click',function(){move(1)});
+$('v-close').addEventListener('click',function(){viewer.close()});
+viewer.addEventListener('click',function(e){if(e.target===viewer)viewer.close()});
+viewer.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
+
+/* Footer: the same ridge formula as the site prints, scaled up until it bleeds off the card. */
 function bigPrint(c,W,H,cx,cy,seed,gapPx,color,width){
   var r=seed;
   function rnd(){r=(r*1664525+1013904223)>>>0;return r/4294967296}
