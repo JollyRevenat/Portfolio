@@ -255,7 +255,7 @@ function initTunnel(live) {
         ["ski-jump", "Snowbasin freeride ski team"],
         ["ehr", "Medical charting system, built at Davis Catalyst Center"],
         ["lacrosse", "Bountiful High lacrosse"],
-        ["kenya-tree-planting", "Planting a tree in Kenya"],
+        ["kenya-tree-planting", "Groundbreaking in Kenya"],
         ["assess", "Designed and built Assess.llc"],
         ["wakesurf", "Wakesurfing"],
         ["boulder-portrait", "Mountain biking, climbing, hiking"],
